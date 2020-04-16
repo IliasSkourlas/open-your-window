@@ -201,6 +201,13 @@ function openSidenav() {
 		$(".enterLink").css("visibility", "visible");
 	});
 }
+// or //
+// document.getElementById('hoverSpot').onmouseover = function(){
+// 		document.querySelector(".leftMenu").style.width = "25%";
+// 		document.querySelector(".memoryButtons").style.visibility = "visible";
+// 		document.querySelector(".enterLink").style.visibility = "visible";
+// };
+
 
 // Sidenav close //
 function closeSidenav() {

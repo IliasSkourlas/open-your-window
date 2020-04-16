@@ -1,0 +1,288 @@
+                                        /* GENERAL */
+* {
+	margin: 0;
+	padding: 0;
+	/* box-sizing: border-box; */
+}
+
+body {
+    background-color: black;
+    /* min-width:1105px; */
+}
+
+#hoverSpot {
+    visibility: visible;
+    position: fixed;
+    width: .8%;
+    height: 30%;
+    top: 0px;
+    left: 0;
+    border: 1px solid rgb(250, 12, 131);;
+    opacity: 0;
+    z-index: 10;
+}
+#hoverSpot:hover {
+    opacity: 0.1;
+}
+
+.loop {position:absolute}
+
+.loop iframe {
+    opacity: 1;
+}
+
+p{
+    color: white;
+    font-size: 30px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 100;
+}
+
+/* main videos */
+.video-container .loop {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: stretch;
+  flex-wrap: wrap; 
+  flex-grow: 1;
+}
+.video-container iframe{
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 420px;
+  height: 236.25px;
+}
+
+/* Back full screen */
+.backgroundVideo iframe{
+    position: fixed;
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    z-index: -1;
+}
+
+.Time  {
+    position: fixed;
+    color: white;
+    border: 1px solid rgba(0, 0, 0, 0.098);
+    border-radius: 60px;
+    padding: 18px 25px;
+    margin-top: 54%;
+    margin-left: 95%;
+    background-color: rgba(0, 0, 0, 0.152);
+    font-size: 35px;
+    font-weight: 100;
+    opacity: .6;
+    z-index: 1;
+}
+
+/* right menu */
+.rightMenu {
+    visibility: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 75%;
+    background-color:rgb(19, 18, 18);
+    border: 1px solid black;
+    opacity: .8;
+    z-index: 3;
+  }
+
+/* left menu */
+.leftMenu {
+    visibility: visible;
+    position: fixed;
+    /* width: 0%; */
+    width: 12.5%;
+    height: 100%;
+    top: 0px;
+    left: 0;
+    background-color:rgb(19, 18, 18);
+    border: 1px solid black;
+    opacity: .8;
+    z-index: 3;
+}
+/* .leftMenu:hover {
+    width: 12.5%;
+} */
+
+.leftMenu .memoryButtons {
+
+    position: relative;
+    color:rgb(250, 12, 131);;
+    background-color: black;
+    border: 1px solid white;
+    width: 37px;
+    height: 37px;
+    border-radius: 50px;
+    top: 38.5%;
+    left: 15%;
+}
+
+
+.enterLink {
+    /* visibility: hidden; */
+    visibility: visible;
+    background-color:rgb(19, 18, 18);
+    border: 1px solid white;
+    width: 100%;
+    height: 100%;
+    left: 5%;
+    width: 95%;
+    height: 15%;
+}
+input.enterLink {
+    /* visibility: hidden; */
+    visibility: visible;
+    background-color:rgb(19, 18, 18);
+    border: 1px solid white;
+    width: 100%;
+    height: 100%;
+    left: 5%;
+    width: 95%;
+    height: 15%;
+}
+
+#submit1 {
+    /* visibility: hidden; */
+    visibility: visible;
+    position: relative; 
+    background-color:rgb(19, 18, 18);
+    color: rgba(255, 255, 255, 0.349);
+    border: 1px solid rgba(255, 255, 255, 0.568); 
+    font-style: italic;
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    font-weight: 100;
+    width: 50%;
+    height: 37px;
+    top: 30%;
+    left: 14%;
+    border-radius: 20px;
+}
+
+.enterbutton {
+    background-color:rgb(19, 18, 18);
+    border: 1px solid white;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    left: 5%;
+    width: 95%;
+    height: 15%;
+}
+
+
+#whatIsThis {
+   
+    border: none;
+}
+
+#writeLink {
+    position: relative;  
+    border: none;
+    color: white;
+    font-size: 20;
+    opacity: 1;
+}
+
+   
+.position {
+    visibility: hidden;
+    position: absolute;
+    width: 20%;
+    height: 6%;
+    color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.098);
+    background-color: rgba(128, 240, 178, 0.043);
+    font-style: italic;
+    font-family: 'Raleway', sans-serif;
+    border-radius: 0px;
+    margin-top: -11%;
+    margin-left: 2%;
+    font-size: 15px;
+    font-weight: 100;
+    opacity: 0;
+    z-index: 1;
+}
+.position:hover {
+    opacity: 1;
+}
+.position input {
+    visibility: visible;
+    position: relative;
+    width: 100%;
+    /* height: 150%; */
+    color: rgb(0, 0, 0);
+    border: 1px solid rgba(0, 0, 0, 0.098);
+    background-color: rgba(128, 240, 178, 0.043);
+    font-style: italic;
+    font-family: 'Raleway', sans-serif;
+    border-radius: 0px;
+    margin-top: 0%;
+    margin-left: 0%;
+    font-size: 20px;
+    font-weight: 100;
+    opacity: 1;
+    z-index: 1;
+}
+.position input:hover {
+    background-color: rgba(128, 240, 178, 0.349);
+
+}
+.buttonLink {
+    visibility: visible;
+    position: relative;
+    width: 15%;
+    height: 25%;
+    color: rgba(0, 0, 0, 0.5);
+    border: none;
+    /* background-color: rgba(240, 128, 227, 0.091); */
+    border: 1px solid rgba(0, 0, 0, 0.205);
+    background-color: rgba(128, 240, 178, 0.043);
+    font-style: italic;
+    font-family: 'Raleway', sans-serif;
+    border-radius: 0px;
+    margin-top: -60px;
+    margin-left: 85%;
+    font-size: 20px;
+    font-weight: 100;
+    opacity: 1;
+    z-index: 1;
+}
+.buttonLink:hover {
+    background-color: rgba(9, 246, 116, 0.335);
+}
+
+
+
+
+
+.video-container .randomVideos {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: stretch;
+    flex-wrap: wrap; 
+    flex-grow: 1;
+}
+    
+.randomVideos {
+    visibility: hidden;
+    position: absolute;
+    background-color: black;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    z-index: 2;
+}
+
+

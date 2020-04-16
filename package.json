@@ -1,0 +1,27 @@
+{
+  "name": "openyourwindow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IliasSkourlas/open-your-window.git"
+  },
+  "author": "89testing",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IliasSkourlas/open-your-window/issues"
+  },
+  "homepage": "https://github.com/IliasSkourlas/open-your-window#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "jquery": "^3.5.0",
+    "lodash": "^4.17.15",
+    "mongoose": "^5.9.9"
+  }
+}
