@@ -16,10 +16,8 @@ app.use(express.static("public"));
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
 let weelName = "";
 let copyState = 0;
-
-
-
-
+let UrlId = "";
+let inputUrl = "";
 
 
 // add the embed link together //
@@ -27,14 +25,25 @@ function embed(link, midle, tale){
     return link + "?" + midle + "&playlist=" + tale;
 }
 
+
 let all = "&autoplay=1&loop=1&controls=0&mute=1";
 let control = "&autoplay=1&loop=1&controls=1&mute=1";
 let still = "&autoplay=0&loop=1&controls=0";
 let mute = "&mute=1";
 let unmute = "&mute=0";
 
+// "https://www.youtube.com/embed/4l7Uw-o-RC4?autoplay=1&loop=1&controls=0&mute=1&playlist=4l7Uw-o-RC4"
+let backgroundMain = embed("https://www.youtube.com/embed/4l7Uw-o-RC4?", all, "4l7Uw-o-RC4");
 
-let background = embed("https://www.youtube.com/embed/4l7Uw-o-RC4?", all, "4l7Uw-o-RC4");
+// https://www.youtube.com/embed/v1P0cAzXR6g?autoplay=1&loop=1&controls=0&mute=1&playlist=v1P0cAzXR6g
+let talkToParot = embed("https://www.youtube.com/embed/v1P0cAzXR6g?", all, "v1P0cAzXR6g" );
+
+// https://www.youtube.com/embed/PwylW_sUfQY?autoplay=1&loop=1&controls=0&mute=1&playlist=PwylW_sUfQY
+let realBirds = embed("https://www.youtube.com/embed/PwylW_sUfQY?", all, "PwylW_sUfQY");
+let kittenCuteness = embed("https://www.youtube.com/embed/dzFKG6rkWpU?", all, "dzFKG6rkWpU");
+let chen = embed("https://www.youtube.com/embed/Iwpr55PZEJ8?", all, "Iwpr55PZEJ8");
+
+
 
 let empty = embed("https://?");
 let bookipia = embed("http://bookipia.com?");
@@ -160,6 +169,7 @@ const defaultUrls = [
 
 const weelsUrlSchema = {
     name: String,
+    background: String,
     items: [itemsUrlSchema]
 };
 const Weel= mongoose.model("Weel", weelsUrlSchema);
@@ -185,7 +195,7 @@ app.get("/", function(req, res){
         }else{
             
             res.render("home", {
-                backgroundBox:background,
+                backgroundBox: backgroundMain,
                 videoBox: foundItems
             });
         }
@@ -203,13 +213,14 @@ app.get("/weel0", function(req, res){
             if (!foundWeel){
                 const weel = new Weel({
                     name :weelName,
+                    background : backgroundMain,
                     items: defaultUrls
                 });
                 weel.save();
                 res.redirect("/weel0");
             }else{
                 res.render("home", {
-                    backgroundBox:background,
+                    backgroundBox:foundWeel.background,
                     videoBox: foundWeel.items
                 });
             }
@@ -225,13 +236,14 @@ app.get("/weel1", function(req, res){
             if (!foundWeel){
                 const weel = new Weel({
                     name :weelName,
+                    background : backgroundMain,
                     items: defaultUrls
                 });
                 weel.save();
                 res.redirect("/weel1");
             }else{
                 res.render("home", {
-                    backgroundBox:background,
+                    backgroundBox:foundWeel.background,
                     videoBox: foundWeel.items
                 });
             }
@@ -247,13 +259,14 @@ app.get("/weel2", function(req, res){
             if (!foundWeel){
                 const weel = new Weel({
                     name :weelName,
+                    background : backgroundMain,
                     items: defaultUrls
                 });
                 weel.save();
                 res.redirect("/weel2");
             }else{
                 res.render("home", {
-                    backgroundBox:background,
+                    backgroundBox:foundWeel.background,
                     videoBox: foundWeel.items
                 });
             }
@@ -269,13 +282,14 @@ app.get("/weel3", function(req, res){
             if (!foundWeel){
                 const weel = new Weel({
                     name :weelName,
+                    background : backgroundMain,
                     items: defaultUrls
                 });
                 weel.save();
                 res.redirect("/weel3");
             }else{
                 res.render("home", {
-                    backgroundBox:background,
+                    backgroundBox:foundWeel.background,
                     videoBox: foundWeel.items
                 });
             }
@@ -288,23 +302,47 @@ app.get("/weel3", function(req, res){
 //  POST
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
 
+
 // Update  Weels
 app.post("/", function(req, res){
-    const UrlId = req.body.button;
-    const inputUrl = req.body.postUrl; 
+    UrlId = req.body.button;
+    inputUrl = req.body.postUrl;
+    let toggleAutoplay = req.body.buttonAutoplayMute;
+    let autoplayMute = "?autoplay=1&mute=1&loop=1&playlist=";
+    let replacedUrl = "";
+    let finalUrl = "";
 
+    // if buttonAutoplayMute is pressed & url includes (youtube or vimeo) video toggles on/off its autoplayMute state
+    if(toggleAutoplay === "on" & (inputUrl.includes("youtube.") || (inputUrl.includes("vimeo.")) )){
+        
+        if(inputUrl.includes(autoplayMute) ){
+            replacedUrl = inputUrl.replace("?autoplay=1&mute=1&loop=1&playlist=", "");
+            finalUrl = replacedUrl;
+
+        }
+        else{
+            finalUrl = inputUrl  + autoplayMute;
+        }
+    }
+    else{
+        finalUrl = inputUrl;
+    }
+    console.log(finalUrl);
+        
+
+    
     switch (weelName) {
         case "weelDefault":
-            ItemUrl.findOneAndUpdate({_id:UrlId}, {name: inputUrl},function(err, foundList){
+            ItemUrl.findOneAndUpdate({_id:UrlId}, {name: finalUrl},function(err, foundList){
                 if(!err){
                     res.redirect("/");  
                 }
             });
             break;
-        case "weel0":   
-            Weel.update(
+        case "weel0": 
+           Weel.update(
                 {"name" : "weel0", "items._id": UrlId },
-                {"$set":{"items.$.name": inputUrl}},
+                {"$set":{"items.$.name":  finalUrl}},
                 function(err, foundList){
                 if(!err){
                     console.log("Succesfuly updated " + UrlId);
@@ -317,7 +355,7 @@ app.post("/", function(req, res){
         case "weel1":
             Weel.update(
                 {"name" : "weel1", "items._id": UrlId },
-                {"$set":{"items.$.name": inputUrl}},
+                {"$set":{"items.$.name": finalUrl}},
                 function(err, foundList){
                 if(!err){
                     console.log("Succesfuly updated " + UrlId);
@@ -330,7 +368,7 @@ app.post("/", function(req, res){
         case "weel2":
             Weel.update(
                 {"name" : "weel2", "items._id": UrlId },
-                {"$set":{"items.$.name": inputUrl}},
+                {"$set":{"items.$.name": finalUrl}},
                 function(err, foundList){
                 if(!err){
                     console.log("Succesfuly updated " + UrlId);
@@ -343,7 +381,7 @@ app.post("/", function(req, res){
         case "weel3":
             Weel.update(
                 {"name" : "weel3", "items._id": UrlId },
-                {"$set":{"items.$.name": inputUrl}},
+                {"$set":{"items.$.name": finalUrl}},
                 function(err, foundList){
                 if(!err){
                     console.log("Succesfuly updated " + UrlId);
@@ -360,8 +398,66 @@ app.post("/", function(req, res){
 });
 
 
+
+// Background
+app.post("/background", function(req, res){
+    console.log("background Button pressed ");
+    switch (weelName) {
+        case "weelDefault":
+            Weel.findOneAndUpdate({name: "weelDefault"}, {background: inputUrl},function(err, foundList){
+                if(!err){
+                    res.redirect("/");  
+                }else{
+                    console.log("Problem with background video update");
+                }
+            });
+            break;
+        case "weel0":
+            Weel.findOneAndUpdate({name: "weel0"}, {background: inputUrl},function(err, foundList){
+                if(!err){
+                    res.redirect("/weel0");  
+                }else{
+                    console.log("Problem with background video update");
+                }
+            });
+            break;
+        case "weel1":
+            Weel.findOneAndUpdate({name: "weel1"}, {background: inputUrl},function(err, foundList){
+                if(!err){
+                    res.redirect("/weel1");  
+                }else{
+                    console.log("Problem with background video update");
+                }
+            });
+            break;
+        case "weel2":
+            Weel.findOneAndUpdate({name: "weel2"}, {background: inputUrl},function(err, foundList){
+                if(!err){
+                    res.redirect("/weel2");  
+                }else{
+                    console.log("Problem with background video update");
+                }
+            });
+            break;
+        case "weel3":
+            Weel.findOneAndUpdate({name: "weel3"}, {background: inputUrl},function(err, foundList){
+                if(!err){
+                    res.redirect("/weel3");  
+                }else{
+                    console.log("Problem with background video update");
+                }
+            });
+            break;
+    
+        default:
+            break;
+    }  
+});
+
+
 // weel puttons hub
 app.post("/memory", function(req, res){
+
     const memory = req.body.memoryButton;
     if(copyState ===  0){
         switch (memory) {
@@ -403,7 +499,7 @@ app.post("/memory", function(req, res){
                 break;
         }        
     }
-})
+});
 
 
 // after copying

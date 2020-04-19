@@ -239,7 +239,7 @@ input.enterLink {
 
 }
 .buttonLink {
-    visibility: visible;
+    visibility: hidden;
     position: relative;
     width: 15%;
     height: 25%;
@@ -261,8 +261,43 @@ input.enterLink {
 .buttonLink:hover {
     background-color: rgba(9, 246, 116, 0.335);
 }
+.position .buttonAutoplayMute {
+    position: absolute;
+    margin-top: -1%;
+    margin-left: 0%;
+    border: none;
+    border: 20px solid rgba(0, 0, 0, 0.205);
+    background-color: rgba(128, 240, 178, 0.043);
+    z-index: 1;
+    opacity: 0;
+}
+.position .buttonAutoplayMute:hover {
+    opacity: .5;
+}
 
+/* .buttonAutoplayMute {
+    visibility: visible;
+    position: relative;
+    width: 15%;
+    height: 28%;
+    color: rgba(0, 0, 0, 0.5);
+    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.205);
+    background-color: rgba(128, 240, 178, 0.043);
+    font-style: italic;
+    font-family: 'Raleway', sans-serif;
+    border-radius: 0px;
+    margin-top: 0px;
+    margin-left: 100%;
+    font-size: 15px;
+    font-weight: 100;
+    opacity: 1;
+    z-index: 1;
+}
+.buttonAutoplayMute:hover {
+    background-color: rgba(246, 9, 226, 0.146);
 
+} */
 
 
 
