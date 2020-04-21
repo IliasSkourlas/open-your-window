@@ -1,4 +1,5 @@
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\SETUP
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -10,74 +11,69 @@ const app = express();
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
 
-
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\GLOBAL VARIABLES
 let weelName = "";
 let copyState = 0;
 let UrlId = "";
 let inputUrl = "";
+let  youtubeString = "watch?v=";
+let youtubeReplace = "embed/";
+let vimeoString = "vimeo.com";
+let vimeoReplace = "player.vimeo.com/video";
 
-
-// add the embed link together //
-function embed(link, midle, tale){
-    return link + "?" + midle + "&playlist=" + tale;
-}
-
-
+let backgroundMain = "https://www.youtube.com/embed/4l7Uw-o-RC4?autoplay=1&mute=1&loop=1&playlist=4l7Uw-o-RC4";
 let all = "&autoplay=1&loop=1&controls=0&mute=1";
 let control = "&autoplay=1&loop=1&controls=1&mute=1";
 let still = "&autoplay=0&loop=1&controls=0";
 let mute = "&mute=1";
 let unmute = "&mute=0";
 
-// "https://www.youtube.com/embed/4l7Uw-o-RC4?autoplay=1&loop=1&controls=0&mute=1&playlist=4l7Uw-o-RC4"
-let backgroundMain = embed("https://www.youtube.com/embed/4l7Uw-o-RC4?", all, "4l7Uw-o-RC4");
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\CLEAN UP AND DELLET AFTER
+let superCute = "https://www.youtube.com/embed/4l7Uw-o-RC4?autoplay=1&mute=1&loop=1&playlist=4l7Uw-o-RC4";
+let talkToParot = "https://www.youtube.com/embed/v1P0cAzXR6g?autoplay=1&loop=1&controls=0&mute=1&playlist=v1P0cAzXR6g";
+let realBirds = "https://www.youtube.com/embed/PwylW_sUfQY?autoplay=1&mute=1&loop=1&playlist=PwylW_sUfQY";
+let kittenCuteness = "https://www.youtube.com/embed/dzFKG6rkWpU?autoplay=1&mute=1&loop=1&playlist=dzFKG6rkWpU";
+let chen = "https://www.youtube.com/embed/Iwpr55PZEJ8?";
 
-// https://www.youtube.com/embed/v1P0cAzXR6g?autoplay=1&loop=1&controls=0&mute=1&playlist=v1P0cAzXR6g
-let talkToParot = embed("https://www.youtube.com/embed/v1P0cAzXR6g?", all, "v1P0cAzXR6g" );
-
-// https://www.youtube.com/embed/PwylW_sUfQY?autoplay=1&loop=1&controls=0&mute=1&playlist=PwylW_sUfQY
-let realBirds = embed("https://www.youtube.com/embed/PwylW_sUfQY?", all, "PwylW_sUfQY");
-let kittenCuteness = embed("https://www.youtube.com/embed/dzFKG6rkWpU?", all, "dzFKG6rkWpU");
-let chen = embed("https://www.youtube.com/embed/Iwpr55PZEJ8?", all, "Iwpr55PZEJ8");
-
-
-
-let empty = embed("https://?");
-let bookipia = embed("http://bookipia.com?");
-let superCute = embed("https://www.youtube.com/embed/4l7Uw-o-RC4?", all, "4l7Uw-o-RC4");
-let aljazeera = embed("https://www.youtube.com/embed/WisZM9CMlTo", control);
-let duckduckgo = "https://duckduckgo.com/search.html?prefill=Search DuckDuckGo";
-let skyNews = embed("https://www.youtube.com/embed/9Auq9mYxFEE", control);
-let bloomberg = embed("https://www.bloomberg.com/markets/commodities");
-let ert = embed("https://webtv.ert.gr/ert1-live/");
-let coindesk = embed("https://www.coindesk.com/price/bitcoin");
-let threejs =  "https://threejs.org/examples/#webgl_helpers";
-let techcrunch = "https://techcrunch.com/";
-let action = "https://neal.fun/auction-game/";
-let play = "https://play.gl/";
-
-let weel = [
-    bookipia, play, superCute, skyNews,
-	aljazeera, bloomberg, ert, coindesk, 
-	duckduckgo, empty, empty, threejs,
-    techcrunch, action, empty, empty,
-    duckduckgo, duckduckgo, duckduckgo, duckduckgo
-];
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\FUNCTIONS
+// automaticaly embed youtube, vimeo
+function toEmbedVideo(url){
+    if(url.includes("youtube.com") & url.includes(youtubeString)){
+           return url.replace(youtubeString, youtubeReplace);
+    }
+    if(url.includes(vimeoReplace)){
+        return url;
+    }
+    if(url.includes("vimeo.com") & url.includes(vimeoString) & !url.includes(vimeoReplace)){
+            return url.replace(vimeoString, vimeoReplace);
+    }
+    else{
+        return url;
+    }
+};
 
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
-// create db //
+
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\DB
+// create db 
 mongoose.connect("mongodb://localhost:27017/urlDB", {useNewUrlParser: true});
 
+// create Items collection
 const itemsUrlSchema = {
     name: String
 };
 const ItemUrl = mongoose.model("ItemUrl", itemsUrlSchema);
 
+// create Weels collection
+const weelsUrlSchema = {
+    name: String,
+    background: String,
+    items: [itemsUrlSchema]
+};
+
+// Enter initial iframes
+const Weel= mongoose.model("Weel", weelsUrlSchema);
 
 const itemUrl1 = new ItemUrl({
     name: "http://bookipia.com?"
@@ -152,9 +148,7 @@ const itemUrl24 = new ItemUrl({
     name: ""
 });
 
-
-
-// defaultUrls
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ defaultUrls Array
 const defaultUrls = [
     itemUrl1, itemUrl2, itemUrl3, itemUrl4,
     itemUrl5, itemUrl6, itemUrl7, itemUrl8,
@@ -163,21 +157,13 @@ const defaultUrls = [
     itemUrl17, itemUrl18, itemUrl19, itemUrl20,
     itemUrl21, itemUrl22, itemUrl23, itemUrl24
 ];
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
-
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
-
-const weelsUrlSchema = {
-    name: String,
-    background: String,
-    items: [itemsUrlSchema]
-};
-const Weel= mongoose.model("Weel", weelsUrlSchema);
 
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
 // GET
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
 
 // weel default
 app.get("/", function(req, res){
@@ -203,8 +189,7 @@ app.get("/", function(req, res){
 });
 
 
-//Weel Memories
-
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\Weel Memories
 app.get("/weel0", function(req, res){
     copyState = 0;
     weelName = "weel0";
@@ -298,211 +283,7 @@ app.get("/weel3", function(req, res){
 })
 
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
-//  POST
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
-
-
-// Update  Weels
-app.post("/", function(req, res){
-    UrlId = req.body.button;
-    inputUrl = req.body.postUrl;
-    let toggleAutoplay = req.body.buttonAutoplayMute;
-    let autoplayMute = "?autoplay=1&mute=1&loop=1&playlist=";
-    let replacedUrl = "";
-    let finalUrl = "";
-
-    // if buttonAutoplayMute is pressed & url includes (youtube or vimeo) video toggles on/off its autoplayMute state
-    if(toggleAutoplay === "on" & (inputUrl.includes("youtube.") || (inputUrl.includes("vimeo.")) )){
-        
-        if(inputUrl.includes(autoplayMute) ){
-            replacedUrl = inputUrl.replace("?autoplay=1&mute=1&loop=1&playlist=", "");
-            finalUrl = replacedUrl;
-
-        }
-        else{
-            finalUrl = inputUrl  + autoplayMute;
-        }
-    }
-    else{
-        finalUrl = inputUrl;
-    }
-    console.log(finalUrl);
-        
-
-    
-    switch (weelName) {
-        case "weelDefault":
-            ItemUrl.findOneAndUpdate({_id:UrlId}, {name: finalUrl},function(err, foundList){
-                if(!err){
-                    res.redirect("/");  
-                }
-            });
-            break;
-        case "weel0": 
-           Weel.update(
-                {"name" : "weel0", "items._id": UrlId },
-                {"$set":{"items.$.name":  finalUrl}},
-                function(err, foundList){
-                if(!err){
-                    console.log("Succesfuly updated " + UrlId);
-                    res.redirect("/weel0");  
-                }else{
-                    console.log("Error in uptating" + UrlId);
-                }
-            });
-            break;
-        case "weel1":
-            Weel.update(
-                {"name" : "weel1", "items._id": UrlId },
-                {"$set":{"items.$.name": finalUrl}},
-                function(err, foundList){
-                if(!err){
-                    console.log("Succesfuly updated " + UrlId);
-                    res.redirect("/weel1");  
-                }else{
-                    console.log("Error in uptating" + UrlId);
-                }
-            });
-            break;
-        case "weel2":
-            Weel.update(
-                {"name" : "weel2", "items._id": UrlId },
-                {"$set":{"items.$.name": finalUrl}},
-                function(err, foundList){
-                if(!err){
-                    console.log("Succesfuly updated " + UrlId);
-                    res.redirect("/weel2");  
-                }else{
-                    console.log("Error in uptating" + UrlId);
-                }
-            });
-            break;
-        case "weel3":
-            Weel.update(
-                {"name" : "weel3", "items._id": UrlId },
-                {"$set":{"items.$.name": finalUrl}},
-                function(err, foundList){
-                if(!err){
-                    console.log("Succesfuly updated " + UrlId);
-                    res.redirect("/weel3");  
-                }else{
-                    console.log("Error in uptating" + UrlId);
-                }
-            });
-            break;
-
-        default:
-        break;
-    }
-});
-
-
-
-// Background
-app.post("/background", function(req, res){
-    console.log("background Button pressed ");
-    switch (weelName) {
-        case "weelDefault":
-            Weel.findOneAndUpdate({name: "weelDefault"}, {background: inputUrl},function(err, foundList){
-                if(!err){
-                    res.redirect("/");  
-                }else{
-                    console.log("Problem with background video update");
-                }
-            });
-            break;
-        case "weel0":
-            Weel.findOneAndUpdate({name: "weel0"}, {background: inputUrl},function(err, foundList){
-                if(!err){
-                    res.redirect("/weel0");  
-                }else{
-                    console.log("Problem with background video update");
-                }
-            });
-            break;
-        case "weel1":
-            Weel.findOneAndUpdate({name: "weel1"}, {background: inputUrl},function(err, foundList){
-                if(!err){
-                    res.redirect("/weel1");  
-                }else{
-                    console.log("Problem with background video update");
-                }
-            });
-            break;
-        case "weel2":
-            Weel.findOneAndUpdate({name: "weel2"}, {background: inputUrl},function(err, foundList){
-                if(!err){
-                    res.redirect("/weel2");  
-                }else{
-                    console.log("Problem with background video update");
-                }
-            });
-            break;
-        case "weel3":
-            Weel.findOneAndUpdate({name: "weel3"}, {background: inputUrl},function(err, foundList){
-                if(!err){
-                    res.redirect("/weel3");  
-                }else{
-                    console.log("Problem with background video update");
-                }
-            });
-            break;
-    
-        default:
-            break;
-    }  
-});
-
-
-// weel puttons hub
-app.post("/memory", function(req, res){
-
-    const memory = req.body.memoryButton;
-    if(copyState ===  0){
-        switch (memory) {
-            case "weel0":
-                res.redirect("/weel0")
-                break;
-            case "weel1":
-                res.redirect("/weel1")
-                break;
-            case "weel2":
-                res.redirect("/weel2")
-                break;
-            case "weel3":
-                res.redirect("/weel3")
-                break;
-            default:
-                break;
-        }
-    }
-    else{
-        switch (memory) {
-            case "weel0":
-                console.log("copy "  + weelName);
-                res.redirect("/copyweel0")
-                break;
-            case "weel1":
-                console.log("copy "  + weelName);
-                res.redirect("/copyweel1")
-                break;
-            case "weel2":
-                console.log("copy "  + weelName);
-                res.redirect("/copyweel2")
-                break;
-            case "weel3":
-                console.log("copy "  + weelName);
-                res.redirect("/copyWeel3")
-                break;
-            default:
-                break;
-        }        
-    }
-});
-
-
-// after copying
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ after copying a weel
 app.get("/copyWeel0", function(req, res){
 
     Weel.findOne({name: weelName},function(err, foundWeel){
@@ -584,7 +365,206 @@ app.get("/copyWeel3", function(req, res){
     })
 })
 
-// Copy
+
+
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
+//  POST
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ Update  Weels
+app.post("/", function(req, res){
+    UrlId = req.body.button;
+    inputUrl = req.body.postUrl;
+    let toggleAutoplay = req.body.buttonAutoplayMute;
+    let autoplayMute = "?autoplay=1&mute=1&loop=1&playlist=";
+    let replacedUrl = "";
+    let finalUrl = "";
+
+    // first toggle Autoplay logic
+    if(toggleAutoplay === "on" & (inputUrl.includes("youtube.") || (inputUrl.includes("vimeo.")) )){
+        
+        if(inputUrl.includes(autoplayMute) ){
+            replacedUrl = inputUrl.replace("?autoplay=1&mute=1&loop=1&playlist=", "");
+            finalUrl = replacedUrl;
+        }
+        else{
+            finalUrl = inputUrl  + autoplayMute;
+        }
+    }
+    else{
+        finalUrl = inputUrl;
+    }
+    console.log(finalUrl);
+    // then update weels   
+    switch (weelName) {
+        case "weelDefault":
+            ItemUrl.findOneAndUpdate({_id:UrlId}, {name: toEmbedVideo(finalUrl)},function(err, foundList){
+                if(!err){
+                    res.redirect("/");  
+                }
+            });
+            break;
+        case "weel0": 
+           Weel.update(
+                {"name" : "weel0", "items._id": UrlId },
+                {"$set":{"items.$.name":  toEmbedVideo(finalUrl)}},
+                function(err, foundList){
+                if(!err){
+                    console.log("Succesfuly updated " + UrlId);
+                    res.redirect("/weel0");  
+                }else{
+                    console.log("Error in uptating" + UrlId);
+                }
+            });
+            break;
+        case "weel1":
+            Weel.update(
+                {"name" : "weel1", "items._id": UrlId },
+                {"$set":{"items.$.name": toEmbedVideo(finalUrl)}},
+                function(err, foundList){
+                if(!err){
+                    console.log("Succesfuly updated " + UrlId);
+                    res.redirect("/weel1");  
+                }else{
+                    console.log("Error in uptating" + UrlId);
+                }
+            });
+            break;
+        case "weel2":
+            Weel.update(
+                {"name" : "weel2", "items._id": UrlId },
+                {"$set":{"items.$.name": toEmbedVideo(finalUrl)}},
+                function(err, foundList){
+                if(!err){
+                    console.log("Succesfuly updated " + UrlId);
+                    res.redirect("/weel2");  
+                }else{
+                    console.log("Error in uptating" + UrlId);
+                }
+            });
+            break;
+        case "weel3":
+            Weel.update(
+                {"name" : "weel3", "items._id": UrlId },
+                {"$set":{"items.$.name": toEmbedVideo(finalUrl)}},
+                function(err, foundList){
+                if(!err){
+                    console.log("Succesfuly updated " + UrlId);
+                    res.redirect("/weel3");  
+                }else{
+                    console.log("Error in uptating" + UrlId);
+                }
+            });
+            break;
+        default:
+        break;
+    }
+});
+
+
+
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ Background
+app.post("/background", function(req, res){
+    console.log("background Button pressed ");
+    switch (weelName) {
+        case "weelDefault":
+            Weel.findOneAndUpdate({name: "weelDefault"}, {background: inputUrl},function(err, foundList){
+                if(!err){
+                    res.redirect("/");  
+                }else{
+                    console.log("Problem with background video update");
+                }
+            });
+            break;
+        case "weel0":
+            Weel.findOneAndUpdate({name: "weel0"}, {background: inputUrl},function(err, foundList){
+                if(!err){
+                    res.redirect("/weel0");  
+                }else{
+                    console.log("Problem with background video update");
+                }
+            });
+            break;
+        case "weel1":
+            Weel.findOneAndUpdate({name: "weel1"}, {background: inputUrl},function(err, foundList){
+                if(!err){
+                    res.redirect("/weel1");  
+                }else{
+                    console.log("Problem with background video update");
+                }
+            });
+            break;
+        case "weel2":
+            Weel.findOneAndUpdate({name: "weel2"}, {background: inputUrl},function(err, foundList){
+                if(!err){
+                    res.redirect("/weel2");  
+                }else{
+                    console.log("Problem with background video update");
+                }
+            });
+            break;
+        case "weel3":
+            Weel.findOneAndUpdate({name: "weel3"}, {background: inputUrl},function(err, foundList){
+                if(!err){
+                    res.redirect("/weel3");  
+                }else{
+                    console.log("Problem with background video update");
+                }
+            });
+            break;
+        default:
+            break;
+    }  
+});
+
+
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\after you press a weel putton
+app.post("/memory", function(req, res){
+
+    const memory = req.body.memoryButton;
+    if(copyState ===  0){
+        switch (memory) {
+            case "weel0":
+                res.redirect("/weel0")
+                break;
+            case "weel1":
+                res.redirect("/weel1")
+                break;
+            case "weel2":
+                res.redirect("/weel2")
+                break;
+            case "weel3":
+                res.redirect("/weel3")
+                break;
+            default:
+                break;
+        }
+    }
+    else{
+        switch (memory) {
+            case "weel0":
+                console.log("copy "  + weelName);
+                res.redirect("/copyweel0")
+                break;
+            case "weel1":
+                console.log("copy "  + weelName);
+                res.redirect("/copyweel1")
+                break;
+            case "weel2":
+                console.log("copy "  + weelName);
+                res.redirect("/copyweel2")
+                break;
+            case "weel3":
+                console.log("copy "  + weelName);
+                res.redirect("/copyWeel3")
+                break;
+            default:
+                break;
+        }        
+    }
+});
+
+
+
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ Copy a weel to another weel
 app.post("/copy", function(req ,res){
     copyState;
     console.log(copyState);
@@ -594,13 +574,13 @@ app.post("/copy", function(req ,res){
         copyState = 1;
     }
 });
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
 
 
 
-// PORT
+
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\PORT
 app.listen(3000, function(){
     console.log("Listening on port 3000");
 });
-
 
