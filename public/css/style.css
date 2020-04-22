@@ -5,9 +5,13 @@
 	/* box-sizing: border-box; */
 }
 
-body {
-    background-color: black;
+body .afterBodyHome {
+    background-color: white;
     /* min-width:1105px; */
+}
+
+.invisible{
+    opacity: 0;
 }
 
 #hoverSpot {
@@ -17,7 +21,7 @@ body {
     height: 30%;
     top: 0px;
     left: 0;
-    border: 1px solid rgb(250, 12, 131);;
+    border: 1px solid rgb(250, 12, 131);
     opacity: 0;
     z-index: 10;
 }
@@ -84,23 +88,102 @@ p{
     opacity: .6;
     z-index: 1;
 }
-
-
-/* right menu *//* right menu *//* right menu *//* right menu *//* right menu *//* right menu */
-.rightMenu {
-    visibility: hidden;
+/* login & Reginster *//* login & Reginster *//* login & Reginster *//* login & Reginster */
+/* experimental */
+.blur {
+    backdrop-filter: blur(5px);
+    visibility: visible;
     position: fixed;
     width: 100%;
     height: 100%;
-    top: 0px;
-    left: 75%;
-    background-color:rgb(19, 18, 18);
-    border: 1px solid black;
-    opacity: .8;
-    z-index: 3;
-  }
+    background-color: white;
+    opacity: 0.93;
+}
+.loginReginster {
+    position: relative;
+    backdrop-filter: blur(1px);
+    visibility: visible;
+    position: fixed;
+    width: 100%;
+    height: 45%;
+    margin-top: 25vh;
+    background-color: rgba(248, 242, 247, 0.349);
+    opacity: 1;
+}
+.p1{
+    position: absolute;
+    color: rgba(0, 0, 0, 0.486);
+    font-size: 29px;
+    padding-top: 0px;
+    margin-top: 2.6%;
+    margin-left: 23%;
+}
+.p2{
+    position: absolute;
+    color: rgba(0, 0, 0, 0.486);
+    font-size: 29px;
+    padding-top: 0px;
+    margin-top: 5.5%;
+    margin-left: 23%;
+}
+.p3{
+    position: absolute;
+    color: rgba(0, 0, 0, 0.486);
+    font-size: 29px;
+    padding-top: 0px;
+    margin-top: 6.4%;
+    margin-left: 23%;
+}
+.loginReginster  .text:hover {
+    color: rgba(0, 0, 0, 0.767);
+}
 
+.inputA input{
+    position: absolute;
+    color: rgb(0, 0, 0);
+    border: 1px solid rgb(149, 149, 149);
+    background-color: rgba(128, 240, 178, 0.043);
+    width: 25%;
+    padding: 6px 2px; 
+    font-style: italic;
+    font-family: 'Raleway', sans-serif;
+    border-radius: 4px;
+    margin-top: 1.5%;
+    margin-left: 37%;
+    font-size: 20px;
+    font-weight: 100;
+    background-color: rgba(128, 240, 178, 0.349);
+    opacity: .6;
+    z-index: 100;
+}
+.inputA input:hover {
+    opacity: 1;
+    border: 1px solid rgba(0, 0, 0, 0.918);
 
+}
+.inputB input{
+    position: absolute;
+    color: rgb(0, 0, 0);
+    border: 1px solid rgb(149, 149, 149);
+    background-color: rgba(128, 240, 178, 0.043);
+    width: 21%;
+    padding: 6px 2px; 
+    font-style: italic;
+    font-family: 'Raleway', sans-serif;
+    border-radius: 4px;
+    margin-top: 4%;
+    margin-left: 37%;
+    font-size: 20px;
+    font-weight: 100;
+    background-color: rgba(128, 240, 178, 0.349);
+    opacity: .6;
+    z-index: 100;
+}
+.inputB input:hover {
+opacity: 1;
+border: 1px solid rgba(0, 0, 0, 0.918);
+
+}
 /* left menu *//* left menu *//* left menu *//* left menu *//* left menu *//* left menu *//* left menu */
 .leftMenu {
     visibility: visible;
@@ -136,6 +219,10 @@ p{
     color:rgb(250, 12, 131);;
     background-color: black;
     border: 1px solid white;
+    font-style: italic;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 100;
     width: 37px;
     height: 37px;
     border-radius: 50px;
@@ -175,6 +262,20 @@ p{
     margin-right: 5%;
     border-radius: 20px;
 }
+
+/* right menu *//* right menu *//* right menu *//* right menu *//* right menu *//* right menu */
+.rightMenu {
+    visibility: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 75%;
+    background-color:rgb(19, 18, 18);
+    border: 1px solid black;
+    opacity: .8;
+    z-index: 3;
+  }
   
 /* iframes  *//* iframes  *//* iframes  *//* iframes  *//* iframes  *//* iframes  */
 .position  {
@@ -217,10 +318,7 @@ p{
     opacity: 1;
     z-index: 1;
 }
-.position input:hover {
-    background-color: rgba(128, 240, 178, 0.349);
 
-}
 .buttonLink {
     visibility: hidden;
     position: relative;

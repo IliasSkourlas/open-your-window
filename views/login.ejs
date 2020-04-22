@@ -32,21 +32,25 @@
     </div>
     <div class="blur"> </div>
     <div class="loginReginster">
+        
+        <p class="p1">email</p>
+        <p class="p2">pass</p>
 
-        <a href="/login"><p class="p1 text">login</p></a>
-        <!-- <a href="/login"><p class="p2 text">login</p></a> -->
-        <a href="/register"><p class="p3 text">register </p></a>
-
+        <form action="/login" method="post">
+            <div class="inputA"> 
+                <input class="inputA" type="email" name="username" id="" >
+            </div>
+            <div class="inputB"> 
+                <input type="password" name="password" id="" >
+            </div>
+            <button class="invisible" type="submit"></button>
+        </form>
 
     </div>
     
     <div class="backgroundVideo">
         <iframe id="background" src= "<%= backgroundBox  %>" width="560" height="315" frameborder="0" loading=”lazy” allowfullscreen ></iframe> 
     </div>
-
-
-
-
 </dir>
 
 

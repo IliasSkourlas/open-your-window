@@ -1,0 +1,63 @@
+
+<%- include("partials/header"); -%>
+
+
+<div   id="hoverSpot"> </div>
+
+
+        <div class="rightMenu">
+            <p>
+                X: <span id="x-value"></span>
+            </p>
+            <p>
+                Y: <span id="y-value"></span>
+            </p>
+        </div>
+       
+        <div class="Time">1</div>
+        <div style="opacity: 0.92;" class="loop">   
+            <% videoBox.forEach(function(i){  %>
+                
+            <div>
+                <iframe  class="giveId" id="v1" src="<%= i.name %>"  width="560" height="315" frameborder="0" loading=”lazy” allowfullscreen scrolling="yes" onload="load('Done func');" onerror="error('failed function');">
+                </iframe>
+                <form action="/" class="position" id="1" method="post">
+                    <input id="i1" class="inputId" name="postUrl" value="<%= i.name %>" autocomplete="off"></input>
+                        <button type="submit" name="button" value="<%= i._id %>" class="buttonLink"></button> 
+                        <input  type="checkbox" name="buttonAutoplayMute"  class="buttonAutoplayMute" autocomplete="off"  ></input>
+                </form>
+            </div>
+           <% }) %>   
+
+        </div>
+       
+        <div class="leftMenu">
+            <div class="memories">
+                <form action="/memory" method="post">
+                    <button type="submit" name="memoryButton" value="weel0" class="memoryButtons"  >0</button>
+                    <button type="submit" name="memoryButton" value="weel1" class="memoryButtons"  >1</button>
+                    <button type="submit" name="memoryButton" value="weel2" class="memoryButtons"  >2</button>
+                    <button type="submit" name="memoryButton" value="weel3" class="memoryButtons"  >3</button>
+                </form>
+                <form action="/copy" method="post">
+                    <input  type="checkbox" name="copy" onchange="this.form.submit()" class="checkbox"  ></input>
+                </form>
+                <div class="background">
+                    <form action="/background" method="post">
+                        <button id="backgroundButton" name="backgroundButton" type="submit"  >Background</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="backgroundVideo">
+            <iframe id="background" src= "<%= backgroundBox  %>" width="560" height="315" frameborder="0" loading=”lazy” allowfullscreen ></iframe> 
+        </div>
+
+
+
+
+
+<%- include("partials/footer"); -%>
+

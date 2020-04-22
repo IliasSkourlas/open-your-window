@@ -4,13 +4,15 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const _ = require('lodash');
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 const mongoose = require("mongoose");
 const app = express();
 
-app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
+app.set("view engine", "ejs");
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\GLOBAL VARIABLES
 let weelName = "";
@@ -53,27 +55,46 @@ function toEmbedVideo(url){
     }
 };
 
-
+// 
+function findCommon(res){
+    ItemUrl.find({}, function(err, foundItems){
+        if(!err){
+            res.render("common", {
+                backgroundBox: backgroundMain,
+                videoBox: foundItems
+            })
+        }
+    })
+};
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\DB
 // create db 
 mongoose.connect("mongodb://localhost:27017/urlDB", {useNewUrlParser: true});
 
-// create Items collection
-const itemsUrlSchema = {
+const itemsUrlSchema = new mongoose.Schema({
     name: String
-};
+});
 const ItemUrl = mongoose.model("ItemUrl", itemsUrlSchema);
 
 // create Weels collection
-const weelsUrlSchema = {
+const weelsUrlSchema = new mongoose.Schema({
     name: String,
     background: String,
     items: [itemsUrlSchema]
-};
+});
+const Weel= mongoose.model("Weel", weelsUrlSchema);
+
+//create Users collection (soon commonWeel ==>to Aray)
+const userSchema = new mongoose.Schema({
+    email: String,
+    password: String,
+    
+});
+const User = new mongoose.model("User", userSchema);
+
+
 
 // Enter initial iframes
-const Weel= mongoose.model("Weel", weelsUrlSchema);
 
 const itemUrl1 = new ItemUrl({
     name: "http://bookipia.com?"
@@ -159,13 +180,10 @@ const defaultUrls = [
 ];
 
 
-
-
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
 // GET
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
-
-// weel default
+// Home  -  weel default
 app.get("/", function(req, res){
     weelName = "weelDefault"
     ItemUrl.find({}, function(err, foundItems){
@@ -188,6 +206,51 @@ app.get("/", function(req, res){
     }); 
 });
 
+// common weel
+app.get("/common", function(req, res){
+    
+    ItemUrl.find({}, function(err, foundItems){
+        if(!err){
+            res.render("common", {
+                backgroundBox: backgroundMain,
+                videoBoxT: foundItems
+            })
+        }
+    })     
+})
+// register
+app.get("/register", function(req, res){
+    ItemUrl.find({}, function(err, foundItems){
+        if(!err){
+            res.render("register", {
+                backgroundBox: backgroundMain,
+                videoBox: foundItems
+            })
+        }
+    })     
+})
+// login
+app.get("/login", function(req, res){
+    ItemUrl.find({}, function(err, foundItems){
+        if(!err){
+            res.render("login", {
+                backgroundBox: backgroundMain,
+                videoBox: foundItems
+            })
+        }
+    })     
+})
+// jump
+app.get("/jump", function(req, res){
+    ItemUrl.find({}, function(err, foundItems){
+        if(!err){
+            res.render("jump", {
+                backgroundBox: backgroundMain,
+                videoBox: foundItems
+            })
+        }
+    })     
+})
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\Weel Memories
 app.get("/weel0", function(req, res){
@@ -204,7 +267,7 @@ app.get("/weel0", function(req, res){
                 weel.save();
                 res.redirect("/weel0");
             }else{
-                res.render("home", {
+                res.render("common", {
                     backgroundBox:foundWeel.background,
                     videoBox: foundWeel.items
                 });
@@ -227,7 +290,7 @@ app.get("/weel1", function(req, res){
                 weel.save();
                 res.redirect("/weel1");
             }else{
-                res.render("home", {
+                res.render("common", {
                     backgroundBox:foundWeel.background,
                     videoBox: foundWeel.items
                 });
@@ -250,7 +313,7 @@ app.get("/weel2", function(req, res){
                 weel.save();
                 res.redirect("/weel2");
             }else{
-                res.render("home", {
+                res.render("common", {
                     backgroundBox:foundWeel.background,
                     videoBox: foundWeel.items
                 });
@@ -273,7 +336,7 @@ app.get("/weel3", function(req, res){
                 weel.save();
                 res.redirect("/weel3");
             }else{
-                res.render("home", {
+                res.render("common", {
                     backgroundBox:foundWeel.background,
                     videoBox: foundWeel.items
                 });
@@ -398,7 +461,7 @@ app.post("/", function(req, res){
         case "weelDefault":
             ItemUrl.findOneAndUpdate({_id:UrlId}, {name: toEmbedVideo(finalUrl)},function(err, foundList){
                 if(!err){
-                    res.redirect("/");  
+                    res.redirect("/common");  
                 }
             });
             break;
@@ -458,7 +521,6 @@ app.post("/", function(req, res){
         break;
     }
 });
-
 
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ Background
@@ -574,6 +636,59 @@ app.post("/copy", function(req ,res){
         copyState = 1;
     }
 });
+
+
+
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\register
+app.post("/register", function(req, res){
+    
+    bcrypt.hash(req.body.password, saltRounds, function(err, hash){
+         
+        const newUser = new User({
+            email: req.body.username,
+            password: hash
+        })
+        newUser.save(function(err){
+            if(err){
+                console.log("1  " +err);
+            }else{
+
+                findCommon(res);  
+                
+            }
+        });
+    });
+});
+
+   
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\LOGIN
+
+app.post("/login", function(req, res){
+    const username = req.body.username;
+    const password = req.body.password;
+   
+    User.findOne({email : username}, function(err, foundUser){
+        if(err){
+           console.log(err);
+        }else{
+            if(foundUser){
+               bcrypt.compare(password , foundUser.password, function(err, result) {
+                   if(result === true) {
+
+                    findCommon(res);
+
+                   }else{
+                       res.redirect("/login")
+                       console.log("wrong password");
+                   }
+               });
+           }else{
+               res.redirect("/login")
+                       console.log("incorrect user");
+           }
+        }
+    });
+}); 
 
 
 
