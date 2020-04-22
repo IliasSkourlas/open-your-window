@@ -1,76 +1,60 @@
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\SETUP
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
-const _ = require('lodash');
-const bcrypt = require("bcrypt");
-const saltRounds = 10;
-
 const mongoose = require("mongoose");
+const _ = require('lodash');
+//(authenticate requests = a.r
+const session = require('express-session');
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
+//a.r)
+
 const app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\GLOBAL VARIABLES
-let weelName = "";
-let copyState = 0;
-let UrlId = "";
-let inputUrl = "";
-let  youtubeString = "watch?v=";
-let youtubeReplace = "embed/";
-let vimeoString = "vimeo.com";
-let vimeoReplace = "player.vimeo.com/video";
+//(a.r 
+app.use(session({
+    secret: "This is a camera.",
+    resave: false,
+    saveUninitialized: false
+}))
 
-let backgroundMain = "https://www.youtube.com/embed/4l7Uw-o-RC4?autoplay=1&mute=1&loop=1&playlist=4l7Uw-o-RC4";
-let all = "&autoplay=1&loop=1&controls=0&mute=1";
-let control = "&autoplay=1&loop=1&controls=1&mute=1";
-let still = "&autoplay=0&loop=1&controls=0";
-let mute = "&mute=1";
-let unmute = "&mute=0";
+app.use(passport.initialize());
+app.use(passport.session());
+//a.r)
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\CLEAN UP AND DELLET AFTER
-let superCute = "https://www.youtube.com/embed/4l7Uw-o-RC4?autoplay=1&mute=1&loop=1&playlist=4l7Uw-o-RC4";
-let talkToParot = "https://www.youtube.com/embed/v1P0cAzXR6g?autoplay=1&loop=1&controls=0&mute=1&playlist=v1P0cAzXR6g";
-let realBirds = "https://www.youtube.com/embed/PwylW_sUfQY?autoplay=1&mute=1&loop=1&playlist=PwylW_sUfQY";
-let kittenCuteness = "https://www.youtube.com/embed/dzFKG6rkWpU?autoplay=1&mute=1&loop=1&playlist=dzFKG6rkWpU";
-let chen = "https://www.youtube.com/embed/Iwpr55PZEJ8?";
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\FUNCTIONS
-// automaticaly embed youtube, vimeo
-function toEmbedVideo(url){
-    if(url.includes("youtube.com") & url.includes(youtubeString)){
-           return url.replace(youtubeString, youtubeReplace);
-    }
-    if(url.includes(vimeoReplace)){
-        return url;
-    }
-    if(url.includes("vimeo.com") & url.includes(vimeoString) & !url.includes(vimeoReplace)){
-            return url.replace(vimeoString, vimeoReplace);
-    }
-    else{
-        return url;
-    }
-};
-
-// 
-function findCommon(res){
-    ItemUrl.find({}, function(err, foundItems){
-        if(!err){
-            res.render("common", {
-                backgroundBox: backgroundMain,
-                videoBox: foundItems
-            })
-        }
-    })
-};
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\DB
-// create db 
-mongoose.connect("mongodb://localhost:27017/urlDB", {useNewUrlParser: true});
+mongoose.connect("mongodb://localhost:27017/urlDB", {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
 
+
+//create Users collection (soon commonWeel ==>to Aray)
+const userSchema = new mongoose.Schema({
+    email: String,
+    password: String,
+    
+});
+
+//(a.r
+userSchema.plugin(passportLocalMongoose);
+//a.r)
+
+const User = new mongoose.model("User", userSchema);
+
+//(a.r 
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+//a.r)
+
+// Schema
 const itemsUrlSchema = new mongoose.Schema({
     name: String
 });
@@ -84,13 +68,6 @@ const weelsUrlSchema = new mongoose.Schema({
 });
 const Weel= mongoose.model("Weel", weelsUrlSchema);
 
-//create Users collection (soon commonWeel ==>to Aray)
-const userSchema = new mongoose.Schema({
-    email: String,
-    password: String,
-    
-});
-const User = new mongoose.model("User", userSchema);
 
 
 
@@ -180,6 +157,62 @@ const defaultUrls = [
 ];
 
 
+
+
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\GLOBAL VARIABLES
+let weelName = "";
+let copyState = 0;
+let UrlId = "";
+let inputUrl = "";
+let  youtubeString = "watch?v=";
+let youtubeReplace = "embed/";
+let vimeoString = "vimeo.com";
+let vimeoReplace = "player.vimeo.com/video";
+
+let backgroundMain = "https://www.youtube.com/embed/4l7Uw-o-RC4?autoplay=1&mute=1&loop=1&playlist=4l7Uw-o-RC4";
+let all = "&autoplay=1&loop=1&controls=0&mute=1";
+let control = "&autoplay=1&loop=1&controls=1&mute=1";
+let still = "&autoplay=0&loop=1&controls=0";
+let mute = "&mute=1";
+let unmute = "&mute=0";
+
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\CLEAN UP AND DELLET AFTER
+let superCute = "https://www.youtube.com/embed/4l7Uw-o-RC4?autoplay=1&mute=1&loop=1&playlist=4l7Uw-o-RC4";
+let talkToParot = "https://www.youtube.com/embed/v1P0cAzXR6g?autoplay=1&loop=1&controls=0&mute=1&playlist=v1P0cAzXR6g";
+let realBirds = "https://www.youtube.com/embed/PwylW_sUfQY?autoplay=1&mute=1&loop=1&playlist=PwylW_sUfQY";
+let kittenCuteness = "https://www.youtube.com/embed/dzFKG6rkWpU?autoplay=1&mute=1&loop=1&playlist=dzFKG6rkWpU";
+let chen = "https://www.youtube.com/embed/Iwpr55PZEJ8?";
+
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\FUNCTIONS
+// automaticaly embed youtube, vimeo
+function toEmbedVideo(url){
+    if(url.includes("youtube.com") & url.includes(youtubeString)){
+           return url.replace(youtubeString, youtubeReplace);
+    }
+    if(url.includes(vimeoReplace)){
+        return url;
+    }
+    if(url.includes("vimeo.com") & url.includes(vimeoString) & !url.includes(vimeoReplace)){
+            return url.replace(vimeoString, vimeoReplace);
+    }
+    else{
+        return url;
+    }
+};
+
+// 
+function findCommon(res){
+    ItemUrl.find({}, function(err, foundItems){
+        if(!err){
+            res.render("common", {
+                backgroundBox: backgroundMain,
+                videoBox: foundItems
+            })
+        }
+    })
+};
+
+
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
 // GET
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -197,7 +230,6 @@ app.get("/", function(req, res){
             });
             res.redirect("/");
         }else{
-            
             res.render("home", {
                 backgroundBox: backgroundMain,
                 videoBox: foundItems
@@ -208,16 +240,20 @@ app.get("/", function(req, res){
 
 // common weel
 app.get("/common", function(req, res){
-    
-    ItemUrl.find({}, function(err, foundItems){
-        if(!err){
-            res.render("common", {
-                backgroundBox: backgroundMain,
-                videoBoxT: foundItems
-            })
-        }
-    })     
-})
+    if(req.isAuthenticated()){
+        ItemUrl.find({}, function(err, foundItems){
+            if(!err){
+                res.render("common", {
+                    backgroundBox: backgroundMain,
+                    videoBox: foundItems
+                });
+            }
+        }) ;   
+    }else{
+        res.redirect("/login");
+    }
+});
+
 // register
 app.get("/register", function(req, res){
     ItemUrl.find({}, function(err, foundItems){
@@ -256,93 +292,121 @@ app.get("/jump", function(req, res){
 app.get("/weel0", function(req, res){
     copyState = 0;
     weelName = "weel0";
-    Weel.findOne({name: weelName},function(err, foundWeel){
-        if (!err){
-            if (!foundWeel){
-                const weel = new Weel({
-                    name :weelName,
-                    background : backgroundMain,
-                    items: defaultUrls
-                });
-                weel.save();
-                res.redirect("/weel0");
-            }else{
-                res.render("common", {
-                    backgroundBox:foundWeel.background,
-                    videoBox: foundWeel.items
-                });
+
+    if(req.isAuthenticated()){
+
+        Weel.findOne({name: weelName},function(err, foundWeel){
+            if (!err){
+                if (!foundWeel){
+                    const weel = new Weel({
+                        name :weelName,
+                        background : backgroundMain,
+                        items: defaultUrls
+                    });
+                    weel.save();
+                    res.redirect("/weel0");
+                }else{
+                    res.render("common", {
+                        backgroundBox:foundWeel.background,
+                        videoBox: foundWeel.items
+                    });
+                }
             }
-        }
-    })
+        })
+    }else{
+        res.redirect("/login");
+    }
+    
 })
 
 app.get("/weel1", function(req, res){
     copyState = 0;
     weelName = "weel1";
-    Weel.findOne({name: weelName},function(err, foundWeel){
-        if (!err){
-            if (!foundWeel){
-                const weel = new Weel({
-                    name :weelName,
-                    background : backgroundMain,
-                    items: defaultUrls
-                });
-                weel.save();
-                res.redirect("/weel1");
-            }else{
-                res.render("common", {
-                    backgroundBox:foundWeel.background,
-                    videoBox: foundWeel.items
-                });
+    
+    if(req.isAuthenticated()){
+
+        Weel.findOne({name: weelName},function(err, foundWeel){
+            if (!err){
+                if (!foundWeel){
+                    const weel = new Weel({
+                        name :weelName,
+                        background : backgroundMain,
+                        items: defaultUrls
+                    });
+                    weel.save();
+                    res.redirect("/weel1");
+                }else{
+                    res.render("common", {
+                        backgroundBox:foundWeel.background,
+                        videoBox: foundWeel.items
+                    });
+                }
             }
-        }
-    })
+        })
+    }else{
+        res.redirect("/login");
+    }
+    
 })
 
 app.get("/weel2", function(req, res){
     copyState = 0;
     weelName = "weel2";
-    Weel.findOne({name: weelName},function(err, foundWeel){
-        if (!err){
-            if (!foundWeel){
-                const weel = new Weel({
-                    name :weelName,
-                    background : backgroundMain,
-                    items: defaultUrls
-                });
-                weel.save();
-                res.redirect("/weel2");
-            }else{
-                res.render("common", {
-                    backgroundBox:foundWeel.background,
-                    videoBox: foundWeel.items
-                });
+
+    if(req.isAuthenticated()){
+
+        Weel.findOne({name: weelName},function(err, foundWeel){
+            if (!err){
+                if (!foundWeel){
+                    const weel = new Weel({
+                        name :weelName,
+                        background : backgroundMain,
+                        items: defaultUrls
+                    });
+                    weel.save();
+                    res.redirect("/weel2");
+                }else{
+                    res.render("common", {
+                        backgroundBox:foundWeel.background,
+                        videoBox: foundWeel.items
+                    });
+                }
             }
-        }
-    })
+        })
+    }else{
+        res.redirect("/login");
+    }
+    
 })
 
 app.get("/weel3", function(req, res){
     copyState = 0;
     weelName = "weel3";
-    Weel.findOne({name: weelName},function(err, foundWeel){
-        if (!err){
-            if (!foundWeel){
-                const weel = new Weel({
-                    name :weelName,
-                    background : backgroundMain,
-                    items: defaultUrls
-                });
-                weel.save();
-                res.redirect("/weel3");
-            }else{
-                res.render("common", {
-                    backgroundBox:foundWeel.background,
-                    videoBox: foundWeel.items
-                });
+
+    if(req.isAuthenticated()){
+
+        Weel.findOne({name: weelName},function(err, foundWeel){
+            if (!err){
+                if (!foundWeel){
+                    const weel = new Weel({
+                        name :weelName,
+                        background : backgroundMain,
+                        items: defaultUrls
+                    });
+                    weel.save();
+                    res.redirect("/weel3");
+                }else{
+                    res.render("common", {
+                        backgroundBox:foundWeel.background,
+                        videoBox: foundWeel.items
+                    });
+                }
             }
-        }
-    })
+        })
+    }else{
+        res.redirect("/login");
+    }
+    
 })
 
 
@@ -639,55 +703,38 @@ app.post("/copy", function(req ,res){
 
 
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\register
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\REGISTER
 app.post("/register", function(req, res){
-    
-    bcrypt.hash(req.body.password, saltRounds, function(err, hash){
-         
-        const newUser = new User({
-            email: req.body.username,
-            password: hash
-        })
-        newUser.save(function(err){
-            if(err){
-                console.log("1  " +err);
-            }else{
-
-                findCommon(res);  
-                
-            }
-        });
-    });
+    User.register({username: req.body.username}, req.body.password, function(err, user){
+        if(err){
+            console.log(err); 
+            res.redirect("/register");
+        }else{
+            passport.authenticate("local")(req, res, function(){
+                res.redirect("/common"); 
+            })
+        }  
+    })
 });
 
    
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\LOGIN
 
 app.post("/login", function(req, res){
-    const username = req.body.username;
-    const password = req.body.password;
-   
-    User.findOne({email : username}, function(err, foundUser){
+    const user = new User({
+        username:req.body.username,
+        password:req.body.password
+    })
+
+    req.login(user, function(err){
         if(err){
-           console.log(err);
+            console.log(err);
         }else{
-            if(foundUser){
-               bcrypt.compare(password , foundUser.password, function(err, result) {
-                   if(result === true) {
-
-                    findCommon(res);
-
-                   }else{
-                       res.redirect("/login")
-                       console.log("wrong password");
-                   }
-               });
-           }else{
-               res.redirect("/login")
-                       console.log("incorrect user");
-           }
+            passport.authenticate("local")(req, res, function(){
+                res.redirect("/common");
+            });
         }
-    });
+    }); 
 }); 
 
 
