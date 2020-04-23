@@ -35,44 +35,14 @@ app.use(passport.session());
 mongoose.connect("mongodb://localhost:27017/urlDB", {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
 
 
-//create Users collection (soon commonWeel ==>to Aray)
-const userSchema = new mongoose.Schema({
-    email: String,
-    password: String,
-    
-});
-
-//(a.r
-userSchema.plugin(passportLocalMongoose);
-//a.r)
-
-const User = new mongoose.model("User", userSchema);
-
-//(a.r 
-passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-//a.r)
-
-// Schema
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\Items collection
 const itemsUrlSchema = new mongoose.Schema({
     name: String
 });
 const ItemUrl = mongoose.model("ItemUrl", itemsUrlSchema);
 
-// create Weels collection
-const weelsUrlSchema = new mongoose.Schema({
-    name: String,
-    background: String,
-    items: [itemsUrlSchema]
-});
-const Weel= mongoose.model("Weel", weelsUrlSchema);
 
-
-
-
-// Enter initial iframes
-
+// defaultUrls
 const itemUrl1 = new ItemUrl({
     name: "http://bookipia.com?"
 });
@@ -146,7 +116,6 @@ const itemUrl24 = new ItemUrl({
     name: ""
 });
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ defaultUrls Array
 const defaultUrls = [
     itemUrl1, itemUrl2, itemUrl3, itemUrl4,
     itemUrl5, itemUrl6, itemUrl7, itemUrl8,
@@ -156,10 +125,36 @@ const defaultUrls = [
     itemUrl21, itemUrl22, itemUrl23, itemUrl24
 ];
 
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\Weels collection
+const weelsUrlSchema = new mongoose.Schema({
+    name: String,
+    background: String,
+    items: [itemsUrlSchema]
+});
+const Weel= mongoose.model("Weel", weelsUrlSchema);
+
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\Users collection & a.r
+const userSchema = new mongoose.Schema({
+    email: String,
+    password: String,
+    common : [weelsUrlSchema]
+});
+
+//(a.r
+userSchema.plugin(passportLocalMongoose);
+//a.r)
+
+const User = new mongoose.model("User", userSchema);
+
+//(a.r 
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+//a.r)
 
 
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\GLOBAL VARIABLES
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\GLOBAL >VARIABLES
 let weelName = "";
 let copyState = 0;
 let UrlId = "";
@@ -214,11 +209,13 @@ function findCommon(res){
 
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
-// GET
+// >GET
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
-// Home  -  weel default
+
+// Home  ----  default Urls
 app.get("/", function(req, res){
     weelName = "weelDefault"
+
     ItemUrl.find({}, function(err, foundItems){
         if(foundItems.length === 0){
             ItemUrl.insertMany(defaultUrls, function(err){
@@ -238,23 +235,8 @@ app.get("/", function(req, res){
     }); 
 });
 
-// common weel
-app.get("/common", function(req, res){
-    if(req.isAuthenticated()){
-        ItemUrl.find({}, function(err, foundItems){
-            if(!err){
-                res.render("common", {
-                    backgroundBox: backgroundMain,
-                    videoBox: foundItems
-                });
-            }
-        }) ;   
-    }else{
-        res.redirect("/login");
-    }
-});
 
-// register
+// register  ----  default Urls
 app.get("/register", function(req, res){
     ItemUrl.find({}, function(err, foundItems){
         if(!err){
@@ -265,7 +247,7 @@ app.get("/register", function(req, res){
         }
     })     
 })
-// login
+// login  ----  default Urls
 app.get("/login", function(req, res){
     ItemUrl.find({}, function(err, foundItems){
         if(!err){
@@ -276,17 +258,59 @@ app.get("/login", function(req, res){
         }
     })     
 })
-// jump
-app.get("/jump", function(req, res){
-    ItemUrl.find({}, function(err, foundItems){
-        if(!err){
-            res.render("jump", {
-                backgroundBox: backgroundMain,
-                videoBox: foundItems
-            })
+
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>common weel
+app.get("/common", function(req, res){
+    // if(req.isAuthenticated()){
+    //     ItemUrl.find({}, function(err, foundItems){
+    //         if(!err){
+    //             res.render("common", {
+    //                 backgroundBox: backgroundMain,
+    //                 videoBox: foundItems
+    //             });
+    //         }
+    //     }) ;   
+    // }else{
+    //     res.redirect("/login");
+    // }
+
+
+    weelName = "weel0";
+    if(req.isAuthenticated()){
+        
+        if(userID == "5ea18048a375b97f96287891"){
+            console.log("Anna");
         }
-    })     
-})
+        else if(userID == "5ea184517eb2530280678aa3"){
+            console.log("Dimosthenis");
+        }
+        else{
+            console.log("unknown user");
+        }
+
+        Weel.findOne({name: weelName},function(err, foundWeel){
+            if (!err){
+                if (!foundWeel){
+                    const weel = new Weel({
+                        name :weelName,
+                        background : backgroundMain,
+                        items: defaultUrls
+                    });
+                    weel.save();
+                    res.redirect("/common");
+                }else{
+                    res.render("common", {
+                        backgroundBox:foundWeel.background,
+                        videoBox: foundWeel.items
+                    });
+                }
+            }
+        })
+    }else{
+        res.redirect("/login");
+    }
+
+});
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\Weel Memories
 app.get("/weel0", function(req, res){
@@ -495,7 +519,7 @@ app.get("/copyWeel3", function(req, res){
 
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
-//  POST
+//  >POST
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ Update  Weels
 app.post("/", function(req, res){
     UrlId = req.body.button;
@@ -703,7 +727,7 @@ app.post("/copy", function(req ,res){
 
 
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\REGISTER
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>REGISTER
 app.post("/register", function(req, res){
     User.register({username: req.body.username}, req.body.password, function(err, user){
         if(err){
@@ -718,8 +742,8 @@ app.post("/register", function(req, res){
 });
 
    
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\LOGIN
-
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>LOGIN
+let userID;
 app.post("/login", function(req, res){
     const user = new User({
         username:req.body.username,
@@ -731,12 +755,20 @@ app.post("/login", function(req, res){
             console.log(err);
         }else{
             passport.authenticate("local")(req, res, function(){
+                User.findOne({username: req.body.username}, function(err, foundUser){
+                    if(!err){
+                        //get userID ... (this technique has to work for now :?)
+                        console.log("user ID: " + foundUser._id);
+                        userID = foundUser._id;
+                    }else{
+                        console.log("could not find user ID!");
+                    }
+                });
                 res.redirect("/common");
             });
         }
     }); 
 }); 
-
 
 
 
