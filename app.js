@@ -31,11 +31,11 @@ app.use(passport.session());
 
 
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\DB
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>DB
 mongoose.connect("mongodb://localhost:27017/urlDB", {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
 
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\Items collection
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\Items Schema
 const itemsUrlSchema = new mongoose.Schema({
     name: String
 });
@@ -125,7 +125,7 @@ const defaultUrls = [
     itemUrl21, itemUrl22, itemUrl23, itemUrl24
 ];
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\Weels collection
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\Weels Schema
 const weelsUrlSchema = new mongoose.Schema({
     name: String,
     background: String,
@@ -133,11 +133,16 @@ const weelsUrlSchema = new mongoose.Schema({
 });
 const Weel= mongoose.model("Weel", weelsUrlSchema);
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\Users collection & a.r
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>Users Schema & a.r
 const userSchema = new mongoose.Schema({
     email: String,
     password: String,
-    common : [weelsUrlSchema]
+    background: [String],
+    weel0: [itemsUrlSchema],
+    weel1: [itemsUrlSchema],
+    weel2: [itemsUrlSchema],
+    weel3: [itemsUrlSchema],
+    
 });
 
 //(a.r
@@ -155,6 +160,7 @@ passport.deserializeUser(User.deserializeUser());
 
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\GLOBAL >VARIABLES
+let userNow;
 let weelName = "";
 let copyState = 0;
 let UrlId = "";
@@ -163,14 +169,11 @@ let  youtubeString = "watch?v=";
 let youtubeReplace = "embed/";
 let vimeoString = "vimeo.com";
 let vimeoReplace = "player.vimeo.com/video";
+let  weelObject;
 
 let backgroundMain = "https://www.youtube.com/embed/4l7Uw-o-RC4?autoplay=1&mute=1&loop=1&playlist=4l7Uw-o-RC4";
-let all = "&autoplay=1&loop=1&controls=0&mute=1";
-let control = "&autoplay=1&loop=1&controls=1&mute=1";
-let still = "&autoplay=0&loop=1&controls=0";
-let mute = "&mute=1";
-let unmute = "&mute=0";
-
+let backgroundSound = "https://www.youtube.com/embed/v1P0cAzXR6g?autoplay=1&loop=1&controls=0&mute=1&playlist=v1P0cAzXR6g"
+let backgroundArray = [backgroundMain, backgroundMain, backgroundMain, backgroundMain];
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\CLEAN UP AND DELLET AFTER
 let superCute = "https://www.youtube.com/embed/4l7Uw-o-RC4?autoplay=1&mute=1&loop=1&playlist=4l7Uw-o-RC4";
 let talkToParot = "https://www.youtube.com/embed/v1P0cAzXR6g?autoplay=1&loop=1&controls=0&mute=1&playlist=v1P0cAzXR6g";
@@ -182,7 +185,7 @@ let chen = "https://www.youtube.com/embed/Iwpr55PZEJ8?";
 // automaticaly embed youtube, vimeo
 function toEmbedVideo(url){
     if(url.includes("youtube.com") & url.includes(youtubeString)){
-           return url.replace(youtubeString, youtubeReplace);
+           return url.replace(youtubeString, youtubeReplace); // replace if contains list first "%" with "?"
     }
     if(url.includes(vimeoReplace)){
         return url;
@@ -200,7 +203,7 @@ function findCommon(res){
     ItemUrl.find({}, function(err, foundItems){
         if(!err){
             res.render("common", {
-                backgroundBox: backgroundMain,
+                backgroundVideo: backgroundMain,
                 videoBox: foundItems
             })
         }
@@ -228,20 +231,18 @@ app.get("/", function(req, res){
             res.redirect("/");
         }else{
             res.render("home", {
-                backgroundBox: backgroundMain,
+                backgroundVideo: backgroundMain,
                 videoBox: foundItems
             });
         }
     }); 
 });
-
-
 // register  ----  default Urls
 app.get("/register", function(req, res){
     ItemUrl.find({}, function(err, foundItems){
         if(!err){
             res.render("register", {
-                backgroundBox: backgroundMain,
+                backgroundVideo: backgroundMain,
                 videoBox: foundItems
             })
         }
@@ -252,7 +253,7 @@ app.get("/login", function(req, res){
     ItemUrl.find({}, function(err, foundItems){
         if(!err){
             res.render("login", {
-                backgroundBox: backgroundMain,
+                backgroundVideo: backgroundMain,
                 videoBox: foundItems
             })
         }
@@ -261,55 +262,24 @@ app.get("/login", function(req, res){
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>common weel
 app.get("/common", function(req, res){
-    // if(req.isAuthenticated()){
-    //     ItemUrl.find({}, function(err, foundItems){
-    //         if(!err){
-    //             res.render("common", {
-    //                 backgroundBox: backgroundMain,
-    //                 videoBox: foundItems
-    //             });
-    //         }
-    //     }) ;   
-    // }else{
-    //     res.redirect("/login");
-    // }
-
-
     weelName = "weel0";
-    if(req.isAuthenticated()){
-        
-        if(userID == "5ea18048a375b97f96287891"){
-            console.log("Anna");
-        }
-        else if(userID == "5ea184517eb2530280678aa3"){
-            console.log("Dimosthenis");
-        }
-        else{
-            console.log("unknown user");
-        }
 
-        Weel.findOne({name: weelName},function(err, foundWeel){
-            if (!err){
-                if (!foundWeel){
-                    const weel = new Weel({
-                        name :weelName,
-                        background : backgroundMain,
-                        items: defaultUrls
-                    });
-                    weel.save();
-                    res.redirect("/common");
-                }else{
-                    res.render("common", {
-                        backgroundBox:foundWeel.background,
-                        videoBox: foundWeel.items
-                    });
-                }
+    if(req.isAuthenticated()){
+
+        User.findOne({username: userNow},function(err, foundCommonWeel){
+            if (err){
+                console.log(err);
+            }else{
+                res.render("common", {
+                    backgroundVideo:foundCommonWeel.background[0],
+                    videoBox: foundCommonWeel.weel0,
+                    backgroundSound: backgroundSound
+                });
             }
         })
     }else{
         res.redirect("/login");
     }
-
 });
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\Weel Memories
@@ -318,136 +288,129 @@ app.get("/weel0", function(req, res){
     weelName = "weel0";
 
     if(req.isAuthenticated()){
-
-        Weel.findOne({name: weelName},function(err, foundWeel){
-            if (!err){
-                if (!foundWeel){
-                    const weel = new Weel({
-                        name :weelName,
-                        background : backgroundMain,
-                        items: defaultUrls
-                    });
-                    weel.save();
-                    res.redirect("/weel0");
+        //>>>>> Chosing a weel from one user wile another dose not... might mix who is userNow ???;;;
+        User.findOne({username: userNow},function(err, foundWeel){
+            if (err){
+                console.log(err);
+               
                 }else{
                     res.render("common", {
-                        backgroundBox:foundWeel.background,
-                        videoBox: foundWeel.items
+                        backgroundVideo:foundWeel.background[0],
+                        videoBox: foundWeel.weel0,
+                        backgroundSound: backgroundSound
                     });
                 }
-            }
-        })
-    }else{
-        res.redirect("/login");
-    }
+            });
+        
+        }else{
+            res.redirect("/login");
+        }
     
-})
+});
 
 app.get("/weel1", function(req, res){
     copyState = 0;
     weelName = "weel1";
-    
-    if(req.isAuthenticated()){
 
-        Weel.findOne({name: weelName},function(err, foundWeel){
-            if (!err){
-                if (!foundWeel){
-                    const weel = new Weel({
-                        name :weelName,
-                        background : backgroundMain,
-                        items: defaultUrls
-                    });
-                    weel.save();
-                    res.redirect("/weel1");
+    if(req.isAuthenticated()){
+        
+        User.findOne({username: userNow},function(err, foundWeel){
+            if (err){
+                console.log(err);
+               
                 }else{
                     res.render("common", {
-                        backgroundBox:foundWeel.background,
-                        videoBox: foundWeel.items
+                        backgroundVideo:foundWeel.background[1],
+                        videoBox: foundWeel.weel1,
+                        backgroundSound: backgroundSound
                     });
                 }
-            }
-        })
-    }else{
-        res.redirect("/login");
-    }
+            });
+        
+        }else{
+            res.redirect("/login");
+        }
     
-})
+});
 
 app.get("/weel2", function(req, res){
     copyState = 0;
     weelName = "weel2";
 
     if(req.isAuthenticated()){
-
-        Weel.findOne({name: weelName},function(err, foundWeel){
-            if (!err){
-                if (!foundWeel){
-                    const weel = new Weel({
-                        name :weelName,
-                        background : backgroundMain,
-                        items: defaultUrls
-                    });
-                    weel.save();
-                    res.redirect("/weel2");
+        
+        User.findOne({username: userNow},function(err, foundWeel){
+            if (err){
+                console.log(err);
+               
                 }else{
                     res.render("common", {
-                        backgroundBox:foundWeel.background,
-                        videoBox: foundWeel.items
+                        backgroundVideo:foundWeel.background[2],
+                        videoBox: foundWeel.weel2,
+                        backgroundSound: backgroundSound
                     });
                 }
-            }
-        })
-    }else{
-        res.redirect("/login");
-    }
+            });
+        
+        }else{
+            res.redirect("/login");
+        }
     
-})
+    
+});
 
 app.get("/weel3", function(req, res){
     copyState = 0;
     weelName = "weel3";
 
     if(req.isAuthenticated()){
-
-        Weel.findOne({name: weelName},function(err, foundWeel){
-            if (!err){
-                if (!foundWeel){
-                    const weel = new Weel({
-                        name :weelName,
-                        background : backgroundMain,
-                        items: defaultUrls
-                    });
-                    weel.save();
-                    res.redirect("/weel3");
+        
+        User.findOne({username: userNow},function(err, foundWeel){
+            if (err){
+                console.log(err);
+               
                 }else{
                     res.render("common", {
-                        backgroundBox:foundWeel.background,
-                        videoBox: foundWeel.items
+                        backgroundVideo:foundWeel.background[3],
+                        videoBox: foundWeel.weel3,
+                        backgroundSound: backgroundSound
                     });
                 }
-            }
-        })
-    }else{
-        res.redirect("/login");
-    }
+            });
+        
+        }else{
+            res.redirect("/login");
+        }
     
-})
+});
 
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ after copying a weel
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ copy too weel x
+
 app.get("/copyWeel0", function(req, res){
 
-    Weel.findOne({name: weelName},function(err, foundWeel){
+    User.findOne({username: userNow},function(err, foundUser){
+        switch (weelName) {
+            case "weel0":
+                weelObject = foundUser.weel0;
+                break;
+            case "weel1": 
+                weelObject = foundUser.weel1;
+                break;
+            case "weel2":
+                weelObject = foundUser.weel2;
+                break;
+            case "weel3":
+                weelObject = foundUser.weel3;
+                break;
+            default:
+                break;
+        }
         if(err){
             console.log(err);
         }else{
-            console.log(".............................");
-            console.log(foundWeel.items);
-            console.log(".............................");
-
-            weelName = "weel0";
-            console.log("to: " + weelName);
-            Weel.findOneAndUpdate({name: weelName},{items: foundWeel.items}, function(err, updateWeel){
+            weelName = "weel0"
+            User.findOneAndUpdate({username: userNow},{weel0: weelObject}, function(err, updateWeel){
                 if(!err){
                     res.redirect("/weel0");  
                 }
@@ -457,17 +420,28 @@ app.get("/copyWeel0", function(req, res){
 })
 app.get("/copyWeel1", function(req, res){
 
-    Weel.findOne({name: weelName},function(err, foundWeel){
+    User.findOne({username: userNow},function(err, foundUser){
+        switch (weelName) {
+            case "weel0":
+                weelObject = foundUser.weel0;
+                break;
+            case "weel1": 
+                weelObject = foundUser.weel1;
+                break;
+            case "weel2":
+                weelObject = foundUser.weel2;
+                break;
+            case "weel3":
+                weelObject = foundUser.weel3;
+                break;
+            default:
+                break;
+        }
         if(err){
             console.log(err);
         }else{
-            console.log(".............................");
-            console.log(foundWeel.items);
-            console.log(".............................");
-
-            weelName = "weel1";
-            console.log("to: " + weelName);
-            Weel.findOneAndUpdate({name: weelName},{items: foundWeel.items}, function(err, updateWeel){
+            weelName = "weel1"
+            User.findOneAndUpdate({username: userNow},{weel1: weelObject}, function(err, updateWeel){
                 if(!err){
                     res.redirect("/weel1");  
                 }
@@ -477,17 +451,28 @@ app.get("/copyWeel1", function(req, res){
 })
 app.get("/copyWeel2", function(req, res){
 
-    Weel.findOne({name: weelName},function(err, foundWeel){
+    User.findOne({username: userNow},function(err, foundUser){
+        switch (weelName) {
+            case "weel0":
+                weelObject = foundUser.weel0;
+                break;
+            case "weel1": 
+                weelObject = foundUser.weel1;
+                break;
+            case "weel2":
+                weelObject = foundUser.weel2;
+                break;
+            case "weel3":
+                weelObject = foundUser.weel3;
+                break;
+            default:
+                break;
+        }
         if(err){
             console.log(err);
         }else{
-            console.log(".............................");
-            console.log(foundWeel.items);
-            console.log(".............................");
-
-            weelName = "weel2";
-            console.log("to: " + weelName);
-            Weel.findOneAndUpdate({name: weelName},{items: foundWeel.items}, function(err, updateWeel){
+            weelName = "weel2"
+            User.findOneAndUpdate({username: userNow},{weel2: weelObject}, function(err, updateWeel){
                 if(!err){
                     res.redirect("/weel2");  
                 }
@@ -497,17 +482,28 @@ app.get("/copyWeel2", function(req, res){
 })
 app.get("/copyWeel3", function(req, res){
 
-    Weel.findOne({name: weelName},function(err, foundWeel){
+    User.findOne({username: userNow},function(err, foundUser){
+        switch (weelName) {
+            case "weel0":
+                weelObject = foundUser.weel0;
+                break;
+            case "weel1": 
+                weelObject = foundUser.weel1;
+                break;
+            case "weel2":
+                weelObject = foundUser.weel2;
+                break;
+            case "weel3":
+                weelObject = foundUser.weel3;
+                break;
+            default:
+                break;
+        }
         if(err){
             console.log(err);
         }else{
-            console.log(".............................");
-            console.log(foundWeel.items);
-            console.log(".............................");
-
-            weelName = "weel3";
-            console.log("to: " + weelName);
-            Weel.findOneAndUpdate({name: weelName},{items: foundWeel.items}, function(err, updateWeel){
+            weelName = "weel3"
+            User.findOneAndUpdate({username: userNow},{weel3: weelObject}, function(err, updateWeel){
                 if(!err){
                     res.redirect("/weel3");  
                 }
@@ -515,7 +511,6 @@ app.get("/copyWeel3", function(req, res){
         }   
     })
 })
-
 
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -544,19 +539,22 @@ app.post("/", function(req, res){
         finalUrl = inputUrl;
     }
     console.log(finalUrl);
+    console.log("Url ID: "+ UrlId);
+    console.log(weelName);
+    
     // then update weels   
     switch (weelName) {
-        case "weelDefault":
-            ItemUrl.findOneAndUpdate({_id:UrlId}, {name: toEmbedVideo(finalUrl)},function(err, foundList){
-                if(!err){
-                    res.redirect("/common");  
-                }
-            });
-            break;
+        // case "weelDefault":
+        //     ItemUrl.findOneAndUpdate({_id:UrlId}, {name: toEmbedVideo(finalUrl)},function(err, foundList){
+        //         if(!err){
+        //             res.redirect("/common");  
+        //         }
+        //     });
+        //     break;
         case "weel0": 
-           Weel.update(
-                {"name" : "weel0", "items._id": UrlId },
-                {"$set":{"items.$.name":  toEmbedVideo(finalUrl)}},
+           User.update(
+                {"username" : userNow, "weel0._id": UrlId },
+                {"$set":{"weel0.$.name":  toEmbedVideo(finalUrl)}},
                 function(err, foundList){
                 if(!err){
                     console.log("Succesfuly updated " + UrlId);
@@ -567,9 +565,9 @@ app.post("/", function(req, res){
             });
             break;
         case "weel1":
-            Weel.update(
-                {"name" : "weel1", "items._id": UrlId },
-                {"$set":{"items.$.name": toEmbedVideo(finalUrl)}},
+            User.update(
+                {"username" : userNow, "weel1._id": UrlId },
+                {"$set":{"weel1.$.name":  toEmbedVideo(finalUrl)}},
                 function(err, foundList){
                 if(!err){
                     console.log("Succesfuly updated " + UrlId);
@@ -580,9 +578,9 @@ app.post("/", function(req, res){
             });
             break;
         case "weel2":
-            Weel.update(
-                {"name" : "weel2", "items._id": UrlId },
-                {"$set":{"items.$.name": toEmbedVideo(finalUrl)}},
+            User.update(
+                {"username" : userNow, "weel2._id": UrlId },
+                {"$set":{"weel2.$.name":  toEmbedVideo(finalUrl)}},
                 function(err, foundList){
                 if(!err){
                     console.log("Succesfuly updated " + UrlId);
@@ -593,9 +591,9 @@ app.post("/", function(req, res){
             });
             break;
         case "weel3":
-            Weel.update(
-                {"name" : "weel3", "items._id": UrlId },
-                {"$set":{"items.$.name": toEmbedVideo(finalUrl)}},
+            User.update(
+                {"username" : userNow, "weel3._id": UrlId },
+                {"$set":{"weel3.$.name":  toEmbedVideo(finalUrl)}},
                 function(err, foundList){
                 if(!err){
                     console.log("Succesfuly updated " + UrlId);
@@ -611,64 +609,97 @@ app.post("/", function(req, res){
 });
 
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ Background
-app.post("/background", function(req, res){
-    console.log("background Button pressed ");
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>BackgroundVideo
+app.post("/backgroundVideo", function(req, res){
+    console.log("backgroundVideo Button pressed ");
     switch (weelName) {
-        case "weelDefault":
-            Weel.findOneAndUpdate({name: "weelDefault"}, {background: inputUrl},function(err, foundList){
-                if(!err){
-                    res.redirect("/");  
-                }else{
-                    console.log("Problem with background video update");
-                }
-            });
-            break;
+        // case "weelDefault":
+        //     Weel.findOneAndUpdate({name: "weelDefault"}, {background: inputUrl},function(err, foundList){
+        //         if(!err){
+        //             res.redirect("/");  
+        //         }else{
+        //             console.log("Problem with background video update");
+        //         }
+        //     });
+        //     break;
+        
         case "weel0":
-            Weel.findOneAndUpdate({name: "weel0"}, {background: inputUrl},function(err, foundList){
-                if(!err){
-                    res.redirect("/weel0");  
-                }else{
-                    console.log("Problem with background video update");
-                }
-            });
+                User.update({'username': userNow}, {'$set': {
+                    'background.0': inputUrl}}, function(err) { 
+                    if(!err){
+                        res.redirect("/weel0");  
+                        }else{
+                            console.log("Problem with background video update");
+                        }
+                    });
             break;
         case "weel1":
-            Weel.findOneAndUpdate({name: "weel1"}, {background: inputUrl},function(err, foundList){
+            User.update({'username': userNow}, {'$set': {
+                'background.1': inputUrl }}, function(err) { 
                 if(!err){
                     res.redirect("/weel1");  
-                }else{
-                    console.log("Problem with background video update");
-                }
-            });
+                    }else{
+                        console.log("Problem with background video update");
+                    }
+                });
             break;
         case "weel2":
-            Weel.findOneAndUpdate({name: "weel2"}, {background: inputUrl},function(err, foundList){
+            User.update({'username': userNow}, {'$set': {
+                'background.2': inputUrl}}, function(err) { 
                 if(!err){
                     res.redirect("/weel2");  
-                }else{
-                    console.log("Problem with background video update");
-                }
-            });
+                    }else{
+                        console.log("Problem with background video update");
+                    }
+                });
             break;
         case "weel3":
-            Weel.findOneAndUpdate({name: "weel3"}, {background: inputUrl},function(err, foundList){
+            User.update({'username': userNow}, {'$set': {
+                'background.3': inputUrl}}, function(err) { 
                 if(!err){
                     res.redirect("/weel3");  
-                }else{
-                    console.log("Problem with background video update");
-                }
-            });
+                    }else{
+                        console.log("Problem with background video update");
+                    }
+                });
             break;
         default:
             break;
     }  
 });
 
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>BackgroundSound
+app.post("/backgroundSound", function(req, res){
 
+    switch (weelName) {  
+        // must have controls=1 
+        case "weel0":
+            console.log("Play background sound 0");
+            backgroundSound = "https://www.youtube.com/embed/H8_BAoVwoaM"
+            res.redirect("/weel0");   
+            break;
+        case "weel1":
+            console.log("Play background sound 1");
+            backgroundSound = "https://www.youtube.com/embed/v4UkD7U88NQ?list=PLfwQKRKOBmguidyvjX5KAPXMztjgQVoXs"
+            res.redirect("/weel1"); 
+            break;
+        case "weel2":
+            console.log("Play background sound 2");
+            res.redirect("/weel2"); 
+            break;
+        case "weel3":
+            console.log("Play background sound 3");
+            res.redirect("/weel3"); 
+                
+            break;
+        default:
+            break;
+    };
+
+});
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\after you press a weel putton
 app.post("/memory", function(req, res){
-
+   
     const memory = req.body.memoryButton;
     if(copyState ===  0){
         switch (memory) {
@@ -688,7 +719,7 @@ app.post("/memory", function(req, res){
                 break;
         }
     }
-    else{
+    else{  ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ Copy a weel to another weel
         switch (memory) {
             case "weel0":
                 console.log("copy "  + weelName);
@@ -714,7 +745,7 @@ app.post("/memory", function(req, res){
 
 
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ Copy a weel to another weel
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ Copy state
 app.post("/copy", function(req ,res){
     copyState;
     console.log(copyState);
@@ -729,13 +760,29 @@ app.post("/copy", function(req ,res){
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>REGISTER
 app.post("/register", function(req, res){
-    User.register({username: req.body.username}, req.body.password, function(err, user){
+    
+    User.register({username: req.body.username}, req.body.password,function(err, user){
         if(err){
             console.log(err); 
             res.redirect("/register");
         }else{
             passport.authenticate("local")(req, res, function(){
-                res.redirect("/common"); 
+
+                userNow = req.body.username;
+                User.findOneAndUpdate({username: req.body.username}, {
+                    background: backgroundArray, 
+                    weel0: defaultUrls,
+                    weel1: defaultUrls,
+                    weel2: defaultUrls,
+                    weel3: defaultUrls
+                  },function(err, foundList){
+                    if(!err){
+                        res.redirect("/common");   
+                    }else{
+                        console.log("Problem with background video initialization");
+                    }
+                });
+                // res.redirect("/common"); 
             })
         }  
     })
@@ -743,9 +790,10 @@ app.post("/register", function(req, res){
 
    
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>LOGIN
-let userID;
+
 app.post("/login", function(req, res){
-    const user = new User({
+
+    const user = new User({        //????
         username:req.body.username,
         password:req.body.password
     })
@@ -755,13 +803,13 @@ app.post("/login", function(req, res){
             console.log(err);
         }else{
             passport.authenticate("local")(req, res, function(){
+
                 User.findOne({username: req.body.username}, function(err, foundUser){
                     if(!err){
-                        //get userID ... (this technique has to work for now :?)
-                        console.log("user ID: " + foundUser._id);
-                        userID = foundUser._id;
+                        console.log("userNow: " + foundUser.username);
+                        userNow = foundUser.username;
                     }else{
-                        console.log("could not find user ID!");
+                        console.log("could not find username!");
                     }
                 });
                 res.redirect("/common");

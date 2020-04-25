@@ -59,8 +59,8 @@ p{
   height: 236.25px;
 }
 
-/* background */
-.backgroundVideo iframe{
+/* >background */
+#backgroundVideo {
     position: fixed;
     background-color: black;
     width: 100%;
@@ -184,11 +184,11 @@ opacity: 1;
 border: 1px solid rgba(0, 0, 0, 0.918);
 
 }
-/* left menu *//* left menu *//* left menu *//* left menu *//* left menu *//* left menu *//* left menu */
+/* >left menu *//* left menu *//* left menu *//* left menu *//* left menu *//* left menu *//* left menu */
 .leftMenu {
     visibility: visible;
     position: fixed;
-    width: 0%;
+    /* width: 0%; */
     width: 0.5%;
     height: 100%;
     top: 0px;
@@ -216,7 +216,7 @@ border: 1px solid rgba(0, 0, 0, 0.918);
 .memoryButtons  {
     /* position: relative; */
     position: relative;
-    color:rgb(250, 12, 131);;
+    color:rgb(250, 12, 131);
     background-color: black;
     border: 1px solid white;
     font-style: italic;
@@ -233,19 +233,65 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     left: 10%;
 }
 
+
 .checkbox {
-    /* visibility: hidden; */
     position: relative;
-    top: 0%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    /* vertical-align: middle; */
+    color:rgb(250, 12, 131);
+    background-color: rgba(0, 0, 0, 0.418);
+    border: 1px solid white;
+    font-style: italic;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 100;
+    width: 50px;
+    height: 37px;
+    border-radius: 50px;
+    margin-top: 120%;
+    left: 10%;
+    top: -100%;
     left: 15%;
-    visibility: visible;
-    opacity: 0;
-}
-.checkbox:hover {
     opacity: 0.5;
 }
+.checkbox:hover {
+    opacity: 0.9;
+}
 
- #backgroundButton {
+.checkbox:checked:after {
+    position: relative;
+    bottom:-4px;
+    left: -10px;
+    color:rgb(250, 12, 131);
+    content: "\2713"; 
+}
+
+.position input.checkAutoplay {
+    position: absolute; 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 30px;
+    height: 30px;
+    margin-top: 0%;
+    margin-left: 1%;
+    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.287);
+    background-color:  rgba(128, 240, 178, 0.308);
+    opacity: 0;
+}
+.position input.checkAutoplay:hover {
+    opacity: 1;
+}
+.checkAutoplay:checked:after {
+    position: relative;
+    bottom:0px;
+    right:  -5px;
+    color: rgba(0, 0, 0, 0.623);
+    content: "\2713"; 
+}
+
+ .backgroundButton {
     visibility: visible;
     position: absolute; 
     background-color:rgb(19, 18, 18);
@@ -258,6 +304,31 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     width: 85%;
     height: 37px;
     margin-top: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 20px;
+}
+#backgroundVideoButton{
+position: relative;
+}
+#backgroundSoundButton {
+position: relative;
+}
+
+#backgroundSound {
+    position: relative;
+    /* width: 4%;
+    height: 6.25%; */
+    z-index: 3;
+
+
+    
+    background-color:rgb(19, 18, 18);
+    color: rgba(255, 255, 255, 0.349);
+    border: 1px solid rgba(255, 255, 255, 0.568); 
+    width: 85%;
+    height: 37px;
+    margin-top: 0%;
     margin-left: 5%;
     margin-right: 5%;
     border-radius: 20px;
@@ -282,19 +353,12 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     visibility: hidden;
     position: absolute;
     width: 20%;
-    /* height: 6%; */
-    /* color: rgba(0, 0, 0, 0.5); */
-    /* border: 1px solid rgba(0, 0, 0, 0.098); */
-    /* background-color: rgba(128, 240, 178, 0.043); */
-    /* font-style: italic; */
-    /* font-family: 'Raleway', sans-serif; */
-    /* border-radius: 0px; */
+   
     margin-top: -11%;
     margin-left: 2%;
-    /* font-size: 15px; */
-    /* font-weight: 100; */
+
     opacity: 0;
-    /* z-index: 1; */
+   
 }
 .position:hover {
     opacity: 1;
@@ -307,7 +371,7 @@ border: 1px solid rgba(0, 0, 0, 0.918);
 
     color: rgb(0, 0, 0);
     border: 1px solid rgba(0, 0, 0, 0.098);
-    background-color: rgba(128, 240, 178, 0.043);
+    background-color: rgba(128, 240, 178, 0.76);
     font-style: italic;
     font-family: 'Raleway', sans-serif;
     border-radius: 0px;
@@ -342,40 +406,9 @@ border: 1px solid rgba(0, 0, 0, 0.918);
 .buttonLink:hover {
     background-color: rgba(9, 246, 116, 0.335);
 }
-.position .buttonAutoplayMute {
-    position: absolute;
-    margin-top: -1%;
-    margin-left: 0%;
-    border: none;
-    border: 20px solid rgba(0, 0, 0, 0.205);
-    background-color: rgba(128, 240, 178, 0.043);
-    z-index: 1;
-    opacity: 0;
-}
-.position .buttonAutoplayMute:hover {
-    opacity: .5;
-}
 
 
 
-/* curently not working *//* curently not working *//* curently not working *//* curently not working */
-.video-container .randomVideos {
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    align-items: stretch;
-    flex-wrap: wrap; 
-    flex-grow: 1;
-}
-    
-.randomVideos {
-    visibility: hidden;
-    position: absolute;
-    background-color: black;
-    top: 0;
-    left: 0;
-    opacity: 1;
-    z-index: 2;
-}
+
 
 
