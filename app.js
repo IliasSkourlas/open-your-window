@@ -42,87 +42,175 @@ const itemsUrlSchema = new mongoose.Schema({
 const ItemUrl = mongoose.model("ItemUrl", itemsUrlSchema);
 
 
-// defaultUrls
-const itemUrl1 = new ItemUrl({
-    name: "http://bookipia.com?"
-});
-const itemUrl2 = new ItemUrl({
-    name: "https://play.gl?"
-});
-const itemUrl3 = new ItemUrl({
-    name: "https://www.youtube.com/embed/WisZM9CMlTo?"
-});
-const itemUrl4 = new ItemUrl({
-    name: "https://duckduckgo.com/search.html?prefill=Search DuckDuckGo?"
-});
-const itemUrl5 = new ItemUrl({
-    name: ""
-});
-const itemUrl6 = new ItemUrl({
-    name: ""
-});
-const itemUrl7 = new ItemUrl({
-    name: ""
-});
-const itemUrl8 = new ItemUrl({
-    name: ""
-});
-const itemUrl9 = new ItemUrl({
-    name: ""
-});
-const itemUrl10 = new ItemUrl({
-    name: ""
-});
-const itemUrl11 = new ItemUrl({
-    name: ""
-});
-const itemUrl12 = new ItemUrl({
-    name: ""
-});
-const itemUrl13 = new ItemUrl({
-    name: ""
-});
-const itemUrl14 = new ItemUrl({
-    name: ""
-});
-const itemUrl15 = new ItemUrl({
-    name: ""
-});
-const itemUrl16 = new ItemUrl({
-    name: ""
-});
-const itemUrl17 = new ItemUrl({
-    name: ""
-});
-const itemUrl18 = new ItemUrl({
-    name: ""
-});
-const itemUrl19 = new ItemUrl({
-    name: ""
-});
-const itemUrl20 = new ItemUrl({
-    name: ""
-});
-const itemUrl21 = new ItemUrl({
-    name: ""
-});
-const itemUrl22 = new ItemUrl({
-    name: ""
-});
-const itemUrl23 = new ItemUrl({
-    name: ""
-});
-const itemUrl24 = new ItemUrl({
-    name: ""
-});
+// defaultUrl
+    const itemUrl1 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl2 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl3 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl4 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl5 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl6 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl7 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl8 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl9 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl10 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl11 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl12 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl13 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl14 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl15 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl16 = new ItemUrl({
+        name: ""
+    });
+
+
+    const itemUrl17 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl18 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl19 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl20 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl21 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl22 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl23 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl24 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl25 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl26 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl27 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl28 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl29 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl30 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl31 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl32 = new ItemUrl({
+        name: ""
+    });
+
+
+    const itemUrl33 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl34 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl35 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl36 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl37 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl38 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl39 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl40 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl41 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl42 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl43 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl44 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl45 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl46 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl47 = new ItemUrl({
+        name: ""
+    });
+    const itemUrl48 = new ItemUrl({
+        name: ""
+    });
+
+
+    
+
 
 const defaultUrls = [
     itemUrl1, itemUrl2, itemUrl3, itemUrl4,
     itemUrl5, itemUrl6, itemUrl7, itemUrl8,
     itemUrl9, itemUrl10, itemUrl11, itemUrl12,
     itemUrl13, itemUrl14, itemUrl15, itemUrl16,
+
     itemUrl17, itemUrl18, itemUrl19, itemUrl20,
-    itemUrl21, itemUrl22, itemUrl23, itemUrl24
+    itemUrl21, itemUrl22, itemUrl23, itemUrl24,
+    itemUrl25, itemUrl26, itemUrl27, itemUrl28,
+    itemUrl29, itemUrl30, itemUrl31, itemUrl32,
+
+    itemUrl33, itemUrl34, itemUrl35, itemUrl36,
+    itemUrl37, itemUrl38, itemUrl39, itemUrl40,
+    itemUrl41, itemUrl42, itemUrl43, itemUrl44,
+    itemUrl45, itemUrl46, itemUrl47, itemUrl48,
 ];
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\Weels Schema
@@ -133,16 +221,48 @@ const weelsUrlSchema = new mongoose.Schema({
 });
 const Weel= mongoose.model("Weel", weelsUrlSchema);
 
+
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\LivingRooms Schema
+const commonsSchema = new mongoose.Schema({
+    name: String,
+    password: String,
+    background: String,
+    weel0: [itemsUrlSchema]
+});
+const Common = mongoose.model("Common", commonsSchema );
+
+const common0 = new Common ({
+    name: "default",
+    password: "the living room",
+    background: "https://www.youtube.com/embed/4l7Uw-o-RC4?autoplay=1&mute=1&loop=1&playlist=4l7Uw-o-RC4",
+    weel0: defaultUrls
+});
+const common1 = new Common ({
+    name: "the living room",
+    password: "the living room",
+    background: "https://www.youtube.com/embed/4l7Uw-o-RC4?autoplay=1&mute=1&loop=1&playlist=4l7Uw-o-RC4",
+    weel0: defaultUrls
+});
+const common2 = new Common ({
+    name: "Denis living room",
+    password: "Denis living room",
+    background: "https://www.youtube.com/embed/4l7Uw-o-RC4?autoplay=1&mute=1&loop=1&playlist=4l7Uw-o-RC4",
+    weel0: defaultUrls
+});
+
+const livingRoomArray = [common0, common1, common2];
+
+
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>Users Schema & a.r
 const userSchema = new mongoose.Schema({
     email: String,
     password: String,
     background: [String],
-    weel0: [itemsUrlSchema],
     weel1: [itemsUrlSchema],
     weel2: [itemsUrlSchema],
     weel3: [itemsUrlSchema],
-    
+    weel4: [itemsUrlSchema],
+    weel5: [itemsUrlSchema] 
 });
 
 //(a.r
@@ -162,6 +282,7 @@ passport.deserializeUser(User.deserializeUser());
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\GLOBAL >VARIABLES
 let userNow;
 let weelName = "";
+let livingroomNow = "default";
 let copyState = 0;
 let UrlId = "";
 let inputUrl = "";
@@ -174,6 +295,7 @@ let  weelObject;
 let backgroundMain = "https://www.youtube.com/embed/4l7Uw-o-RC4?autoplay=1&mute=1&loop=1&playlist=4l7Uw-o-RC4";
 let backgroundSound = "https://www.youtube.com/embed/v1P0cAzXR6g?autoplay=1&loop=1&controls=0&mute=1&playlist=v1P0cAzXR6g"
 let backgroundArray = [backgroundMain, backgroundMain, backgroundMain, backgroundMain];
+
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\CLEAN UP AND DELLET AFTER
 let superCute = "https://www.youtube.com/embed/4l7Uw-o-RC4?autoplay=1&mute=1&loop=1&playlist=4l7Uw-o-RC4";
 let talkToParot = "https://www.youtube.com/embed/v1P0cAzXR6g?autoplay=1&loop=1&controls=0&mute=1&playlist=v1P0cAzXR6g";
@@ -181,7 +303,7 @@ let realBirds = "https://www.youtube.com/embed/PwylW_sUfQY?autoplay=1&mute=1&loo
 let kittenCuteness = "https://www.youtube.com/embed/dzFKG6rkWpU?autoplay=1&mute=1&loop=1&playlist=dzFKG6rkWpU";
 let chen = "https://www.youtube.com/embed/Iwpr55PZEJ8?";
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\FUNCTIONS
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>FUNCTIONS
 // automaticaly embed youtube, vimeo
 function toEmbedVideo(url){
     if(url.includes("youtube.com") & url.includes(youtubeString)){
@@ -198,18 +320,6 @@ function toEmbedVideo(url){
     }
 };
 
-// 
-function findCommon(res){
-    ItemUrl.find({}, function(err, foundItems){
-        if(!err){
-            res.render("common", {
-                backgroundVideo: backgroundMain,
-                videoBox: foundItems
-            })
-        }
-    })
-};
-
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
 // >GET
@@ -218,6 +328,18 @@ function findCommon(res){
 // Home  ----  default Urls
 app.get("/", function(req, res){
     weelName = "weelDefault"
+
+    Common.find({}, function(err, foundCommon){
+        if(foundCommon.length === 0){
+            Common.insertMany(livingRoomArray, function(err){
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log("Success with inserting livingRoomArray");
+                }
+            });
+        }
+    })
 
     ItemUrl.find({}, function(err, foundItems){
         if(foundItems.length === 0){
@@ -232,7 +354,8 @@ app.get("/", function(req, res){
         }else{
             res.render("home", {
                 backgroundVideo: backgroundMain,
-                videoBox: foundItems
+                videoBox: foundItems,
+               
             });
         }
     }); 
@@ -263,20 +386,28 @@ app.get("/login", function(req, res){
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>common weel
 app.get("/common", function(req, res){
     weelName = "weel0";
-
+    
     if(req.isAuthenticated()){
 
-        User.findOne({username: userNow},function(err, foundCommonWeel){
+        Common.findOne({name: livingroomNow},function(err, foundWeel){
             if (err){
                 console.log(err);
-            }else{
-                res.render("common", {
-                    backgroundVideo:foundCommonWeel.background[0],
-                    videoBox: foundCommonWeel.weel0,
-                    backgroundSound: backgroundSound
-                });
-            }
-        })
+                }else{
+                    if(!foundWeel){
+                        livingroomNow = "default";
+                        res.redirect("/common")
+                    }else{
+                        res.render("common", {
+                            backgroundVideo:foundWeel.background,
+                            videoBox: foundWeel.weel0,
+                            backgroundSound: backgroundSound,
+                            inputUrl: inputUrl,
+                            livingroomNow: livingroomNow
+                            })
+                    }
+                }
+            });
+        
     }else{
         res.redirect("/login");
     }
@@ -288,16 +419,19 @@ app.get("/weel0", function(req, res){
     weelName = "weel0";
 
     if(req.isAuthenticated()){
-        //>>>>> Chosing a weel from one user wile another dose not... might mix who is userNow ???;;;
-        User.findOne({username: userNow},function(err, foundWeel){
+
+        //This is a hack: ...acording to userNow name switch to livingroom by name
+        Common.findOne({name: livingroomNow},function(err, foundWeel){
             if (err){
                 console.log(err);
                
                 }else{
                     res.render("common", {
-                        backgroundVideo:foundWeel.background[0],
+                        backgroundVideo:foundWeel.background,
                         videoBox: foundWeel.weel0,
-                        backgroundSound: backgroundSound
+                        backgroundSound: backgroundSound,
+                        inputUrl: inputUrl,
+                        livingroomNow: livingroomNow
                     });
                 }
             });
@@ -305,7 +439,6 @@ app.get("/weel0", function(req, res){
         }else{
             res.redirect("/login");
         }
-    
 });
 
 app.get("/weel1", function(req, res){
@@ -322,7 +455,9 @@ app.get("/weel1", function(req, res){
                     res.render("common", {
                         backgroundVideo:foundWeel.background[1],
                         videoBox: foundWeel.weel1,
-                        backgroundSound: backgroundSound
+                        backgroundSound: backgroundSound,
+                        inputUrl: inputUrl,
+                        livingroomNow: livingroomNow
                     });
                 }
             });
@@ -347,7 +482,9 @@ app.get("/weel2", function(req, res){
                     res.render("common", {
                         backgroundVideo:foundWeel.background[2],
                         videoBox: foundWeel.weel2,
-                        backgroundSound: backgroundSound
+                        backgroundSound: backgroundSound,
+                        inputUrl: inputUrl,
+                        livingroomNow: livingroomNow
                     });
                 }
             });
@@ -373,7 +510,63 @@ app.get("/weel3", function(req, res){
                     res.render("common", {
                         backgroundVideo:foundWeel.background[3],
                         videoBox: foundWeel.weel3,
-                        backgroundSound: backgroundSound
+                        backgroundSound: backgroundSound,
+                        inputUrl: inputUrl,
+                        livingroomNow: livingroomNow
+                    });
+                }
+            });
+        
+        }else{
+            res.redirect("/login");
+        }
+    
+});
+app.get("/weel4", function(req, res){
+    copyState = 0;
+    weelName = "weel4";
+    
+    
+
+    if(req.isAuthenticated()){
+        console.log("!!!");  
+        User.findOne({username: userNow},function(err, foundWeel){
+            if (err){
+                console.log(err);
+               
+                }else{
+                    res.render("common", {
+                        backgroundVideo:foundWeel.background[3],
+                        videoBox: foundWeel.weel4,
+                        backgroundSound: backgroundSound,
+                        inputUrl: inputUrl,
+                        livingroomNow: livingroomNow
+                    });
+                }
+            });
+        
+        }else{
+            res.redirect("/login");
+        }
+    
+});
+app.get("/weel5", function(req, res){
+    copyState = 0;
+    weelName = "weel5";
+
+    if(req.isAuthenticated()){
+        
+        User.findOne({username: userNow},function(err, foundWeel){
+            if (err){
+                console.log(err);
+               
+                }else{
+                    res.render("common", {
+                        backgroundVideo:foundWeel.background[3],
+                        videoBox: foundWeel.weel5,
+                        backgroundSound: backgroundSound,
+                        inputUrl: inputUrl,
+                        livingroomNow: livingroomNow
                     });
                 }
             });
@@ -385,11 +578,12 @@ app.get("/weel3", function(req, res){
 });
 
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ copy too weel x
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ >copy too weel x
 
 app.get("/copyWeel0", function(req, res){
 
     User.findOne({username: userNow},function(err, foundUser){
+        // weel that will be copied
         switch (weelName) {
             case "weel0":
                 weelObject = foundUser.weel0;
@@ -403,6 +597,12 @@ app.get("/copyWeel0", function(req, res){
             case "weel3":
                 weelObject = foundUser.weel3;
                 break;
+            case "weel4":
+                weelObject = foundUser.weel4;
+                break;
+            case "weel5":
+                weelObject = foundUser.weel5;
+                break;
             default:
                 break;
         }
@@ -410,14 +610,11 @@ app.get("/copyWeel0", function(req, res){
             console.log(err);
         }else{
             weelName = "weel0"
-            User.findOneAndUpdate({username: userNow},{weel0: weelObject}, function(err, updateWeel){
-                if(!err){
-                    res.redirect("/weel0");  
-                }
-            })
+            console.log("No can do :)");
+            res.redirect("/weel0");  
         }   
-    })
-})
+    });
+});
 app.get("/copyWeel1", function(req, res){
 
     User.findOne({username: userNow},function(err, foundUser){
@@ -434,13 +631,19 @@ app.get("/copyWeel1", function(req, res){
             case "weel3":
                 weelObject = foundUser.weel3;
                 break;
+            case "weel4":
+                weelObject = foundUser.weel4;
+                break;
+            case "weel5":
+                weelObject = foundUser.weel5;
+                break;
             default:
                 break;
         }
         if(err){
             console.log(err);
         }else{
-            weelName = "weel1"
+            weelName = "weel1" 
             User.findOneAndUpdate({username: userNow},{weel1: weelObject}, function(err, updateWeel){
                 if(!err){
                     res.redirect("/weel1");  
@@ -464,6 +667,12 @@ app.get("/copyWeel2", function(req, res){
                 break;
             case "weel3":
                 weelObject = foundUser.weel3;
+                break;
+            case "weel4":
+                weelObject = foundUser.weel4;
+                break;
+            case "weel5":
+                weelObject = foundUser.weel5;
                 break;
             default:
                 break;
@@ -496,6 +705,12 @@ app.get("/copyWeel3", function(req, res){
             case "weel3":
                 weelObject = foundUser.weel3;
                 break;
+            case "weel4":
+                weelObject = foundUser.weel4;
+                break;
+            case "weel5":
+                weelObject = foundUser.weel5;
+                break;
             default:
                 break;
         }
@@ -506,6 +721,80 @@ app.get("/copyWeel3", function(req, res){
             User.findOneAndUpdate({username: userNow},{weel3: weelObject}, function(err, updateWeel){
                 if(!err){
                     res.redirect("/weel3");  
+                }
+            })
+        }   
+    })
+})
+app.get("/copyWeel4", function(req, res){
+
+    User.findOne({username: userNow},function(err, foundUser){
+        switch (weelName) {
+            case "weel0":
+                weelObject = foundUser.weel0;
+                break;
+            case "weel1": 
+                weelObject = foundUser.weel1;
+                break;
+            case "weel2":
+                weelObject = foundUser.weel2;
+                break;
+            case "weel3":
+                weelObject = foundUser.weel3;
+                break;
+            case "weel4":
+                weelObject = foundUser.weel4;
+                break;
+            case "weel5":
+                weelObject = foundUser.weel5;
+                break;
+            default:
+                break;
+        }
+        if(err){
+            console.log(err);
+        }else{
+            weelName = "weel4"
+            User.findOneAndUpdate({username: userNow},{weel4: weelObject}, function(err, updateWeel){
+                if(!err){
+                    res.redirect("/weel4");  
+                }
+            })
+        }   
+    })
+})
+app.get("/copyWeel5", function(req, res){
+
+    User.findOne({username: userNow},function(err, foundUser){
+        switch (weelName) {
+            case "weel0":
+                weelObject = foundUser.weel0;
+                break;
+            case "weel1": 
+                weelObject = foundUser.weel1;
+                break;
+            case "weel2":
+                weelObject = foundUser.weel2;
+                break;
+            case "weel3":
+                weelObject = foundUser.weel3;
+                break;
+            case "weel4":
+                weelObject = foundUser.weel4;
+                break;
+            case "weel5":
+                weelObject = foundUser.weel5;
+                break;
+            default:
+                break;
+        }
+        if(err){
+            console.log(err);
+        }else{
+            weelName = "weel5"
+            User.findOneAndUpdate({username: userNow},{weel5: weelObject}, function(err, updateWeel){
+                if(!err){
+                    res.redirect("/weel5");  
                 }
             })
         }   
@@ -544,16 +833,12 @@ app.post("/", function(req, res){
     
     // then update weels   
     switch (weelName) {
-        // case "weelDefault":
-        //     ItemUrl.findOneAndUpdate({_id:UrlId}, {name: toEmbedVideo(finalUrl)},function(err, foundList){
-        //         if(!err){
-        //             res.redirect("/common");  
-        //         }
-        //     });
-        //     break;
+   
         case "weel0": 
-           User.update(
-                {"username" : userNow, "weel0._id": UrlId },
+
+        // UrlId might get lost.....between common after update ...users!
+           Common.update(
+                {"name" : livingroomNow, "weel0._id": UrlId },
                 {"$set":{"weel0.$.name":  toEmbedVideo(finalUrl)}},
                 function(err, foundList){
                 if(!err){
@@ -564,6 +849,7 @@ app.post("/", function(req, res){
                 }
             });
             break;
+
         case "weel1":
             User.update(
                 {"username" : userNow, "weel1._id": UrlId },
@@ -603,6 +889,32 @@ app.post("/", function(req, res){
                 }
             });
             break;
+        case "weel4":
+            User.update(
+                {"username" : userNow, "weel4._id": UrlId },
+                {"$set":{"weel4.$.name":  toEmbedVideo(finalUrl)}},
+                function(err, foundList){
+                if(!err){
+                    console.log("Succesfuly updated " + UrlId);
+                    res.redirect("/weel4");  
+                }else{
+                    console.log("Error in uptating" + UrlId);
+                }
+            });
+            break;
+        case "weel5":
+            User.update(
+                {"username" : userNow, "weel5._id": UrlId },
+                {"$set":{"weel5.$.name":  toEmbedVideo(finalUrl)}},
+                function(err, foundList){
+                if(!err){
+                    console.log("Succesfuly updated " + UrlId);
+                    res.redirect("/weel5");  
+                }else{
+                    console.log("Error in uptating" + UrlId);
+                }
+            });
+            break;
         default:
         break;
     }
@@ -610,22 +922,19 @@ app.post("/", function(req, res){
 
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>BackgroundVideo
+app.post("/livingroomInput", function(req, res){
+    livingroomNow = req.body.livingroomInput;
+    res.redirect("/common");
+});
+
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>BackgroundVideo
 app.post("/backgroundVideo", function(req, res){
     console.log("backgroundVideo Button pressed ");
     switch (weelName) {
-        // case "weelDefault":
-        //     Weel.findOneAndUpdate({name: "weelDefault"}, {background: inputUrl},function(err, foundList){
-        //         if(!err){
-        //             res.redirect("/");  
-        //         }else{
-        //             console.log("Problem with background video update");
-        //         }
-        //     });
-        //     break;
         
         case "weel0":
-                User.update({'username': userNow}, {'$set': {
-                    'background.0': inputUrl}}, function(err) { 
+                Common.update({'name': livingroomNow}, {'$set': {
+                    'background': inputUrl}}, function(err) { 
                     if(!err){
                         res.redirect("/weel0");  
                         }else{
@@ -663,40 +972,32 @@ app.post("/backgroundVideo", function(req, res){
                     }
                 });
             break;
+        case "weel4":
+            User.update({'username': userNow}, {'$set': {
+                'background.4': inputUrl}}, function(err) { 
+                if(!err){
+                    res.redirect("/weel4");  
+                    }else{
+                        console.log("Problem with background video update");
+                    }
+                });
+            break;
+        case "weel5":
+            User.update({'username': userNow}, {'$set': {
+                'background.5': inputUrl}}, function(err) { 
+                if(!err){
+                    res.redirect("/weel5");  
+                    }else{
+                        console.log("Problem with background video update");
+                    }
+                });
+            break;
         default:
             break;
     }  
 });
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>BackgroundSound
-app.post("/backgroundSound", function(req, res){
 
-    switch (weelName) {  
-        // must have controls=1 
-        case "weel0":
-            console.log("Play background sound 0");
-            backgroundSound = "https://www.youtube.com/embed/H8_BAoVwoaM"
-            res.redirect("/weel0");   
-            break;
-        case "weel1":
-            console.log("Play background sound 1");
-            backgroundSound = "https://www.youtube.com/embed/v4UkD7U88NQ?list=PLfwQKRKOBmguidyvjX5KAPXMztjgQVoXs"
-            res.redirect("/weel1"); 
-            break;
-        case "weel2":
-            console.log("Play background sound 2");
-            res.redirect("/weel2"); 
-            break;
-        case "weel3":
-            console.log("Play background sound 3");
-            res.redirect("/weel3"); 
-                
-            break;
-        default:
-            break;
-    };
-
-});
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\after you press a weel putton
 app.post("/memory", function(req, res){
    
@@ -714,6 +1015,12 @@ app.post("/memory", function(req, res){
                 break;
             case "weel3":
                 res.redirect("/weel3")
+                break;
+            case "weel4":
+                res.redirect("/weel4")
+                break;
+            case "weel5":
+                res.redirect("/weel5")
                 break;
             default:
                 break;
@@ -736,6 +1043,14 @@ app.post("/memory", function(req, res){
             case "weel3":
                 console.log("copy "  + weelName);
                 res.redirect("/copyWeel3")
+                break;
+            case "weel4":
+                console.log("copy "  + weelName);
+                res.redirect("/copyWeel4")
+                break;
+            case "weel5":
+                console.log("copy "  + weelName);
+                res.redirect("/copyWeel5")
                 break;
             default:
                 break;
@@ -774,7 +1089,9 @@ app.post("/register", function(req, res){
                     weel0: defaultUrls,
                     weel1: defaultUrls,
                     weel2: defaultUrls,
-                    weel3: defaultUrls
+                    weel3: defaultUrls,
+                    weel4: defaultUrls,
+                    weel5: defaultUrls
                   },function(err, foundList){
                     if(!err){
                         res.redirect("/common");   
@@ -782,7 +1099,7 @@ app.post("/register", function(req, res){
                         console.log("Problem with background video initialization");
                     }
                 });
-                // res.redirect("/common"); 
+               
             })
         }  
     })
@@ -826,3 +1143,38 @@ app.listen(3000, function(){
     console.log("Listening on port 3000");
 });
 
+
+
+
+
+
+
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>BackgroundSound
+// app.post("/backgroundSound", function(req, res){
+
+//     switch (weelName) {  
+//         // must have controls=1 
+//         case "weel0":
+//             console.log("Play background sound 0");
+//             backgroundSound = "https://www.youtube.com/embed/H8_BAoVwoaM"
+//             res.redirect("/weel0");   
+//             break;
+//         case "weel1":
+//             console.log("Play background sound 1");
+//             backgroundSound = "https://www.youtube.com/embed/v4UkD7U88NQ?list=PLfwQKRKOBmguidyvjX5KAPXMztjgQVoXs"
+//             res.redirect("/weel1"); 
+//             break;
+//         case "weel2":
+//             console.log("Play background sound 2");
+//             res.redirect("/weel2"); 
+//             break;
+//         case "weel3":
+//             console.log("Play background sound 3");
+//             res.redirect("/weel3"); 
+                
+//             break;
+//         default:
+//             break;
+//     };
+
+// });          

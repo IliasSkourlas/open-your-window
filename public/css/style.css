@@ -5,11 +5,6 @@
 	/* box-sizing: border-box; */
 }
 
-body .afterBodyHome {
-    background-color: white;
-    /* min-width:1105px; */
-}
-
 .invisible{
     opacity: 0;
 }
@@ -31,47 +26,7 @@ body .afterBodyHome {
 
 .loop {position:absolute}
 
-.loop iframe {
-    opacity: 1;
-}
 
-p{
-    color: white;
-    font-size: 30px;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 100;
-}
-
-/* main videos *//* main videos *//* main videos *//* main videos *//* main videos */
-.video-container .loop {
-  display: flex;
-  flex-direction: row;
-  justify-content: stretch;
-  align-items: stretch;
-  flex-wrap: wrap; 
-  flex-grow: 1;
-}
-.video-container iframe{
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 420px;
-  height: 236.25px;
-}
-
-/* >background */
-#backgroundVideo {
-    position: fixed;
-    background-color: black;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 1;
-    z-index: -1;
-    /* z-index: 100;
-    opacity: 0.9; */
-}
 
 /* weel counter */
 .Time  {
@@ -110,6 +65,12 @@ p{
     background-color: rgba(248, 242, 247, 0.349);
     opacity: 1;
 }
+
+p {
+    font-style: italic;
+    font-family: 'Raleway', sans-serif;
+    font-weight: lighter;
+}
 .p1{
     position: absolute;
     color: rgba(0, 0, 0, 0.486);
@@ -145,7 +106,6 @@ p{
     background-color: rgba(128, 240, 178, 0.043);
     width: 25%;
     padding: 6px 2px; 
-    font-style: italic;
     font-family: 'Raleway', sans-serif;
     border-radius: 4px;
     margin-top: 1.5%;
@@ -168,7 +128,6 @@ p{
     background-color: rgba(128, 240, 178, 0.043);
     width: 21%;
     padding: 6px 2px; 
-    font-style: italic;
     font-family: 'Raleway', sans-serif;
     border-radius: 4px;
     margin-top: 4%;
@@ -186,9 +145,7 @@ border: 1px solid rgba(0, 0, 0, 0.918);
 }
 /* >left menu *//* left menu *//* left menu *//* left menu *//* left menu *//* left menu *//* left menu */
 .leftMenu {
-    visibility: visible;
     position: fixed;
-    /* width: 0%; */
     width: 0.5%;
     height: 100%;
     top: 0px;
@@ -197,200 +154,275 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     border: 1px solid black;
     opacity: 0;
     z-index: 3;
-    /* width: 12.5%;
-    opacity: .8; */
+    transition-duration: 0.4s;
+    /* transition-delay: 1s; */
 }
 .leftMenu:hover {
     width: 12.5%;
-    opacity: .8;
+    /* width: 12.5%; */
+    opacity: .83;
+    transition: width 0.8s, opacity 3.5s;
+    /* transition-delay: 1s; */
+    
+}
+
+#livingroomInput {
+ 
+    background-color:rgb(19, 18, 18);
+    color: rgba(255, 255, 255, 0.515);
+    border: 1px solid rgba(255, 255, 255, 0.568); 
+    font-style: normal;
+    letter-spacing: 0.15em;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    font-weight: 100;
+    width: 83%;
+    height: 37px;
+    margin-top: 82%;
+    margin-left: 5%;
+    /* margin-right: 0%; */
+    border-radius: 20px;
+    opacity: 1;
+}
+#livingroomInput:hover {
+    color: rgba(255, 255, 255, 0.865);
+}
+#livingroomInput:focus {
+    color: rgba(255, 255, 255, 0.988);
 
 }
 
-.memories {
-    /* position: absolute; */
-    margin-top: 0%;
-    margin-left: 0%;
-    margin-left: 0%;
-    position: relative;
+.memoryBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    order: 3; 
+    /* align-items: stretch; */
+    flex-wrap: wrap; 
+    /* flex-grow: 1; */
 }
 .memoryButtons  {
-    /* position: relative; */
-    position: relative;
-    color:rgb(250, 12, 131);
-    background-color: black;
-    border: 1px solid white;
+    color:rgba(255, 240, 247, 0.707);
+    background-color:rgb(19, 18, 18);
+    border: 1px solid rgba(255, 255, 255, 0.55); 
     font-style: italic;
+    /* letter-spacing: 2em; */
     font-family: 'Raleway', sans-serif;
     font-size: 14px;
     font-weight: 100;
     width: 37px;
     height: 37px;
     border-radius: 50px;
-    /* top: 38.5%;
-    left: 15%;
-    right: 15%; */
-    margin-top: 120%;
-    left: 10%;
+    margin-top: 2%;
+    left: 5%;
+    /* margin-right: 5%; */
+}
+.memoryButtons:hover {
+    color:rgb(250, 12, 131);
+    background-color: black;
+    border: 1px solid white;
+    transition-duration: 0.4s;
 }
 
-
 .checkbox {
-    position: relative;
     -webkit-appearance: none;
     -moz-appearance: none;
-    /* vertical-align: middle; */
     color:rgb(250, 12, 131);
     background-color: rgba(0, 0, 0, 0.418);
-    border: 1px solid white;
-    font-style: italic;
-    font-family: 'Raleway', sans-serif;
-    font-size: 14px;
-    font-weight: 100;
-    width: 50px;
-    height: 37px;
+    border: 1px solid rgb(254, 248, 87);
     border-radius: 50px;
-    margin-top: 120%;
+    margin-top: 0%;
     left: 10%;
-    top: -100%;
-    left: 15%;
-    opacity: 0.5;
+    opacity: 0.4;
+    transition: background-color 5s, opacity 2s;    
 }
 .checkbox:hover {
     opacity: 0.9;
+    background-color:rgba(85, 83, 17, 0.632);
+
+    
+    transition: background-color 5s, opacity 2s ; 
 }
 
 .checkbox:checked:after {
-    position: relative;
     bottom:-4px;
     left: -10px;
     color:rgb(250, 12, 131);
     content: "\2713"; 
+}
+ .backgroundButton {
+    background-color:rgb(19, 18, 18);
+    color: rgba(255, 255, 255, 0.349);
+    border: 1px solid rgba(255, 255, 255, 0.568); 
+    font-style: italic;
+    letter-spacing: 0.1em;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-weight: 100;
+    width: 85%;
+    height: 37px;
+    margin-top: 0%;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 20px;
+    transition-duration: 0.4s;
+}
+.backgroundButton:hover {
+    color: rgba(255, 255, 255, 0.865);
+    border: 1px solid rgba(255, 255, 255, 0.961); 
+
+    transition: color 0.4s, border 0.5;
+}
+/* not used */
+#backgroundSound {
+    z-index: 3;
+    background-color:rgb(19, 18, 18);
+    color: rgba(255, 255, 255, 0.349);
+    border: 1px solid rgba(255, 255, 255, 0.568); 
+    width: 85%;
+    height: 37px;
+    margin-top: 0%;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 20px;
+}
+
+
+  
+/* >iframes  *//* iframes  *//* iframes  *//* iframes  *//* iframes  *//* iframes  */
+
+
+.video-container .loop {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: stretch;
+  flex-wrap: wrap; 
+  /* flex-grow: 1; */
+}
+.video-container iframe {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 420px;
+  height: 236.25px;
+}
+
+.position  {
+    position: absolute;
+    width: 20%;
+    margin-top: -11%;
+    margin-left: 2%;
+    opacity: 0;
+    /* transition-duration: 0.3s; */
+}
+.position:hover {
+    opacity: 0.95;
+    transition-duration: 0.1s;
+    /* transition-delay: 1s; */
+}
+.inputUrl {
+    position: inherit;
+    width: 100%;
+    /* height: 6%; */
+    color: rgb(0, 0, 0);
+    border: 1px solid rgba(0, 0, 0, 0.098);
+    background-color: rgba(128, 240, 178, 0.76);
+    
+    font-style: italic;
+    font-family: 'Raleway', sans-serif;
+    border-radius: none;
+    margin-top: 0%;
+    margin-left: 0%;
+    font-size: 20px;
+    font-weight: 100;
+    transition-duration: 0.4s;
+    opacity: 0.35;
+    z-index: 1;
+}
+.inputUrl:focus {
+    background-color: rgba(128, 240, 178, 0.76);
+    transition-duration: 0.3s;
+    /* transition-delay: 1s; */
+    opacity: 1;
 }
 
 .position input.checkAutoplay {
     position: absolute; 
     -webkit-appearance: none;
     -moz-appearance: none;
-    width: 30px;
-    height: 30px;
-    margin-top: 0%;
-    margin-left: 1%;
+    width: 25px;
+    height: 24.3px;
+    margin-top: 0.5px;
+    margin-left: 15.2%;
     border: none;
-    border: 1px solid rgba(0, 0, 0, 0.287);
-    background-color:  rgba(128, 240, 178, 0.308);
+    border: 1px solid rgba(0, 0, 0, 0.199);
+    background-color:  rgba(240, 128, 225, 0.221);
     opacity: 0;
 }
 .position input.checkAutoplay:hover {
     opacity: 1;
+    
 }
 .checkAutoplay:checked:after {
     position: relative;
     bottom:0px;
     right:  -5px;
-    color: rgba(0, 0, 0, 0.623);
+    color: rgba(254, 254, 254, 0.673);
     content: "\2713"; 
 }
-
- .backgroundButton {
-    visibility: visible;
-    position: absolute; 
-    background-color:rgb(19, 18, 18);
-    color: rgba(255, 255, 255, 0.349);
-    border: 1px solid rgba(255, 255, 255, 0.568); 
-    font-style: italic;
-    font-family: 'Raleway', sans-serif;
-    font-size: 14px;
-    font-weight: 100;
-    width: 85%;
-    height: 37px;
-    margin-top: 2%;
-    margin-left: 5%;
-    margin-right: 5%;
-    border-radius: 20px;
+.krosia p{
+    position: absolute;
+    color: black;
+    letter-spacing: 0.1em;
 }
-#backgroundVideoButton{
-position: relative;
+#krosiaUp {
+    top: 305%;
+    color: black;
 }
-#backgroundSoundButton {
-position: relative;
+#krosiaDown {
+    top: 308%;
+    color: black;
 }
-
-#backgroundSound {
-    position: relative;
-    /* width: 4%;
-    height: 6.25%; */
-    z-index: 3;
-
-
+   
+#invisibleBox {
+    position: absolute;
     
-    background-color:rgb(19, 18, 18);
-    color: rgba(255, 255, 255, 0.349);
-    border: 1px solid rgba(255, 255, 255, 0.568); 
-    width: 85%;
-    height: 37px;
-    margin-top: 0%;
-    margin-left: 5%;
-    margin-right: 5%;
-    border-radius: 20px;
-}
-
-/* right menu *//* right menu *//* right menu *//* right menu *//* right menu *//* right menu */
-.rightMenu {
-    visibility: hidden;
-    position: fixed;
     width: 100%;
     height: 100%;
-    top: 0px;
-    left: 75%;
-    background-color:rgb(19, 18, 18);
-    border: 1px solid black;
-    opacity: .8;
-    z-index: 3;
-  }
-  
-/* iframes  *//* iframes  *//* iframes  *//* iframes  *//* iframes  *//* iframes  */
-.position  {
-    visibility: hidden;
-    position: absolute;
-    width: 20%;
-   
-    margin-top: -11%;
-    margin-left: 2%;
+    border: none;
+    top: 310%;
+    z-index: 100;
+    transition-duration: 0.8s;
+    opacity: 0.1;
+}
+#invisibleBox:hover {
+    transition-duration: 0.8s;
 
-    opacity: 0;
-   
+    opacity: 0.99;
 }
-.position:hover {
-    opacity: 1;
-}
-.position input {
-    visibility: visible;
-    position: relative;
+
+
+/* >background */
+#backgroundVideo {
+    position: fixed;
+    background-color: black;
     width: 100%;
-    height: 6%;
-
-    color: rgb(0, 0, 0);
-    border: 1px solid rgba(0, 0, 0, 0.098);
-    background-color: rgba(128, 240, 178, 0.76);
-    font-style: italic;
-    font-family: 'Raleway', sans-serif;
-    border-radius: 0px;
-    margin-top: 0%;
-    margin-left: 0%;
-    font-size: 20px;
-    font-weight: 100;
+    height: 100%;
+    top: 0;
+    left: 0;
     opacity: 1;
-    z-index: 1;
+    z-index: -1;
+    /* z-index: 100;
+    opacity: 0.9; */
 }
-
+/* /// */
 .buttonLink {
     visibility: hidden;
     position: relative;
-    width: 15%;
-    height: 25%;
+    width: 0px;
+    height: 0px;
     color: rgba(0, 0, 0, 0.5);
-    border: none;
-    /* background-color: rgba(240, 128, 227, 0.091); */
     border: 1px solid rgba(0, 0, 0, 0.205);
     background-color: rgba(128, 240, 178, 0.043);
     font-style: italic;

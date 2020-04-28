@@ -1,18 +1,10 @@
 
 <%- include("partials/header"); -%>
-
+  <body>
+    <div class="video-container">
 
 <dir class="afterBodyHome">
     <div   id="hoverSpot"> </div>
-
-
-    <div class="rightMenu">
-        <p>
-            X: <span id="x-value"></span>
-        </p>
-        <p>
-            Y: <span id="y-value"></span>
-        </p>
     </div>
    
     
@@ -40,10 +32,10 @@
 
         <form action="/login" method="post">
             <div class="inputA"> 
-                <input class="inputA" type="email" name="username" id="" >
+                <input class="inputA" type="email" name="username"  autocomplete="off">
             </div>
             <div class="inputB"> 
-                <input type="password" name="password" id="" >
+                <input type="password" name="password" autocomplete="off" >
             </div>
             <button class="invisible" type="submit"></button>
         </form>

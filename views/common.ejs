@@ -1,52 +1,74 @@
 
 <%- include("partials/header"); -%>
+<body style="background-color: black;">
+    <div class="video-container">
 
         <!-- hidden -->
         <div   id="hoverSpot"> </div>
-        <!-- hidden -->
-        <div class="rightMenu"></div>
+       
         <!-- hidden -->   
-        <div class="Time">1</div>
+        <!-- <div class="Time">1</div> -->
         
         <!-- iframes -->
         <div style="opacity: 0.92;" class="loop">   
             <% videoBox.forEach(function(i){  %>
             <div>
-                <iframe  class="giveId" id="v1" src="<%= i.name %>"  width="560" height="315" frameborder="0" loading=”lazy” allowfullscreen scrolling="yes" ">
-                </iframe>  
-                <form action="/" class="position" id="1" method="post">
-                    <input id="i1" class="inputId" name="postUrl" value="<%= i.name %>" autocomplete="off"></input>
+                <iframe  class="videoBox"  src="<%= i.name %>"  width="560" height="315" frameborder="0" loading=”lazy” allowfullscreen scrolling="yes" ">
+                </iframe>
+                <form action="/" class="position" method="post">
+                    <input  class="inputUrl" name="postUrl" value="<%= i.name %>" autocomplete="off"></input>
                         <button type="submit" name="button" value="<%= i._id %>" class="buttonLink"></button> 
+                        
                         <input class="checkAutoplay" type="checkbox" name="buttonAutoplayMute" autocomplete="off"  ></input>
                 </form>
             </div>
            <% }) %>   
-
+        </div>
+        <!-- invisibleBox -->
+        <div>
+            <div class="krosia" >
+                <p id="krosiaUp"> :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) </p>  
+                <p id="krosiaDown"> :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) </p>  
+            </div>
+            <iframe  id="invisibleBox"   src="<%= inputUrl %>" frameborder="0" loading=”lazy” allowfullscreen scrolling="yes" ">
+            </iframe> 
+           
         </div>
        
         <!-- left menu -->
         <div class="leftMenu">
+            <!-- living room input -->
+            <form  action="/livingroomInput" method="post">
+                
+                <input id="livingroomInput" type="text" name="livingroomInput"   value="<%=livingroomNow%>">
+            </form>
             <div class="memories">
                 <form action="/memory" method="post">
-                    <button type="submit" name="memoryButton" value="weel0" class="memoryButtons"  >0</button>
-                    <button type="submit" name="memoryButton" value="weel1" class="memoryButtons"  >1</button>
-                    <button type="submit" name="memoryButton" value="weel2" class="memoryButtons"  >2</button>
-                    <button type="submit" name="memoryButton" value="weel3" class="memoryButtons"  >3</button>
+                    
+                    <button id="livingroomButton" type="submit" name="memoryButton" value="weel0" class="memoryButtons"  ></button>
+                    <div class="memoryBox">
+                        <button type="submit" name="memoryButton" value="weel1" class="memoryButtons"  >1</button>
+                        <button type="submit" name="memoryButton" value="weel2" class="memoryButtons"  >2</button>
+                        <button type="submit" name="memoryButton" value="weel3" class="memoryButtons"  >3</button>
+                        <button type="submit" name="memoryButton" value="weel4" class="memoryButtons"  >4</button>
+                        <button type="submit" name="memoryButton" value="weel5" class="memoryButtons"  >5</button>
+                    </div>
+                    
                 </form>
                 <form action="/copy" method="post">
-                    <input class="checkbox" id="copyCheckbox" type="checkbox" name="copy" onchange="this.form.submit()" >copy</input>
+                    <input class="checkbox" id="copyCheckbox" type="checkbox" name="copy" onchange="this.form.submit()" ></input>
                 </form>
                 <div class="background">
                     <form action="/backgroundVideo" method="post">
                         <button class="backgroundButton" id="backgroundVideoButton"  type="submit"  >Background</button>                 
                     </form>
-                    <form action="/backgroundSound" method="post">
+                    <!-- <form action="/backgroundSound" method="post">
                         <button class="backgroundButton" id="backgroundSoundButton"  type="submit"  >Sound</button>
-                    </form>
+                    </form> -->
                 </div>
             </div>
-            <!-- sound only    test: z-index -100 & width= 0   mute = 0   play -->
-        <iframe id="backgroundSound" src= "<%= backgroundSound  %>" width="560" height="315" frameborder="0" allowfullscreen ></iframe> 
+          
+        <!-- <iframe id="backgroundSound" src= "<%= backgroundSound  %>" width="560" height="315" frameborder="0" allowfullscreen ></iframe>  -->
         
         </div>
 
