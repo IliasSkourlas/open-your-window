@@ -153,7 +153,7 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     background-color:rgb(19, 18, 18);
     border: 1px solid black;
     opacity: 0;
-    z-index: 3;
+    z-index: 100;
     transition-duration: 0.4s;
     /* transition-delay: 1s; */
 }
@@ -291,15 +291,6 @@ border: 1px solid rgba(0, 0, 0, 0.918);
   
 /* >iframes  *//* iframes  *//* iframes  *//* iframes  *//* iframes  *//* iframes  */
 
-
-.video-container .loop {
-  display: flex;
-  flex-direction: row;
-  justify-content: stretch;
-  align-items: stretch;
-  flex-wrap: wrap; 
-  /* flex-grow: 1; */
-}
 .video-container iframe {
   position: relative;
   top: 0;
@@ -307,6 +298,16 @@ border: 1px solid rgba(0, 0, 0, 0.918);
   width: 420px;
   height: 236.25px;
 }
+
+.loop {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: stretch;
+  flex-wrap: wrap; 
+  /* flex-grow: 1; */
+}
+
 
 .position  {
     position: absolute;
@@ -371,6 +372,9 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     color: rgba(254, 254, 254, 0.673);
     content: "\2713"; 
 }
+
+
+
 .krosia p{
     position: absolute;
     color: black;
@@ -384,7 +388,9 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     top: 308%;
     color: black;
 }
-   
+ 
+
+
 #invisibleBox {
     position: absolute;
     
@@ -392,11 +398,26 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     height: 100%;
     border: none;
     top: 310%;
-    z-index: 100;
+    z-index: 98;
     transition-duration: 0.8s;
     opacity: 0.1;
 }
 #invisibleBox:hover {
+    transition-duration: 0.8s;
+
+    opacity: 1;
+}
+#animationBox {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    border: none;
+    top: 310%;
+    z-index: 99;
+    transition-duration: 0.8s;
+    opacity: 0;
+}
+#animationBox:hover {
     transition-duration: 0.8s;
 
     opacity: 0.99;
