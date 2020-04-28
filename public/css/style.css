@@ -292,22 +292,28 @@ border: 1px solid rgba(0, 0, 0, 0.918);
 /* >iframes  *//* iframes  *//* iframes  *//* iframes  *//* iframes  *//* iframes  */
 
 .video-container iframe {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 420px;
-  height: 236.25px;
+    /* position: relative; */
+    top: 0;
+    left: 0;
+  
 }
 
 .loop {
-  display: flex;
-  flex-direction: row;
-  justify-content: stretch;
-  align-items: stretch;
-  flex-wrap: wrap; 
-  /* flex-grow: 1; */
-}
+    position: relative;
 
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: stretch;
+    flex-wrap: wrap; 
+    /* flex-grow: 1; */
+}
+.loop iframe {
+    /* position: relative; */
+  
+    /* width: 420px;
+    height: 236.25px; */
+}
 
 .position  {
     position: absolute;
@@ -373,7 +379,23 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     content: "\2713"; 
 }
 
+.secondBox {
+    position: relative;
 
+    border: 1px solid rgba(0, 0, 0, 0.844);
+    width: 100%;
+
+    /* this is the crusial factor */
+    height: 3000px;
+    /* height: 2500px; */
+
+/*     
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: stretch;
+    flex-wrap: wrap;  */
+}
 
 .krosia p{
     position: absolute;
@@ -381,15 +403,27 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     letter-spacing: 0.1em;
 }
 #krosiaUp {
-    top: 305%;
+    /* top: 305%; */
     color: black;
 }
 #krosiaDown {
-    top: 308%;
+    /* top: 308%; */
     color: black;
 }
  
-
+#animationBox {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    border: none;
+    z-index: 99;
+    transition-duration: 0.8s;
+    opacity: 0;
+}
+#animationBox:hover {
+    transition-duration: 0.8s;
+    opacity: 0.99;
+}
 
 #invisibleBox {
     position: absolute;
@@ -397,31 +431,14 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     width: 100%;
     height: 100%;
     border: none;
-    top: 310%;
-    z-index: 98;
     transition-duration: 0.8s;
     opacity: 0.1;
 }
 #invisibleBox:hover {
     transition-duration: 0.8s;
-
     opacity: 1;
 }
-#animationBox {
-    position: absolute;
-    width: 100%;
-    height: 50%;
-    border: none;
-    top: 310%;
-    z-index: 99;
-    transition-duration: 0.8s;
-    opacity: 0;
-}
-#animationBox:hover {
-    transition-duration: 0.8s;
 
-    opacity: 0.99;
-}
 
 
 /* >background */
