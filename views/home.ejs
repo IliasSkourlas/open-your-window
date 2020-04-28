@@ -4,9 +4,8 @@
     <div class="video-container">
 
     <dir class="afterBodyHome">
-        <div   id="hoverSpot"> </div>
-        
         <div style="opacity: 0.92;" class="loop">   
+
             <% videoBox.forEach(function(i){  %>
             <div>
                 <iframe  class="giveId" id="v1" src="<%= i.name %>"  width="560" height="315" frameborder="0" loading=”lazy” allowfullscreen scrolling="yes" onload="load('Done func');" onerror="error('failed function');">
@@ -20,13 +19,12 @@
         <% }) %>   
 
         </div>
-        <div class="blur"> </div>
+        <div id="blur" class="blur"> </div>
         <div class="loginReginster">
 
             <a href="/login"><p class="p1 text">login</p></a>
             <!-- <a href="/login"><p class="p2 text">login</p></a> -->
             <a href="/register"><p class="p3 text">register </p></a>
-
 
         </div>
         
