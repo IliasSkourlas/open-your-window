@@ -1,30 +1,37 @@
 
 <%- include("partials/header"); -%>
   <body>
+     
     <div class="video-container">
 
-    <dir class="afterBodyHome">
-        <div style="opacity: 0.92;" class="loop">   
+   
+    </div> -->
 
-            <% videoBox.forEach(function(i){  %>
+        <div style="opacity: 0.92;" class="loop">   
+        <% videoBox.forEach(function(i){  %>
             <div>
-                <iframe  class="giveId" id="v1" src="<%= i.name %>"  width="560" height="315" frameborder="0" loading=”lazy” allowfullscreen scrolling="yes" onload="load('Done func');" onerror="error('failed function');">
-                </iframe>
-                <form action="/" class="position" id="1" method="post">
+                <iframe  class="giveId" id="v1" src="<%= i.name %>"  width="560" height="315" frameborder="0" loading=”lazy” allowfullscreen scrolling="yes" onload="load('Done func');" onerror="error('failed function');"></iframe>
+            <!-- <form action="/" class="position" id="1" method="post">
                     <input id="i1" class="inputId" name="postUrl" value="<%= i.name %>" autocomplete="off"></input>
-                        <button type="submit" name="button" value="<%= i._id %>" class="buttonLink"></button> 
-                        <input  type="checkbox" name="buttonAutoplayMute"  class="buttonAutoplayMute" autocomplete="off"  ></input>
-                </form>
+                    <button type="submit" name="button" value="<%= i._id %>" class="buttonLink"></button> 
+                    <input  type="checkbox" name="buttonAutoplayMute"  class="buttonAutoplayMute" autocomplete="off"  ></input>
+                </form> -->
             </div>
         <% }) %>   
 
         </div>
-        <div id="blur" class="blur"> </div>
-        <div class="loginReginster">
 
-            <a href="/login"><p class="p1 text">login</p></a>
-            <!-- <a href="/login"><p class="p2 text">login</p></a> -->
-            <a href="/register"><p class="p3 text">register </p></a>
+
+        <div class="blur"> </div>
+        
+        <div class="loginReginsterBox">
+
+            <div class="colorLayer"> </div>
+
+            <div class="home" id="jumbo">
+                <a href="/login"><p class="p1 text">login</p></a>
+                <a href="/register"><p class="p2 text">register </p></a>
+            </div>
 
         </div>
         
@@ -32,8 +39,9 @@
             <iframe id="backgroundVideo" src= "<%= backgroundVideo  %>" width="560" height="315" frameborder="0" loading=”lazy” allowfullscreen ></iframe> 
         </div>
 
-    </dir>
-</div>
+      
+
+    </div>
 
 <%- include("partials/footer"); -%>
 

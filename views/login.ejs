@@ -1,52 +1,47 @@
 
 <%- include("partials/header"); -%>
-  <body>
-    <div class="video-container">
+<body>
+  <div class="video-container">
 
-    <dir class="afterBodyHome">
-        <div   id="hoverSpot"> </div>
-        </div>
-    
-        
-        <div style="opacity: 0.92;" class="loop">   
-            <% videoBox.forEach(function(i){  %>
-            <div>
-                <iframe  class="giveId" id="v1" src="<%= i.name %>"  width="560" height="315" frameborder="0" loading=”lazy” allowfullscreen scrolling="yes" onload="load('Done func');" onerror="error('failed function');">
-                </iframe>
-                <form action="/" class="position" id="1" method="post">
-                    <input id="i1" class="inputId" name="postUrl" value="<%= i.name %>" autocomplete="off"></input>
-                        <button type="submit" name="button" value="<%= i._id %>" class="buttonLink"></button> 
-                        <input  type="checkbox" name="buttonAutoplayMute"  class="buttonAutoplayMute" autocomplete="off"  ></input>
-                </form>
-            </div>
-        <% }) %>   
+      <div style="opacity: 0.92;" class="loop">   
+          <% videoBox.forEach(function(i){  %>
+          <div>
+              <iframe  class="giveId" id="v1" src="<%= i.name %>"  width="560" height="315" frameborder="0" loading=”lazy” allowfullscreen scrolling="yes" onload="load('Done func');" onerror="error('failed function');">
+              </iframe>
+              <!-- <form action="/" class="position" id="1" method="post">
+                  <input id="i1" class="inputId" name="postUrl" value="<%= i.name %>" autocomplete="off"></input>
+                      <button type="submit" name="button" value="<%= i._id %>" class="buttonLink"></button> 
+                      <input  type="checkbox" name="buttonAutoplayMute"  class="buttonAutoplayMute" autocomplete="off"  ></input>
+              </form> -->
+          </div>
+      <% }) %>   
 
-        </div>
-        <div class="blur"> </div>
-        <div class="loginReginster">
-            
-            <!-- email -->
-            <p class="p1"></p>
-            <!-- password -->
-            <p class="p2"></p>
+      </div>
 
-            <form action="/login" method="post">
-                <div class="inputA"> 
-                    <input class="inputA" type="email" name="username"  autocomplete="off">
-                </div>
-                <div class="inputB"> 
-                    <input type="password" name="password" autocomplete="off" >
-                </div>
-                <button class="invisible" type="submit"></button>
-            </form>
+      <div class="blur"> </div>
 
-        </div>
-        
-        <div class="backgroundIframe">
-            <iframe id="backgroundVideo" src= "<%= backgroundVideo  %>" width="560" height="315" frameborder="0" loading=”lazy” allowfullscreen ></iframe> 
-        </div>
-    </dir>
-</div>
+      <div class="loginReginsterBox">
+
+        <div class="colorLayer"> </div>
+          <!-- <div class="">
+          <p class="p1">email</p>
+          <p class="p2">password</p>
+          </div> -->
+          
+          <form class="loginReginsterInputs" action="/login" method="post">
+                  <input class="inputA" type="email" name="username" autocomplete="off" placeholder="email">
+                  <input class="inputB" type="password" name="password" autocomplete="off" placeholder="pass">
+                  <button class="invisible" type="submit"></button>
+          </form>
+
+      </div>
+
+      <div class="backgroundIframe">
+          <iframe id="backgroundVideo" src= "<%= backgroundVideo  %>" width="560" height="315" frameborder="0" loading=”lazy” allowfullscreen ></iframe> 
+      </div>
+          
+      
+  </div>
 
 <%- include("partials/footer"); -%>
 

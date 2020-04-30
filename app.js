@@ -282,10 +282,14 @@ passport.deserializeUser(User.deserializeUser());
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\GLOBAL >VARIABLES
 let userNow;
 let weelName = "";
-let livingroomNow = "default";
+let livingroomNow = "balcony";
 let copyState = 0;
 let UrlId = "";
-let inputUrl = "";
+let inputUrl = "https://iliasskourlas.github.io/Canvas5/";
+let defaultRightPanel = "https://iliasskourlas.github.io/Canvas6Tapestrie/";
+
+let rightPanel = "";
+
 let  youtubeString = "watch?v=";
 let youtubeReplace = "embed/";
 let vimeoString = "vimeo.com";
@@ -317,6 +321,17 @@ function toEmbedVideo(url){
     }
     else{
         return url;
+    }
+};
+
+// replace empty rightPanel with something.. (so that you can always see something there)
+function defaultOrPanel(){
+    if (inputUrl === ""){ 
+        console.log("!!!!!!!!!!!!!rightPanel became https://iliasskourlas.github.io/Canvas5/");
+        return defaultRightPanel;
+    }else{
+        console.log("rightPanel is Something");
+        return inputUrl;
     }
 };
 
@@ -386,7 +401,10 @@ app.get("/login", function(req, res){
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>common weel
 app.get("/common", function(req, res){
     weelName = "weel0";
+
     
+ 
+
     if(req.isAuthenticated()){
 
         Common.findOne({name: livingroomNow},function(err, foundWeel){
@@ -397,12 +415,14 @@ app.get("/common", function(req, res){
                         livingroomNow = "default";
                         res.redirect("/common")
                     }else{
+                        let panel = defaultOrPanel();
                         res.render("common", {
                             backgroundVideo:foundWeel.background,
                             videoBox: foundWeel.weel0,
                             backgroundSound: backgroundSound,
                             inputUrl: inputUrl,
-                            livingroomNow: livingroomNow
+                            livingroomNow: livingroomNow,
+                            rightPanel: panel
                             })
                     }
                 }
@@ -418,6 +438,9 @@ app.get("/weel0", function(req, res){
     copyState = 0;
     weelName = "weel0";
 
+   
+   
+
     if(req.isAuthenticated()){
 
         //This is a hack: ...acording to userNow name switch to livingroom by name
@@ -426,12 +449,14 @@ app.get("/weel0", function(req, res){
                 console.log(err);
                
                 }else{
+                    let panel = defaultOrPanel();
                     res.render("common", {
                         backgroundVideo:foundWeel.background,
                         videoBox: foundWeel.weel0,
                         backgroundSound: backgroundSound,
                         inputUrl: inputUrl,
-                        livingroomNow: livingroomNow
+                        livingroomNow: livingroomNow,
+                        rightPanel: panel
                     });
                 }
             });
@@ -452,12 +477,14 @@ app.get("/weel1", function(req, res){
                 console.log(err);
                
                 }else{
+                    let panel = defaultOrPanel();
                     res.render("common", {
                         backgroundVideo:foundWeel.background[1],
                         videoBox: foundWeel.weel1,
                         backgroundSound: backgroundSound,
                         inputUrl: inputUrl,
-                        livingroomNow: livingroomNow
+                        livingroomNow: livingroomNow,
+                        rightPanel: panel
                     });
                 }
             });
@@ -479,12 +506,14 @@ app.get("/weel2", function(req, res){
                 console.log(err);
                
                 }else{
+                    let panel = defaultOrPanel();
                     res.render("common", {
                         backgroundVideo:foundWeel.background[2],
                         videoBox: foundWeel.weel2,
                         backgroundSound: backgroundSound,
                         inputUrl: inputUrl,
-                        livingroomNow: livingroomNow
+                        livingroomNow: livingroomNow,
+                        rightPanel: panel
                     });
                 }
             });
@@ -507,12 +536,14 @@ app.get("/weel3", function(req, res){
                 console.log(err);
                
                 }else{
+                    let panel = defaultOrPanel();
                     res.render("common", {
                         backgroundVideo:foundWeel.background[3],
                         videoBox: foundWeel.weel3,
                         backgroundSound: backgroundSound,
                         inputUrl: inputUrl,
-                        livingroomNow: livingroomNow
+                        livingroomNow: livingroomNow,
+                        rightPanel: panel
                     });
                 }
             });
@@ -535,12 +566,14 @@ app.get("/weel4", function(req, res){
                 console.log(err);
                
                 }else{
+                    let panel = defaultOrPanel();
                     res.render("common", {
-                        backgroundVideo:foundWeel.background[3],
+                        backgroundVideo:foundWeel.background[4],
                         videoBox: foundWeel.weel4,
                         backgroundSound: backgroundSound,
                         inputUrl: inputUrl,
-                        livingroomNow: livingroomNow
+                        livingroomNow: livingroomNow,
+                        rightPanel: panel
                     });
                 }
             });
@@ -561,12 +594,14 @@ app.get("/weel5", function(req, res){
                 console.log(err);
                
                 }else{
+                    let panel = defaultOrPanel();
                     res.render("common", {
-                        backgroundVideo:foundWeel.background[3],
+                        backgroundVideo:foundWeel.background[5],
                         videoBox: foundWeel.weel5,
                         backgroundSound: backgroundSound,
                         inputUrl: inputUrl,
-                        livingroomNow: livingroomNow
+                        livingroomNow: livingroomNow,
+                        rightPanel: panel
                     });
                 }
             });

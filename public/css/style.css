@@ -5,6 +5,10 @@
 	/* box-sizing: border-box; */
 }
 
+body {
+    background-color: black;
+}
+
 .invisible{
     opacity: 0;
 }
@@ -28,109 +32,174 @@
     opacity: .6;
     z-index: 1;
 }
-/* login & Reginster *//* login & Reginster *//* login & Reginster *//* login & Reginster */
+
+
+/* >login & >Reginster *//* login & Reginster *//* login & Reginster *//* login & Reginster */
 /* experimental */
 .blur {
-    backdrop-filter: blur(5px);
+    position: absolute;
+    backdrop-filter: blur(10px);
     position: fixed;
-    background-color: white;
+    background-color: black;
     width: 100%;
     height: 100%;
-    opacity: 0.93;
-
-    /* border: 1px solid rgb(238, 255, 0); */
-
-
+    top: 0px;
+    opacity: 0.90;
     z-index: 99;
 }
 
-.loginReginster {
+.loginReginsterBox {
     position: relative;
-    backdrop-filter: blur(1px);
-    visibility: visible;
+    backdrop-filter: blur(5px);
     position: fixed;
     width: 100%;
-    height: 45%;
-    margin-top: 25vh;
-    background-color: rgba(248, 242, 247, 0.349);
+    height: 51%;
+    top: 27%;
+    left: 0px;
+    background-color: rgba(255, 255, 255, 0.349);
     opacity: 1;
-
     z-index: 100;
+
+    /* transition-delay: 1s; */
 }
 
-p {
+.loginReginsterBox .colorLayer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    left: 0px;
+    background-color: rgba(251, 224, 242, 0.116);
+}
+
+
+#jumbo p  {
+   
+    position: fixed;
+    /* top: 5%; */
+    margin-left: 0%;
+    color:  rgba(209, 253, 219, 0.356);
     font-style: italic;
     font-family: 'Raleway', sans-serif;
+    text-shadow: 2px 2px 5px rgba(128, 240, 178, 0.123);
+    letter-spacing: 0.1em;
     font-weight: lighter;
+    font-size: 40px;
+    opacity: 0.8;
+    z-index: 100;
+
+}
+#jumbo p:hover {
+    opacity: 1;
+    color:  rgba(209, 253, 219, 0.835);
+
+    transition-duration: .2s;
+
 }
 .p1{
     position: absolute;
-    color: rgba(0, 0, 0, 0.486);
-    font-size: 29px;
+    top: -10%;
+    left: 10%;
     padding-top: 0px;
-    margin-top: 2.6%;
-    margin-left: 23%;
 }
+
 .p2{
     position: absolute;
-    color: rgba(0, 0, 0, 0.486);
-    font-size: 29px;
+    top: 5%;
+    left: 10%;
     padding-top: 0px;
-    margin-top: 5.5%;
-    margin-left: 23%;
-}
-.p3{
-    position: absolute;
-    color: rgba(0, 0, 0, 0.486);
-    font-size: 29px;
-    padding-top: 0px;
-    margin-top: 6.4%;
-    margin-left: 23%;
 }
 .loginReginster  .text:hover {
     color: rgba(0, 0, 0, 0.767);
+    transition-duration: 1s;
 }
 
-.inputA input{
+.loginReginsterInputs {
     position: absolute;
-    color: rgb(0, 0, 0);
-    border: 1px solid rgb(149, 149, 149);
-    background-color: rgba(128, 240, 178, 0.043);
-    width: 25%;
-    padding: 6px 2px; 
-    font-family: 'Raleway', sans-serif;
-    border-radius: 4px;
-    margin-top: 1.5%;
-    margin-left: 37%;
-    font-size: 20px;
-    font-weight: 100;
-    background-color: rgba(128, 240, 178, 0.349);
-    opacity: .6;
+    /* text-align: center; */
+    margin-top: 0px;
+    margin-left: 0px;
+   
+    opacity: .5;
     z-index: 100;
 }
-.inputA input:hover {
+.loginReginsterInputs input{
+    
+    backdrop-filter: blur(5px);
+    color: rgb(0, 0, 0);
+    /* border: 1px solid rgba(149, 149, 149, 0.116); */
+    background-color: rgba(128, 240, 178, 0.123);
+    height: 37px;
+    padding: 6px 2px; 
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 0.1em;
+    text-shadow: 2px 2px 5px rgba(128, 240, 178, 0.267);
+    box-shadow: -10px 10px 50px rgba(128, 240, 178, 0.267);
+    border-radius: 7px;
+    font-size: x-large;
+    font-weight: 100;
+
+    
+}
+.loginReginsterInputs input:focus:invalid {
+    color: lawngreen;
+    border-color: white;
+}
+.loginReginsterInputs input:focus:valid {
+    color: lawngreen;
+    border-color: white;
+}
+.loginReginsterInputs input:hover {
+    border-color: rgba(209, 253, 219, 0.781);
+}
+.loginReginsterInputs input:focus {
+    border-color: white;
+}
+
+.loginReginsterInputs input::-webkit-input-placeholder {
+    color: 1px solid rgba(130, 153, 121, 0.842);
+    letter-spacing: 0.1em;
+    opacity: 0;
+   
+}
+.loginReginsterInputs input:hover::-webkit-input-placeholder {
+    rgba(209, 253, 219, 0.548);
+    opacity: 1;
+    transition-duration: 0.7s;
+}
+.loginReginsterInputs input:hover:focus::-webkit-input-placeholder {
+   
+    opacity: 0;
+    transition-duration: 0.5s;
+}
+
+.inputA[type=email]{
+    
+    position: absolute;
+    width: 500px;
+    bottom: 100%;
+    
+    padding-left: 10px;
+    color: white;
+}
+.inputA:hover {
     opacity: 1;
     border: 1px solid rgba(0, 0, 0, 0.918);
+}
+.inputB[type=password] {
+    position: absolute;
+    font-style: italic;
+    width: 500px;
+    top: 5%;
+    /* left: 10%; */
+    
+   
+    
+    padding-left: 10px;
+    color: white;
 
 }
-.inputB input{
-    position: absolute;
-    color: rgb(0, 0, 0);
-    border: 1px solid rgb(149, 149, 149);
-    background-color: rgba(128, 240, 178, 0.043);
-    width: 21%;
-    padding: 6px 2px; 
-    font-family: 'Raleway', sans-serif;
-    border-radius: 4px;
-    margin-top: 4%;
-    margin-left: 37%;
-    font-size: 20px;
-    font-weight: 100;
-    background-color: rgba(128, 240, 178, 0.349);
-    opacity: .6;
-    z-index: 100;
-}
-.inputB input:hover {
+.inputB:hover {
 opacity: 1;
 border: 1px solid rgba(0, 0, 0, 0.918);
 
@@ -150,64 +219,83 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     /* transition-delay: 1s; */
 }
 .leftMenu:hover {
-    width: 12.5%;
+    width: 25%;
     /* width: 12.5%; */
     opacity: .83;
-    transition: width 0.8s, opacity 3.5s;
+    transition: width 0.8s, opacity 3.3s;
     /* transition-delay: 1s; */
     
 }
-
+/* >li */
 #livingroomInput {
- 
-    background-color:rgb(19, 18, 18);
-    color: rgba(255, 255, 255, 0.515);
-    border: 1px solid rgba(255, 255, 255, 0.568); 
-    font-style: normal;
-    letter-spacing: 0.15em;
-    font-family: 'Raleway', sans-serif;
-    font-size: 20px;
-    font-weight: 100;
+    color:rgba(248, 212, 230, 0.411);
+    backdrop-filter: blur(3px);
+    background-color: rgba(113, 116, 114, 0.123);
+    border: 1px solid rgba(255, 255, 255, 0.219); 
     width: 83%;
     height: 37px;
     margin-top: 82%;
     margin-left: 5%;
-    /* margin-right: 0%; */
-    border-radius: 20px;
+    padding: 6px 2px; 
+    font-style: italic;
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 0.1em;
+    text-shadow: 2px 2px 5px rgba(128, 240, 178, 0.171);
+    box-shadow: -10px 10px 50px rgba(128, 240, 178, 0.109);
+    border-radius: 7px;
+    font-size: x-large;
+    font-weight: lighter;
     opacity: 1;
+    
 }
+::selection {
+    background-color: #222;
+    color: white;
+}
+
 #livingroomInput:hover {
-    color: rgba(255, 255, 255, 0.865);
+    color: rgba(255, 255, 255, 0.507);
+    background-color: black;
+    
+    border: 1px solid rgba(255, 255, 255, 0.602); 
 }
 #livingroomInput:focus {
     color: rgba(255, 255, 255, 0.988);
-
+    color: lawngreen;
+  
 }
+
 
 .memoryBox {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    /* justify-content: center; */
     order: 3; 
-    /* align-items: stretch; */
+    align-items: stretch;
     flex-wrap: wrap; 
     /* flex-grow: 1; */
 }
 .memoryButtons  {
+    backdrop-filter: blur(5px);
     color:rgba(255, 240, 247, 0.707);
-    background-color:rgb(19, 18, 18);
+    background-color: rgba(113, 116, 114, 0.123);
+    /* background-color:rgb(19, 18, 18); */
     border: 1px solid rgba(255, 255, 255, 0.55); 
     font-style: italic;
     /* letter-spacing: 2em; */
     font-family: 'Raleway', sans-serif;
     font-size: 14px;
     font-weight: 100;
-    width: 37px;
-    height: 37px;
+    width: 50px;
+    height: 40px;
     border-radius: 50px;
-    margin-top: 2%;
+    margin-top: 7%;
     left: 5%;
-    /* margin-right: 5%; */
+    opacity: 0.8;
+}
+#livingroomButton {
+    width: 50px;
+    height: 40px;
 }
 .memoryButtons:hover {
     color:rgb(250, 12, 131);
@@ -217,14 +305,15 @@ border: 1px solid rgba(0, 0, 0, 0.918);
 }
 
 .checkbox {
+    position: absolute;
     -webkit-appearance: none;
     -moz-appearance: none;
     color:rgb(250, 12, 131);
     background-color: rgba(0, 0, 0, 0.418);
     border: 1px solid rgb(254, 248, 87);
     border-radius: 50px;
-    margin-top: 0%;
-    left: 10%;
+    top: 30%;
+    left: 85%;
     opacity: 0.4;
     transition: background-color 5s, opacity 2s;    
 }
@@ -243,25 +332,33 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     content: "\2713"; 
 }
  .backgroundButton {
-    background-color:rgb(19, 18, 18);
-    color: rgba(255, 255, 255, 0.349);
-    border: 1px solid rgba(255, 255, 255, 0.568); 
-    font-style: italic;
-    letter-spacing: 0.1em;
-    font-family: 'Raleway', sans-serif;
-    font-size: 16px;
-    font-weight: 100;
-    width: 85%;
+
+    color: rgba(255, 255, 255, 0.39);
+    backdrop-filter: blur(2px);
+    background-color: rgba(113, 116, 114, 0.123);
+    border: 1px solid rgba(255, 255, 255, 0.219); 
+    width: 83%;
     height: 37px;
-    margin-top: 0%;
-    margin-left: 5%;
+    margin-top: 10%;
     margin-right: 5%;
-    border-radius: 20px;
+    margin-left: 5%;
+    padding: 6px 2px; 
+    font-style: italic;
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 0.1em;
+    text-shadow: 2px 2px 5px rgba(128, 240, 178, 0.096);
+    box-shadow: -10px 10px 50px rgba(128, 240, 178, 0.137);
+    border-radius: 7px;
+    font-size: x-large;
+    font-weight: lighter;
+    opacity: 1;
     transition-duration: 0.4s;
+    width: 83%;
+    height: 37px;
 }
 .backgroundButton:hover {
     color: rgba(255, 255, 255, 0.865);
-    border: 1px solid rgba(255, 255, 255, 0.961); 
+    border: 1px solid rgb(250, 12, 131); 
 
     transition: color 0.4s, border 0.5;
 }
@@ -293,7 +390,7 @@ border: 1px solid rgba(0, 0, 0, 0.918);
 }
  .rightPanel:hover {
     width: 100%;
-    left: 0.08%;
+    left: 0%;
     /* right: 3; */
     opacity: 1;
     transition: left 0.8s, opacity 3.5s;
@@ -333,7 +430,7 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     /* transition-duration: 0.3s; */
 }
 .position:hover {
-    opacity: 0.95;
+    opacity: 0.97;
     transition-duration: 0.1s;
     /* transition-delay: 1s; */
 }
