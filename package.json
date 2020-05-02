@@ -12,6 +12,9 @@
   },
   "author": "89testing",
   "license": "ISC",
+  "engines": {
+    "node": "12.16.1"
+  },
   "bugs": {
     "url": "https://github.com/IliasSkourlas/open-your-window/issues"
   },
