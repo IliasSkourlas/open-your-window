@@ -222,7 +222,7 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     width: 25%;
     /* width: 12.5%; */
     opacity: .83;
-    transition: width 0.8s, opacity 3.3s;
+    transition: width 0.5s, opacity 3.3s;
     /* transition-delay: 1s; */
     
 }
@@ -298,7 +298,7 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     height: 40px;
 }
 .memoryButtons:hover {
-    color:rgb(250, 12, 131);
+    color:rgba(187, 255, 177, 0.865);
     background-color: black;
     border: 1px solid white;
     transition-duration: 0.4s;
@@ -357,9 +357,9 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     height: 37px;
 }
 .backgroundButton:hover {
-    color: rgba(255, 255, 255, 0.865);
-    border: 1px solid rgb(250, 12, 131); 
-
+    color: rgba(187, 255, 177, 0.865);
+    border: 1px solid rgba(255, 255, 255, 0.865);
+    
     transition: color 0.4s, border 0.5;
 }
 /* not used */
@@ -382,8 +382,8 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     position: fixed;
     width: 100%;
     height: 100%;
-    top: 0px;
-    left:  97%;
+    top: 3px;
+    left:  99.9%;
     right: 0;
     opacity: 0;
     z-index: 100;
@@ -412,13 +412,14 @@ border: 1px solid rgba(0, 0, 0, 0.918);
 
 .loop {
     position: relative;
-
+    /* border: 1px solid rgb(255, 0, 0); */
     display: flex;
     flex-direction: row;
     justify-content: stretch;
     align-items: stretch;
     flex-wrap: wrap; 
     /* flex-grow: 1; */
+    z-index: 2;
 }
 
 .position  {
@@ -430,8 +431,8 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     /* transition-duration: 0.3s; */
 }
 .position:hover {
-    opacity: 0.97;
-    transition-duration: 0.1s;
+    opacity: 1;
+    /* transition-duration: 0.1s; */
     /* transition-delay: 1s; */
 }
 .inputUrl {
@@ -451,7 +452,7 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     font-weight: 100;
     transition-duration: 0.4s;
     opacity: 0.35;
-    z-index: 1;
+    z-index: 2;
 }
 .inputUrl:focus {
     background-color: rgba(128, 240, 178, 0.76);
@@ -489,11 +490,16 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     position: relative;
 
     border: 1px solid rgba(0, 0, 0, 0.844);
+    /* border: 1px solid rgb(255, 247, 0); */
     width: 100%;
 
     /* this is the crusial factor */
     height: 3000px;
     /* height: 2500px; */
+    top : 1000px;
+    /* bottom: 300px;
+    padding-bottom: 400px; */
+    z-index:1;
 }
 
 .krosia p{
@@ -513,7 +519,7 @@ border: 1px solid rgba(0, 0, 0, 0.918);
 #animationBox {
     position: absolute;
     width: 100%;
-    height: 50%;
+    height: 100%;
     border: none;
     z-index: 90;
     transition-duration: 0.8s;
@@ -539,7 +545,6 @@ border: 1px solid rgba(0, 0, 0, 0.918);
 }
 
 
-
 /* >background */
 #backgroundVideo {
     position: fixed;
@@ -549,7 +554,9 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     top: 0;
     left: 0;
     opacity: 1;
-    z-index: -1;
+    z-index: 0;
+
+    volume: silent;
 }
 /* /// */
 .buttonLink {

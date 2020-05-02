@@ -14,7 +14,7 @@
 
             <% videoBox.forEach(function(i){  %>
             <div>
-                <iframe  class="videoBox"  src="<%= i.name %>"  width="560" height="315" frameborder="0" loading=”lazy” allowfullscreen scrolling="yes" ">
+                <iframe  class="videoBox"  src="<%= i.name %>"  width="560" height="315" frameborder="0" loading=”lazy” allowfullscreen scrolling="yes" allow=autoplay>
                 </iframe>
                 <form action="/" class="position" method="post">
                     <input  class="inputUrl" name="postUrl" value="<%= i.name %>" autocomplete="off"></input>
@@ -34,7 +34,7 @@
                 <p id="krosiaDown"> © 89testing 2020  </p>  
             </div>
             <iframe  id="animationBox"   src="https://iliasskourlas.github.io/Canvas7Aliens/" frameborder="0" loading=”lazy” allowfullscreen scrolling="no" "> </iframe> 
-            <iframe  id="invisibleBox"   src="<%= inputUrl %>" frameborder="0" loading=”lazy” allowfullscreen scrolling="yes" "> </iframe> 
+            <iframe  id="invisibleBox"   src="<%= backgroundVideo  %>" frameborder="0" loading=”lazy” allowfullscreen scrolling="yes" "> </iframe> 
                
         </div>
        
@@ -89,7 +89,7 @@
 
         <!-- background Video iframe -->
         <div class="backgroundIframe">
-            <iframe id="backgroundVideo" src= "<%= backgroundVideo  %>" width="560" height="315" frameborder="0" loading=”lazy” allowfullscreen ></iframe> 
+            <iframe id="backgroundVideo" src= "<%= backgroundVideo  %>" width="560" height="315" frameborder="0" loading=”lazy” allowfullscreen  ></iframe> 
         </div>
 
 

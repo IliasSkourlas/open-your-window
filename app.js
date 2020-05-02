@@ -32,7 +32,13 @@ app.use(passport.session());
 
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>DB
-mongoose.connect("mongodb://localhost:27017/urlDB", {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
+
+
+//Using MongoDB Atlas
+mongoose.connect("mongodb+srv://admin-ilias:test123@cluster0-riqh2.mongodb.net/urlDB", {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
+
+//Using MongoDB
+// mongoose.connect("mongodb://localhost:27017/urlDB", {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
 
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\Items Schema
@@ -191,11 +197,7 @@ const ItemUrl = mongoose.model("ItemUrl", itemsUrlSchema);
     const itemUrl48 = new ItemUrl({
         name: ""
     });
-
-
-    
-
-
+//Aray
 const defaultUrls = [
     itemUrl1, itemUrl2, itemUrl3, itemUrl4,
     itemUrl5, itemUrl6, itemUrl7, itemUrl8,
@@ -213,15 +215,6 @@ const defaultUrls = [
     itemUrl45, itemUrl46, itemUrl47, itemUrl48,
 ];
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\Weels Schema
-const weelsUrlSchema = new mongoose.Schema({
-    name: String,
-    background: String,
-    items: [itemsUrlSchema]
-});
-const Weel= mongoose.model("Weel", weelsUrlSchema);
-
-
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\LivingRooms Schema
 const commonsSchema = new mongoose.Schema({
     name: String,
@@ -233,25 +226,24 @@ const Common = mongoose.model("Common", commonsSchema );
 
 const common0 = new Common ({
     name: "default",
-    password: "the living room",
+    password: "default",
     background: "https://www.youtube.com/embed/4l7Uw-o-RC4?autoplay=1&mute=1&loop=1&playlist=4l7Uw-o-RC4",
     weel0: defaultUrls
 });
 const common1 = new Common ({
-    name: "the living room",
-    password: "the living room",
+    name: "balcony",
+    password: "balcony",
     background: "https://www.youtube.com/embed/4l7Uw-o-RC4?autoplay=1&mute=1&loop=1&playlist=4l7Uw-o-RC4",
     weel0: defaultUrls
 });
 const common2 = new Common ({
-    name: "Denis living room",
-    password: "Denis living room",
+    name: "Dimosthenis",
+    password: "Dimosthenis",
     background: "https://www.youtube.com/embed/4l7Uw-o-RC4?autoplay=1&mute=1&loop=1&playlist=4l7Uw-o-RC4",
     weel0: defaultUrls
 });
 
 const livingRoomArray = [common0, common1, common2];
-
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>Users Schema & a.r
 const userSchema = new mongoose.Schema({
@@ -276,8 +268,6 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 //a.r)
-
-
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\GLOBAL >VARIABLES
 let userNow;
@@ -305,13 +295,17 @@ let superCute = "https://www.youtube.com/embed/4l7Uw-o-RC4?autoplay=1&mute=1&loo
 let talkToParot = "https://www.youtube.com/embed/v1P0cAzXR6g?autoplay=1&loop=1&controls=0&mute=1&playlist=v1P0cAzXR6g";
 let realBirds = "https://www.youtube.com/embed/PwylW_sUfQY?autoplay=1&mute=1&loop=1&playlist=PwylW_sUfQY";
 let kittenCuteness = "https://www.youtube.com/embed/dzFKG6rkWpU?autoplay=1&mute=1&loop=1&playlist=dzFKG6rkWpU";
-let chen = "https://www.youtube.com/embed/Iwpr55PZEJ8?";
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>FUNCTIONS
 // automaticaly embed youtube, vimeo
 function toEmbedVideo(url){
+    if ((url.includes("youtube.")) & (url.includes("watch?")) & (url.includes("&list="))){
+
+        return url.replace("watch", "embed") + "&";
+
+    }
     if(url.includes("youtube.com") & url.includes(youtubeString)){
-           return url.replace(youtubeString, youtubeReplace); // replace if contains list first "%" with "?"
+        return url.replace(youtubeString, youtubeReplace); // replace if contains list first "%" with "?"
     }
     if(url.includes(vimeoReplace)){
         return url;
@@ -327,10 +321,8 @@ function toEmbedVideo(url){
 // replace empty rightPanel with something.. (so that you can always see something there)
 function defaultOrPanel(){
     if (inputUrl === ""){ 
-        console.log("!!!!!!!!!!!!!rightPanel became https://iliasskourlas.github.io/Canvas5/");
         return defaultRightPanel;
     }else{
-        console.log("rightPanel is Something");
         return inputUrl;
     }
 };
@@ -343,6 +335,25 @@ function defaultOrPanel(){
 // Home  ----  default Urls
 app.get("/", function(req, res){
     weelName = "weelDefault"
+    
+        ItemUrl.find({}, function(err, foundItems){
+            if(foundItems.length === 0){
+                ItemUrl.insertMany(defaultUrls, function(err){
+                    if(err){
+                        console.log(err);
+                    }else{
+                        console.log("Success with inserting default Urls");
+                    }
+                });
+                res.redirect("/");
+            }else{
+                res.render("home", {
+                    backgroundVideo: backgroundMain,
+                    videoBox: foundItems,
+                   
+                });
+            }
+        }); 
 
     Common.find({}, function(err, foundCommon){
         if(foundCommon.length === 0){
@@ -356,24 +367,7 @@ app.get("/", function(req, res){
         }
     })
 
-    ItemUrl.find({}, function(err, foundItems){
-        if(foundItems.length === 0){
-            ItemUrl.insertMany(defaultUrls, function(err){
-                if(err){
-                    console.log(err);
-                }else{
-                    console.log("Success with inserting default Urls");
-                }
-            });
-            res.redirect("/");
-        }else{
-            res.render("home", {
-                backgroundVideo: backgroundMain,
-                videoBox: foundItems,
-               
-            });
-        }
-    }); 
+    
 });
 // register  ----  default Urls
 app.get("/register", function(req, res){
@@ -401,9 +395,6 @@ app.get("/login", function(req, res){
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>common weel
 app.get("/common", function(req, res){
     weelName = "weel0";
-
-    
- 
 
     if(req.isAuthenticated()){
 
@@ -470,16 +461,20 @@ app.get("/weel1", function(req, res){
     copyState = 0;
     weelName = "weel1";
 
+    console.log("/weel1");
+    
+
     if(req.isAuthenticated()){
         
         User.findOne({username: userNow},function(err, foundWeel){
+
             if (err){
                 console.log(err);
                
                 }else{
                     let panel = defaultOrPanel();
                     res.render("common", {
-                        backgroundVideo:foundWeel.background[1],
+                        backgroundVideo: foundWeel.background[1],
                         videoBox: foundWeel.weel1,
                         backgroundSound: backgroundSound,
                         inputUrl: inputUrl,
@@ -560,7 +555,6 @@ app.get("/weel4", function(req, res){
     
 
     if(req.isAuthenticated()){
-        console.log("!!!");  
         User.findOne({username: userNow},function(err, foundWeel){
             if (err){
                 console.log(err);
@@ -615,47 +609,16 @@ app.get("/weel5", function(req, res){
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ >copy too weel x
 
-app.get("/copyWeel0", function(req, res){
-
-    User.findOne({username: userNow},function(err, foundUser){
-        // weel that will be copied
-        switch (weelName) {
-            case "weel0":
-                weelObject = foundUser.weel0;
-                break;
-            case "weel1": 
-                weelObject = foundUser.weel1;
-                break;
-            case "weel2":
-                weelObject = foundUser.weel2;
-                break;
-            case "weel3":
-                weelObject = foundUser.weel3;
-                break;
-            case "weel4":
-                weelObject = foundUser.weel4;
-                break;
-            case "weel5":
-                weelObject = foundUser.weel5;
-                break;
-            default:
-                break;
-        }
-        if(err){
-            console.log(err);
-        }else{
-            weelName = "weel0"
-            console.log("No can do :)");
-            res.redirect("/weel0");  
-        }   
-    });
-});
 app.get("/copyWeel1", function(req, res){
 
     User.findOne({username: userNow},function(err, foundUser){
         switch (weelName) {
             case "weel0":
-                weelObject = foundUser.weel0;
+                //stays the same ....must change
+                weelObject = foundUser.weel1;
+                console.log("can not copy to weel0");
+                
+
                 break;
             case "weel1": 
                 weelObject = foundUser.weel1;
@@ -692,7 +655,8 @@ app.get("/copyWeel2", function(req, res){
     User.findOne({username: userNow},function(err, foundUser){
         switch (weelName) {
             case "weel0":
-                weelObject = foundUser.weel0;
+                 //stays the same ....must change
+                weelObject = foundUser.weel2;
                 break;
             case "weel1": 
                 weelObject = foundUser.weel1;
@@ -729,7 +693,8 @@ app.get("/copyWeel3", function(req, res){
     User.findOne({username: userNow},function(err, foundUser){
         switch (weelName) {
             case "weel0":
-                weelObject = foundUser.weel0;
+                 //stays the same ....must change
+                weelObject = foundUser.weel3;
                 break;
             case "weel1": 
                 weelObject = foundUser.weel1;
@@ -766,7 +731,8 @@ app.get("/copyWeel4", function(req, res){
     User.findOne({username: userNow},function(err, foundUser){
         switch (weelName) {
             case "weel0":
-                weelObject = foundUser.weel0;
+                 //stays the same ....must change
+                weelObject = foundUser.weel4;
                 break;
             case "weel1": 
                 weelObject = foundUser.weel1;
@@ -798,12 +764,17 @@ app.get("/copyWeel4", function(req, res){
         }   
     })
 })
+
+let xx;
 app.get("/copyWeel5", function(req, res){
+    
+    
 
     User.findOne({username: userNow},function(err, foundUser){
         switch (weelName) {
             case "weel0":
-                weelObject = foundUser.weel0;
+                 //stays the same ....must change
+                 weelObject = foundUser.weel5;
                 break;
             case "weel1": 
                 weelObject = foundUser.weel1;
@@ -847,11 +818,12 @@ app.post("/", function(req, res){
     let autoplayMute = "?autoplay=1&mute=1&loop=1&playlist=";
     let replacedUrl = "";
     let finalUrl = "";
-
+  
     // first toggle Autoplay logic
+   
     if(toggleAutoplay === "on" & (inputUrl.includes("youtube.") || (inputUrl.includes("vimeo.")) )){
-        
-        if(inputUrl.includes(autoplayMute) ){
+      
+        if (inputUrl.includes(autoplayMute) ){
             replacedUrl = inputUrl.replace("?autoplay=1&mute=1&loop=1&playlist=", "");
             finalUrl = replacedUrl;
         }
@@ -1061,11 +1033,11 @@ app.post("/memory", function(req, res){
                 break;
         }
     }
-    else{  ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ Copy a weel to another weel
+    else{  ///////////////////if copyState = 1\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ Copy a weel to another weel
         switch (memory) {
             case "weel0":
-                console.log("copy "  + weelName);
-                res.redirect("/copyweel0")
+                console.log("copy "  + weelName + "to weel0 is not allowed");
+                res.redirect("/weel0")
                 break;
             case "weel1":
                 console.log("copy "  + weelName);
@@ -1094,7 +1066,6 @@ app.post("/memory", function(req, res){
 });
 
 
-
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ Copy state
 app.post("/copy", function(req ,res){
     copyState;
@@ -1105,6 +1076,12 @@ app.post("/copy", function(req ,res){
         copyState = 1;
     }
 });
+
+
+
+
+
+
 
 
 
