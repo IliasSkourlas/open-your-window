@@ -1,5 +1,5 @@
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\SETUP
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\APP CONFIG
 require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -31,7 +31,7 @@ app.use(passport.session());
 
 
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>DB
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>DB CONFIG
 
 
 //Using MongoDB Atlas
@@ -41,7 +41,8 @@ mongoose.connect("mongodb+srv://admin-ilias:test123@cluster0-riqh2.mongodb.net/u
 // mongoose.connect("mongodb://localhost:27017/urlDB", {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
 
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\Items Schema
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\MODEL CONFIG
+//Items Schema
 const itemsUrlSchema = new mongoose.Schema({
     name: String
 });
@@ -393,7 +394,7 @@ app.get("/login", function(req, res){
     })     
 })
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>common weel
+///////////////////INDEX\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>common weel 
 app.get("/common", function(req, res){
     weelName = "weel0";
 
@@ -426,6 +427,8 @@ app.get("/common", function(req, res){
 });
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\Weel Memories
+
+//==> i could have had it with findById()
 app.get("/weel0", function(req, res){
     copyState = 0;
     weelName = "weel0";
@@ -811,6 +814,9 @@ app.get("/copyWeel5", function(req, res){
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
 //  >POST
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ 
+
+
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ Update  Weels
 app.post("/", function(req, res){
     UrlId = req.body.button;
