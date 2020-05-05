@@ -16,7 +16,7 @@
             <div>
                 <iframe  class="videoBox"  src="<%= i.name %>"  width="560" height="315" frameborder="0" loading=”lazy” allowfullscreen scrolling="yes" allow=autoplay>
                 </iframe>
-                <form action="/" class="position" method="post">
+                <form action="/index/update/<%=weel%>/<%=i._id %>" class="position" method="post">
                     <input  class="inputUrl" name="postUrl" value="<%= i.name %>" autocomplete="off"></input>
                         <button type="submit" name="button" value="<%= i._id %>" class="buttonLink"></button> 
                         <input class="checkAutoplay" type="checkbox" name="buttonAutoplayMute" autocomplete="off"  ></input>
@@ -47,9 +47,8 @@
             </form>
 
             <div class="memories">
-                
-               
-                <form action="/memory" method="post">
+
+                <form action="/index/<%=weel%>/memory" method="post">
                     <div class="memoryBox">
                         <button id="livingroomButton" type="submit" name="memoryButton" value="weel0" class="memoryButtons"  >Comm</button>
                         <button type="submit" name="memoryButton" value="weel1" class="memoryButtons"  >1</button>
@@ -66,7 +65,7 @@
 
                 <div class="background">
 
-                    <form action="/backgroundVideo" method="post">
+                    <form action="/index/<%=weel%>/backgroundVideo" method="post">
                         <button class="backgroundButton" id="backgroundVideoButton"  type="submit"  >background</button>                 
                     </form>
                     <!-- <form action="/backgroundSound" method="post">
