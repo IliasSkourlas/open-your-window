@@ -17,9 +17,11 @@
                 <iframe   src="<%= i.name %>"  frameborder="0" loading=”lazy” allowfullscreen scrolling="yes" allow=autoplay>
                 </iframe>
                 <form class="inline" action="/index/update/<%=weel%>/<%=i._id %>"  method="post">
-                    <input class="inline" id="inputUrl" name="postUrl" value="<%= i.name %>" autocomplete="off"></input>
-                        <button  type="submit" name="button" value="<%= i._id %>" class="buttonLink inline"></button> 
-                        <input id="checkAutoplay" class="controlButtons inline" type="checkbox" name="buttonAutoplayMute" autocomplete="off"  ></input>
+                    <div class="input">
+                        <input  id="inputUrl" name="postUrl" value="<%= i.name %>" autocomplete="off"></input>
+                        <button id="enderLink" type="submit" name="button" value="<%= i._id %>" class="controlButtons">||</button> 
+                        <input id="checkAutoplay" class="controlButtons" type="checkbox" name="buttonAutoplayMute" autocomplete="off"  ></input>
+                    </div>
                 </form>
                 <form class="inline" action="/index/<%=weel%>/backgroundVideo" method="post">
                     <button id="smallBackground" class="controlButtons" name="smallBackground" value="<%=i.name %>" type="submit"></button>

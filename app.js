@@ -632,14 +632,14 @@ app.get("/index/:weel/copyTo/:weelTarget", function(req, res){
 //  >POST
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>delete
-app.post("/index/update/:weel/:id", function(req, res){
-    console.log("from weel : " + req.params.weel);
-    console.log("deleting id :" + req.params.id);
-
-    
+// app.post("/index/update/:weel/:id", function(req, res){
+//     console.log("from weel : " + req.params.weel);
+//     console.log("deleting id :" + req.params.id);
 
 
-});
+
+
+// });
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\after you press a weel putton
 app.post("/index/:weel/memory", function(req, res){
    
