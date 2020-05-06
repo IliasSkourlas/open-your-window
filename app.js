@@ -631,6 +631,15 @@ app.get("/index/:weel/copyTo/:weelTarget", function(req, res){
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
 //  >POST
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\ 
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>delete
+app.post("/index/update/:weel/:id", function(req, res){
+    console.log("from weel : " + req.params.weel);
+    console.log("deleting id :" + req.params.id);
+
+    
+
+
+});
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\after you press a weel putton
 app.post("/index/:weel/memory", function(req, res){
    
@@ -700,14 +709,14 @@ app.post("/index/update/:weel/:id", function(req, res){
     console.log("updating : " + req.params.weel);
     console.log("updating id :" + req.params.id);
     
-    // first toggle Autoplay logic
     let UrlId = req.body.button;
     inputUrl = req.body.postUrl;
     let toggleAutoplay = req.body.buttonAutoplayMute;
     let autoplayMute = "?autoplay=1&mute=1&loop=1&playlist=";
     let replacedUrl = "";
     let finalUrl = "";
-   
+    
+    // first toggle Autoplay logic
     if(toggleAutoplay === "on" & (inputUrl.includes("youtube.") || (inputUrl.includes("vimeo.")) )){
       
         if (inputUrl.includes(autoplayMute) ){
@@ -822,11 +831,14 @@ app.post("/livingroomInput", function(req, res){
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>BackgroundVideo
 app.post("/index/:weel/backgroundVideo", function(req, res){
     console.log("backgroundVideo Button pressed ");
+    let ll= req.body.smallBackground;
+    console.log("small b: " + ll);
+    
     switch (req.params.weel) {
         
         case "weel0":
                 Common.update({'name': livingroomNow}, {'$set': {
-                    'background': inputUrl}}, function(err) { 
+                    'background': ll}}, function(err) { 
                     if(!err){
                         res.redirect("/index/weel0");  
                         }else{
@@ -836,7 +848,7 @@ app.post("/index/:weel/backgroundVideo", function(req, res){
             break;
         case "weel1":
             User.update({'username': userNow}, {'$set': {
-                'background.1': inputUrl }}, function(err) { 
+                'background.1': ll}}, function(err) { 
                 if(!err){
                     res.redirect("/index/weel1");  
                     }else{
@@ -846,7 +858,7 @@ app.post("/index/:weel/backgroundVideo", function(req, res){
             break;
         case "weel2":
             User.update({'username': userNow}, {'$set': {
-                'background.2': inputUrl}}, function(err) { 
+                'background.2': ll}}, function(err) { 
                 if(!err){
                     res.redirect("/index/weel2");  
                     }else{
@@ -856,7 +868,7 @@ app.post("/index/:weel/backgroundVideo", function(req, res){
             break;
         case "weel3":
             User.update({'username': userNow}, {'$set': {
-                'background.3': inputUrl}}, function(err) { 
+                'background.3': ll}}, function(err) { 
                 if(!err){
                     res.redirect("/index/weel3");  
                     }else{
@@ -866,7 +878,7 @@ app.post("/index/:weel/backgroundVideo", function(req, res){
             break;
         case "weel4":
             User.update({'username': userNow}, {'$set': {
-                'background.4': inputUrl}}, function(err) { 
+                'background.4': ll}}, function(err) { 
                 if(!err){
                     res.redirect("/index/weel4");  
                     }else{
@@ -876,7 +888,7 @@ app.post("/index/:weel/backgroundVideo", function(req, res){
             break;
         case "weel5":
             User.update({'username': userNow}, {'$set': {
-                'background.5': inputUrl}}, function(err) { 
+                'background.5': ll}}, function(err) { 
                 if(!err){
                     res.redirect("/index/weel5");  
                     }else{

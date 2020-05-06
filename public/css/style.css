@@ -13,12 +13,9 @@ body {
     opacity: 0;
 }
 
-.loop {position:absolute}
-
-
 
 /* weel counter */
-.Time  {
+/* .Time  {
     position: fixed;
     color: white;
     border: 1px solid rgba(0, 0, 0, 0.098);
@@ -31,7 +28,7 @@ body {
     font-weight: 100;
     opacity: .6;
     z-index: 1;
-}
+} */
 
 
 /* >login & >Reginster *//* login & Reginster *//* login & Reginster *//* login & Reginster */
@@ -204,6 +201,7 @@ opacity: 1;
 border: 1px solid rgba(0, 0, 0, 0.918);
 
 }
+
 /* >left menu *//* left menu *//* left menu *//* left menu *//* left menu *//* left menu *//* left menu */
 .leftMenu {
     position: fixed;
@@ -409,94 +407,151 @@ border: 1px solid rgba(0, 0, 0, 0.918);
   
 }
 
-
+.inline {
+    display: inline;
+}
+/* vh */
 .loop {
-    position: relative;
-    /* border: 1px solid rgb(255, 0, 0); */
+    position: absolute;
     display: flex;
+    flex-wrap: wrap; 
     flex-direction: row;
     justify-content: stretch;
-    align-items: stretch;
-    flex-wrap: wrap; 
+    
+    flex-basis: 600px;
+    flex-grow: 1;
+    
+    /* justify-content: flex-end; */
+    /* align-items: stretch; */
+    /* flex-grow: 0;
+    flex-shrink: 0; */
     /* flex-grow: 1; */
+    /* flex: 1 1 auto; */
     z-index: 2;
 }
 
-.position  {
+#videoBox {
+    position: relative;
+    width: 560px;
+    height: 315px;
+    
+}
+.loop iframe {
+    /* position: absolute ; */
+    width: 560px;
+    height: 315px;
+}
+
+
+#inputUrl {
     position: absolute;
-    width: 20%;
-    margin-top: -11%;
-    margin-left: 2%;
-    opacity: 0;
-    /* transition-duration: 0.3s; */
-}
-.position:hover {
-    opacity: 1;
-    /* transition-duration: 0.1s; */
-    /* transition-delay: 1s; */
-}
-.inputUrl {
-    position: inherit;
-    width: 100%;
-    /* height: 6%; */
     color: rgb(0, 0, 0);
     border: 1px solid rgba(0, 0, 0, 0.098);
     background-color: rgba(128, 240, 178, 0.76);
-    
     font-style: italic;
     font-family: 'Raleway', sans-serif;
-    border-radius: none;
-    margin-top: 0%;
-    margin-left: 0%;
     font-size: 20px;
     font-weight: 100;
-    transition-duration: 0.4s;
-    opacity: 0.35;
+    width: 68%;
+    height: 8%;
+    margin-top: -37%;
+    margin-left: 14%;
+    /* transition-duration: 0.4s; */
+    opacity: 0;
     z-index: 2;
 }
-.inputUrl:focus {
+#inputUrl:hover {
+    opacity: 0.45    ;
+}
+#inputUrl:focus {
     background-color: rgba(128, 240, 178, 0.76);
     transition-duration: 0.3s;
-    /* transition-delay: 1s; */
     opacity: 1;
 }
 
-.position input.checkAutoplay {
+.loop .controlButtons {
     position: absolute; 
+    border: 1px solid rgba(0, 0, 0, 0.199);
+    width: 6%;
+    height: 8.6%;
+    opacity: 1;
+}
+.loop .controlButtons:hover {
+    opacity: 1;
+}
+#checkAutoplay {
     -webkit-appearance: none;
     -moz-appearance: none;
-    width: 25px;
-    height: 24.3px;
-    margin-top: 0.5px;
-    margin-left: 15.2%;
-    border: none;
-    border: 1px solid rgba(0, 0, 0, 0.199);
-    background-color:  rgba(240, 128, 225, 0.221);
+    margin-top: -37%;
+    margin-left: -3%;
+    background-color:  rgba(240, 128, 225, 0.582);
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 2px;
     opacity: 0;
 }
-.position input.checkAutoplay:hover {
+#checkAutoplay:hover {
+    border: 1px solid rgba(0, 0, 0, 0.205);
     opacity: 1;
+    transition: border 3s, opacity 1s;
     
 }
-.checkAutoplay:checked:after {
+#checkAutoplay:checked:after {
     position: relative;
     bottom:0px;
-    right:  -5px;
-    color: rgba(254, 254, 254, 0.673);
+    right:  -10px;
+    top: 2px;
+    color: rgb(255, 255, 255);
     content: "\2713"; 
 }
+
+#smallBackground{
+    margin-top:-57.2%;
+    margin-left: -79.5%;
+    background-color:  rgba(110, 250, 110, 0.623);
+    border: 1px solid rgba(255, 255, 255, 0);
+    border-radius: 3px;
+    opacity: 0;
+}
+#smallBackground:hover {
+    opacity: 1;
+    border: 1px solid rgb(255, 255, 255);
+
+    transition: opacity 0.1s, border 4s ease-in;
+}
+
+#smallDelete{
+    position: absolute;
+    margin-top: -57.2%;
+    margin-left: -85.5%;
+    background-color:  rgba(251, 95, 95, 0.671);
+    border: 1px solid rgba(255, 255, 255, 0);
+    border-radius: 3px;
+    opacity: 0;
+}
+#smallDelete:hover {
+    opacity: 1;
+    border: 1px solid rgb(255, 255, 255);
+
+    transition: opacity 0.1s, border 4s ease-in;
+
+}
+
+
+
+
+
+/*  */
 
 .secondBox {
     position: relative;
 
     border: 1px solid rgba(0, 0, 0, 0.844);
-    /* border: 1px solid rgb(255, 247, 0); */
     width: 100%;
 
     /* this is the crusial factor */
     height: 3000px;
     /* height: 2500px; */
-    top : 1000px;
+    top :6000px;
     /* bottom: 300px;
     padding-bottom: 400px; */
     z-index:1;

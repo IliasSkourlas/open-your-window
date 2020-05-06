@@ -13,15 +13,23 @@
         <div style="opacity: 0.92;" class="loop">  
 
             <% videoBox.forEach(function(i){  %>
-            <div>
-                <iframe  class="videoBox"  src="<%= i.name %>"  width="560" height="315" frameborder="0" loading=”lazy” allowfullscreen scrolling="yes" allow=autoplay>
+           <div id="videoBox" >
+                <iframe   src="<%= i.name %>"  frameborder="0" loading=”lazy” allowfullscreen scrolling="yes" allow=autoplay>
                 </iframe>
-                <form action="/index/update/<%=weel%>/<%=i._id %>" class="position" method="post">
-                    <input  class="inputUrl" name="postUrl" value="<%= i.name %>" autocomplete="off"></input>
-                        <button type="submit" name="button" value="<%= i._id %>" class="buttonLink"></button> 
-                        <input class="checkAutoplay" type="checkbox" name="buttonAutoplayMute" autocomplete="off"  ></input>
+                <form class="inline" action="/index/update/<%=weel%>/<%=i._id %>"  method="post">
+                    <input class="inline" id="inputUrl" name="postUrl" value="<%= i.name %>" autocomplete="off"></input>
+                        <button  type="submit" name="button" value="<%= i._id %>" class="buttonLink inline"></button> 
+                        <input id="checkAutoplay" class="controlButtons inline" type="checkbox" name="buttonAutoplayMute" autocomplete="off"  ></input>
                 </form>
-            </div>
+                <form class="inline" action="/index/<%=weel%>/backgroundVideo" method="post">
+                    <button id="smallBackground" class="controlButtons" name="smallBackground" value="<%=i.name %>" type="submit"></button>
+                </form>
+                <form class="inline" >
+                    <button id="smallDelete" class="controlButtons" name="smallBackground" type="submit"></button>
+                </form>
+           </div>
+                
+            
            <% }) %>  
 
         </div>
@@ -65,9 +73,9 @@
 
                 <div class="background">
 
-                    <form action="/index/<%=weel%>/backgroundVideo" method="post">
+                    <!-- <form action="/index/<%=weel%>/backgroundVideo" method="post">
                         <button class="backgroundButton" id="backgroundVideoButton"  type="submit"  >background</button>                 
-                    </form>
+                    </form> -->
                     <!-- <form action="/backgroundSound" method="post">
                         <button class="backgroundButton" id="backgroundSoundButton"  type="submit"  >Sound</button>
                     </form> -->
