@@ -5,8 +5,8 @@
 
       <div style="opacity: 0.92;" class="loop">   
           <% videoBox.forEach(function(i){  %>
-          <div>
-              <iframe  class="giveId" id="v1" src="<%= i.name %>"  width="560" height="315" frameborder="0" loading=”lazy” allowfullscreen scrolling="yes" onload="load('Done func');" onerror="error('failed function');">
+          <div id="videoBox">
+              <iframe  class="giveId" id="v1" src="<%= i.name %>"   frameborder="0" loading=”lazy” allowfullscreen scrolling="yes" onload="load('Done func');" onerror="error('failed function');">
               </iframe>
               <!-- <form action="/" class="position" id="1" method="post">
                   <input id="i1" class="inputId" name="postUrl" value="<%= i.name %>" autocomplete="off"></input>
@@ -23,10 +23,7 @@
       <div class="loginReginsterBox">
 
         <div class="colorLayer"> </div>
-          <!-- <div class="">
-          <p class="p1">email</p>
-          <p class="p2">password</p>
-          </div> -->
+          
           
           <form class="loginReginsterInputs" action="/login" method="post">
                   <input class="inputA" type="email" name="username" autocomplete="on" placeholder="email">

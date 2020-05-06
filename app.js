@@ -51,7 +51,7 @@ const ItemUrl = mongoose.model("ItemUrl", itemsUrlSchema);
 
 // defaultUrl
     const itemUrl1 = new ItemUrl({
-        name: ""
+        name: "https://iliasskourlas.github.io/Canvas5/"
     });
     const itemUrl2 = new ItemUrl({
         name: ""
@@ -101,7 +101,7 @@ const ItemUrl = mongoose.model("ItemUrl", itemsUrlSchema);
 
 
     const itemUrl17 = new ItemUrl({
-        name: ""
+        name: "https://iliasskourlas.github.io/Canvas6Tapestrie/"
     });
     const itemUrl18 = new ItemUrl({
         name: ""
@@ -244,6 +244,8 @@ const common2 = new Common ({
     weel0: defaultUrls
 });
 
+
+
 const livingRoomArray = [common0, common1, common2];
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>Users Schema & a.r
@@ -288,7 +290,7 @@ let vimeoReplace = "player.vimeo.com/video";
 
 let backgroundMain = "https://www.youtube.com/embed/4l7Uw-o-RC4?autoplay=1&mute=1&loop=1&playlist=4l7Uw-o-RC4";
 let backgroundSound = "https://www.youtube.com/embed/v1P0cAzXR6g?autoplay=1&loop=1&controls=0&mute=1&playlist=v1P0cAzXR6g"
-let backgroundArray = [backgroundMain, backgroundMain, backgroundMain, backgroundMain];
+let backgroundArray = [backgroundMain, backgroundMain, backgroundMain, backgroundMain, backgroundMain, backgroundMain];
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\CLEAN UP AND DELLET AFTER
 let superCute = "https://www.youtube.com/embed/4l7Uw-o-RC4?autoplay=1&mute=1&loop=1&playlist=4l7Uw-o-RC4";
@@ -297,7 +299,7 @@ let realBirds = "https://www.youtube.com/embed/PwylW_sUfQY?autoplay=1&mute=1&loo
 let kittenCuteness = "https://www.youtube.com/embed/dzFKG6rkWpU?autoplay=1&mute=1&loop=1&playlist=dzFKG6rkWpU";
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>FUNCTIONS
-// automaticaly embed youtube, vimeo
+// automaticaly embed youtube, vimeo>
 function toEmbedVideo(url){
     if ((url.includes("youtube.")) & (url.includes("watch?")) & (url.includes("&list="))){
 
@@ -986,6 +988,12 @@ app.post("/login", function(req, res){
     }); 
 }); 
 
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>LOGOUT
+
+app.get("/logout", function(req,res){
+    req.logOut;
+    res.redirect("/");
+});
 
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\

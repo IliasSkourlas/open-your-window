@@ -73,7 +73,7 @@ body {
 #jumbo p  {
    
     position: fixed;
-    /* top: 5%; */
+  
     margin-left: 0%;
     color:  rgba(209, 253, 219, 0.356);
     font-style: italic;
@@ -124,7 +124,6 @@ body {
     
     backdrop-filter: blur(5px);
     color: rgb(0, 0, 0);
-    /* border: 1px solid rgba(149, 149, 149, 0.116); */
     background-color: rgba(128, 240, 178, 0.123);
     height: 37px;
     padding: 6px 2px; 
@@ -156,7 +155,7 @@ body {
 .loginReginsterInputs input::-webkit-input-placeholder {
     color: 1px solid rgba(130, 153, 121, 0.842);
     letter-spacing: 0.1em;
-    opacity: 0;
+    opacity: 1;
    
 }
 .loginReginsterInputs input:hover::-webkit-input-placeholder {
@@ -201,6 +200,43 @@ opacity: 1;
 border: 1px solid rgba(0, 0, 0, 0.918);
 
 }
+/* up *//* up *//* up *//* up *//* up *//* up *//* up *//* up *//* up *//* up *//* up *//* up *//* up */
+.upMenu {
+    position: fixed;
+    /* border: 1px solid pink; */
+    margin-top: -1px;
+    width: 100%;
+    height: 8%;
+    opacity: 0;
+    z-index: 10;
+}
+.upMenu:hover {
+    opacity: 1;
+
+}
+.upMenu p {
+    position: fixed;
+  
+    margin-left: 0%;
+    color:  rgba(209, 253, 219, 0.356);
+    font-style: italic;
+    font-family: 'Raleway', sans-serif;
+    text-shadow: 2px 2px 5px rgba(128, 240, 178, 0.514);
+    letter-spacing: 0.1em;
+    font-weight: lighter;
+    font-size: 35px;
+    margin-top: 2%;
+    margin-left: 90%;
+    opacity: 0.7;
+    z-index: 100;
+}
+.upMenu p:hover {
+    opacity: 1;
+    color:  rgba(255, 255, 255, 0.883);
+    text-shadow: 2px 2px 5px rgba(1, 61, 28, 0.514);
+    transition: opacity 1s, color 2s;
+}
+
 
 /* >left menu *//* left menu *//* left menu *//* left menu *//* left menu *//* left menu *//* left menu */
 .leftMenu {
@@ -397,6 +433,7 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     width: 100%;
     height: 100%;
 }
+
   
 /* >iframes  *//* iframes  *//* iframes  *//* iframes  *//* iframes  *//* iframes  */
 
