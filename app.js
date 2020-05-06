@@ -394,6 +394,14 @@ app.get("/login", function(req, res){
     })     
 })
 
+
+///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>LOGOUT
+
+app.get("/logout", function(req,res){
+    req.logOut;
+    res.redirect("/");
+});
+
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>INDEX >Weel Memories
 app.get("/index/:weel", function(req, res){
     console.log(req.params.weel );
@@ -988,12 +996,6 @@ app.post("/login", function(req, res){
     }); 
 }); 
 
-///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\>LOGOUT
-
-app.get("/logout", function(req,res){
-    req.logOut;
-    res.redirect("/");
-});
 
 
 ///////////////////\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////\\\\\\\\\\\\\\\\\\\\\\\\

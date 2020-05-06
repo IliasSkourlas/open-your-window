@@ -42,7 +42,7 @@ body {
     height: 100%;
     top: 0px;
     opacity: 0.90;
-    z-index: 99;
+    z-index: 20;
 }
 
 .loginReginsterBox {
@@ -55,7 +55,7 @@ body {
     left: 0px;
     background-color: rgba(255, 255, 255, 0.349);
     opacity: 1;
-    z-index: 100;
+    z-index: 30;
 
     /* transition-delay: 1s; */
 }
@@ -203,9 +203,10 @@ border: 1px solid rgba(0, 0, 0, 0.918);
 /* up *//* up *//* up *//* up *//* up *//* up *//* up *//* up *//* up *//* up *//* up *//* up *//* up */
 .upMenu {
     position: fixed;
-    /* border: 1px solid pink; */
+    border: 1px solid pink;
     margin-top: -1px;
-    width: 100%;
+    margin-left: 80%;
+    width: 20%;
     height: 8%;
     opacity: 0;
     z-index: 10;
@@ -216,8 +217,6 @@ border: 1px solid rgba(0, 0, 0, 0.918);
 }
 .upMenu p {
     position: fixed;
-  
-    margin-left: 0%;
     color:  rgba(209, 253, 219, 0.356);
     font-style: italic;
     font-family: 'Raleway', sans-serif;
@@ -225,8 +224,8 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     letter-spacing: 0.1em;
     font-weight: lighter;
     font-size: 35px;
-    margin-top: 2%;
-    margin-left: 90%;
+    margin-top: 1%;
+    margin-left: 2%;
     opacity: 0.7;
     z-index: 100;
 }
@@ -235,6 +234,53 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     color:  rgba(255, 255, 255, 0.883);
     text-shadow: 2px 2px 5px rgba(1, 61, 28, 0.514);
     transition: opacity 1s, color 2s;
+}
+  
+.upMenu #out {
+    margin-top: 2%;
+    margin-left: 90%;
+}
+.introMenu {
+    position: fixed;
+    text-decoration: none;
+    color:  rgba(209, 253, 219, 0.356);
+    font-style: italic;
+    font-family: 'Raleway', sans-serif;
+    text-shadow: 2px 2px 5px rgba(128, 240, 178, 0.514);
+    letter-spacing: 0.1em;
+    font-weight: lighter;
+    font-size: 35px;
+    left: 80%;
+    z-index: 100;
+}
+
+
+
+
+
+#home{
+    
+    /* display: inline; */
+    margin-top: 2%;
+    margin-left: 80%;
+    opacity: 0.7;
+    z-index: 100;
+}
+
+#register{
+    
+    margin-top: 2%;
+    margin-left: 90%;
+    opacity: 0.4;
+    z-index: 100;
+}
+#login{
+    
+    /* display: inline; */
+    margin-top: 2%;
+    margin-left: 90%;
+    opacity: 0.4;
+    z-index: 100;
 }
 
 
