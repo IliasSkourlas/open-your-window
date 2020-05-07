@@ -496,13 +496,17 @@ border: 1px solid rgba(0, 0, 0, 0.918);
 /* vh */
 .loop {
     position: absolute;
+    
     display: flex;
     flex-wrap: wrap; 
     flex-direction: row;
     justify-content: center;
     z-index: 2;
 }
-
+div .loop{
+    
+    border: 1px solid rgb(0, 0, 0);
+}
 @media (min-width: 0px){
     .loop {
         border: 1px solid rgba(255, 0, 128, 0);
@@ -732,18 +736,24 @@ border: 1px solid rgba(0, 0, 0, 0.918);
     z-index:1;
 }
 
-.krosia p{
+.krosia{
     position: absolute;
-    color: black;
+    color: rgb(0, 0, 0);
     letter-spacing: 0.1em;
+    opacity: .9;
+    z-index: 100;
 }
-#krosiaUp {
-    /* top: 305%; */
-    color: black;
+#krosiaUpBlack {
+   
+   
+
+    
 }
+
 #krosiaDown {
-    /* top: 308%; */
-    color: black;
+    
+    
+    
 }
  
 #animationBox {
